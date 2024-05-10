@@ -3,9 +3,9 @@ import { RouterModule, Routes } from '@angular/router';
 import { AuthenticationLayoutComponent } from './Authentication/authentication-layout/authentication-layout.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: 'login', pathMatch: 'full' },
+  { path: '', redirectTo: 'l', pathMatch: 'full' },
   {
-    path: 'login',
+    path: 'l',
     component: AuthenticationLayoutComponent,
     children: [
       { path: '', loadChildren: () => import('./Authentication/authentication.module').then(m => m.AuthenticationModule) },
@@ -25,7 +25,7 @@ const routes: Routes = [
   //     { path: '', loadChildren: () => import('./super-admin/super-admin.module').then(m => m.SuperAdminModule) },
   //   ]
   // },
-  { path: '**', redirectTo: 'login' }
+  { path: '**', redirectTo: 'l' }
 ];
 
 @NgModule({
