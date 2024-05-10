@@ -1,13 +1,23 @@
-.loginNav {
-  height: 15vh;
-  background: linear-gradient(to right, whitesmoke, ghostwhite);
-  box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
-}
-
-.loginFooter {
+.footer {
   position: fixed;
   bottom: 0;
-  height: 5vh;
-  background: linear-gradient(to right, whitesmoke, ghostwhite);
-  box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+  height: 30px;
+  width: 100%;
+  color: black;
+  display: flex;
+  box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
+}
+
+.footer-title{
+  text-align: center;
+  color: black;
+  font-size: 0.8rem;
+}
+
+.footer-link{
+    color: black;
+}
+
+.footer-link:hover{
+  color: blue;
 }
