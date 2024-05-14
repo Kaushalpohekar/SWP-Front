@@ -1,54 +1,16 @@
 .sidenav-container {
-  height: 100%;
-  overflow-y: hidden;
+  width: 100%;
+  height: 100vh;
 }
 
-.sidenav {
-  width: 200px;
-  background-color: white;
-  /* border-top-right-radius: 25px;
-  border-bottom-right-radius: 25px; */
-  background-color: #008554; 
+.sidenav .mat-list-item {
+  height: 64px; /* Match the height with icon width */
 }
 
-.sidenav .mat-toolbar {
-  background: inherit;
+.sidenav .mat-list-item .mat-line {
+  display: none; /* Initially hide the text */
 }
 
-.mat-toolbar.mat-primary {
-  position: sticky;
-  top: 0;
-  z-index: 1;
+.mat-drawer-opened .sidenav .mat-list-item .mat-line {
+  display: block; /* Show text when drawer is opened */
 }
-
-.white-toolbar {
-  background-color: white; /* Set the background color to white */
-  color: black; /* Set the text color to black */
-}
-
-.example-spacer {
-  flex: 1 1 auto;
-}
-
-.home-container {
-  display: inline-flex; /* Display as inline flex container */
-  align-items: center; /* Align items vertically */
-  color: white;
-}
-
-.home-container mat-icon {
-  margin-right: 5px;
-}
-.toggle-button {
-  display: flex; /* Display as flex container */
-  align-items: center; /* Align items vertically */
-  padding: 0; /* Remove any default padding */
-}
-
-.toggleicon {
-  margin-right: 0.5rem; /* Add some margin between the icon and the text */
-}
-.senselive-section {
-  background-color: #008554;
-}
-
