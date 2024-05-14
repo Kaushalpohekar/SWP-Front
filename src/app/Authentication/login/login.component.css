@@ -1,15 +1,51 @@
-.login{
-	height: calc(100% - 25px);
-	display: flex;
-	justify-content: center;
-	align-items: center;
+
+.login-card {
+    width: 100%;
+    max-width: 400px;
+    height: auto;
+    background: rgba(255, 255, 255, 0.7); /* White color with 70% opacity */
 }
 
-.login_image {
-    max-height: 50px;
-    width: auto;
+
+.img-fluid{
+	height: 70px;
 }
 
-.full-width-input {
-    width: 100%; /* Ensure the input spans full width */
+.from-feild{
+	width: 100%;
 }
+
+.SignInButton{
+	width: 100%;
+	background-color: #4caf50;
+}
+
+.title{
+	font-size: 1.2rem;
+	font-weight: 550;
+}
+
+@media screen and (max-width: 768px) {
+    .login-card {
+        min-width: auto; /* Remove the minimum width restriction */
+    }
+}
+
+
+.line {
+    flex-grow: 1; /* To make the line grow and fill the available space */
+    height: 1px; /* Height of the line */
+    background-color: #918f87; /* Color of the line */
+    margin: 0 5px; /* Adjust margin as needed */
+}
+
+.line-title {
+    font-size: 0.8rem; /* Adjust font size as needed */
+    color: #918f87; /* Color of the title */
+}
+
+.reg-link {
+    text-decoration: none; /* Remove underlining */
+    font-weight: 550; /* Make it bold */
+}
+

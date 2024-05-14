@@ -5,16 +5,12 @@ import { ForgotComponent } from './forgot/forgot.component';
 import { ResetComponent } from './reset/reset.component';
 import { AuthenticationLayoutComponent } from './authentication-layout/authentication-layout.component'
 
-import { MatToolbarModule } from '@angular/material/toolbar';
-import { MatCardModule } from '@angular/material/card';
-import{ AuthenticationRoutingModule } from './authentication-routing.module'
-import {FormControl, Validators, FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {NgIf} from '@angular/common';
-import {MatInputModule} from '@angular/material/input';
-import {MatFormFieldModule} from '@angular/material/form-field';
-import {MatIconModule} from '@angular/material/icon';
-import {MatDividerModule} from '@angular/material/divider';
-import {MatButtonModule} from '@angular/material/button';
+import { MaterialModule } from '../material/material.module';
+import{ AuthenticationRoutingModule } from './authentication-routing.module';
+import { RegisterComponent } from './register/register.component';
+import { AfterRegComponent } from './after-reg/after-reg.component';
+import { ContactComponent } from './contact/contact.component';
+
 
 
 @NgModule({
@@ -22,16 +18,15 @@ import {MatButtonModule} from '@angular/material/button';
     LoginComponent,
     ForgotComponent,
     ResetComponent,
-    AuthenticationLayoutComponent
+    AuthenticationLayoutComponent,
+    RegisterComponent,
+    AfterRegComponent,
+    ContactComponent
   ],
   imports: [
     CommonModule,
-    MatToolbarModule,
-    MatCardModule,
-    AuthenticationRoutingModule,
-    FormsModule, MatFormFieldModule, MatInputModule, ReactiveFormsModule, NgIf,
-    MatButtonModule, MatDividerModule, MatIconModule,
-    
+    MaterialModule,
+    AuthenticationRoutingModule
   ]
 })
 export class AuthenticationModule { }

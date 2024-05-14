@@ -1,29 +1,38 @@
-
+.mb-custom{
+    margin-bottom: 20px;
+}
 .login-card {
     width: 100%;
-    max-width: 400px;
+    max-width: 800px;
     height: auto;
     background: rgba(255, 255, 255, 0.7); /* White color with 70% opacity */
 }
 
 
 .img-fluid{
-    height: 70px;
+	height: 70px;
 }
 
 .from-feild{
-    width: 100%;
+	width: 100%;
 }
 
 .SignInButton{
-    width: 100%;
-    background-color: #4caf50;
+	width: 100%;
+	background-color: #4caf50;
 }
 
 .title{
-    font-size: 1.2rem;
-    font-weight: 550;
+	font-size: 1.2rem;
+	font-weight: 550;
 }
+
+@media screen and (max-width: 768px) {
+    .login-card {
+        min-width: auto; /* Remove the minimum width restriction */
+    }
+}
+
 
 .line {
     flex-grow: 1; /* To make the line grow and fill the available space */
@@ -42,8 +51,3 @@
     font-weight: 550; /* Make it bold */
 }
 
-@media screen and (max-width: 768px) {
-    .login-card {
-        min-width: auto; /* Remove the minimum width restriction */
-    }
-}
