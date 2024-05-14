@@ -5,9 +5,11 @@ import { ForgotComponent } from './forgot/forgot.component';
 import { ResetComponent } from './reset/reset.component';
 import { AuthenticationLayoutComponent } from './authentication-layout/authentication-layout.component'
 
-import { MatToolbarModule } from '@angular/material/toolbar';
-import { MatCardModule } from '@angular/material/card';
-import{ AuthenticationRoutingModule } from './authentication-routing.module'
+import { MaterialModule } from '../material/material.module';
+import{ AuthenticationRoutingModule } from './authentication-routing.module';
+import { RegisterComponent } from './register/register.component';
+import { AfterRegComponent } from './after-reg/after-reg.component';
+import { ContactComponent } from './contact/contact.component';
 
 
 
@@ -16,12 +18,14 @@ import{ AuthenticationRoutingModule } from './authentication-routing.module'
     LoginComponent,
     ForgotComponent,
     ResetComponent,
-    AuthenticationLayoutComponent
+    AuthenticationLayoutComponent,
+    RegisterComponent,
+    AfterRegComponent,
+    ContactComponent
   ],
   imports: [
     CommonModule,
-    MatToolbarModule,
-    MatCardModule,
+    MaterialModule,
     AuthenticationRoutingModule
   ]
 })

@@ -1,3 +1,23 @@
+.login {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-image: url('../../../assets/img/bg-9.png'); /* Replace 'path/to/your/image.jpg' with the path to your image */
+    background-size: cover;
+    background-position: center;
+}
+
+.fixed-image {
+    position: fixed;
+    top: 10px; /* adjust top position as needed */
+    left: 10px; /* adjust right position as needed */
+    width: 100px; /* adjust width as needed */
+    height: auto; /* adjust height as needed */
+    z-index: 999; /* ensure the image is on top of other content */
+}
+
+
 .footer {
   position: fixed;
   bottom: 0;
@@ -6,6 +26,7 @@
   color: black;
   display: flex;
   box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
+  background: rgba(255, 255, 255, 0.7);
 }
 
 .footer-title{
@@ -20,4 +41,11 @@
 
 .footer-link:hover{
   color: blue;
+}
+
+
+@media screen and (max-width: 992px) {
+    .fixed-image {
+      display: none;
+    }
 }
