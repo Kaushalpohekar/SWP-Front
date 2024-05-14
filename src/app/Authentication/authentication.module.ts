@@ -8,7 +8,13 @@ import { AuthenticationLayoutComponent } from './authentication-layout/authentic
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatCardModule } from '@angular/material/card';
 import{ AuthenticationRoutingModule } from './authentication-routing.module'
-
+import {FormControl, Validators, FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {NgIf} from '@angular/common';
+import {MatInputModule} from '@angular/material/input';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatIconModule} from '@angular/material/icon';
+import {MatDividerModule} from '@angular/material/divider';
+import {MatButtonModule} from '@angular/material/button';
 
 
 @NgModule({
@@ -22,7 +28,10 @@ import{ AuthenticationRoutingModule } from './authentication-routing.module'
     CommonModule,
     MatToolbarModule,
     MatCardModule,
-    AuthenticationRoutingModule
+    AuthenticationRoutingModule,
+    FormsModule, MatFormFieldModule, MatInputModule, ReactiveFormsModule, NgIf,
+    MatButtonModule, MatDividerModule, MatIconModule,
+    
   ]
 })
 export class AuthenticationModule { }

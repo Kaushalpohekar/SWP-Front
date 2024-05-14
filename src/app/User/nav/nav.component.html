@@ -1,0 +1,45 @@
+<mat-sidenav-container class="sidenav-container">
+  <mat-sidenav #drawer class="sidenav" fixedInViewport [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
+    [mode]="(isHandset$ | async) ? 'over' : 'side'" [opened]="(isHandset$ | async) === false">
+    <div class="senselive-section">
+      <mat-toolbar class="senselive-toolbar">SenseLive</mat-toolbar>
+    </div>
+    <mat-nav-list>
+      <a mat-list-item routerLink="/userhome">
+        <div class="home-container">
+          <mat-icon>home</mat-icon>
+          <span>Home</span>
+        </div>
+      </a>
+      <a mat-list-item routerLink="/userhome">
+        <div class="home-container">
+          <mat-icon>message</mat-icon>
+          <span>Message</span>
+        </div>
+      </a>
+      <a mat-list-item routerLink="/userhome">
+        <div class="home-container">
+          <mat-icon>settings</mat-icon>
+          <span>Settings</span>
+        </div>
+      </a>
+
+
+
+    </mat-nav-list>
+  </mat-sidenav>
+  <mat-sidenav-content>
+
+
+    <mat-toolbar>
+      <button type="button" aria-label="Toggle sidenav" mat-icon-button (click)="drawer.toggle()"
+        *ngIf="isHandset$ | async" class="toggle-button">
+        <mat-icon aria-label="Side nav toggle icon" class="toggleicon">menu</mat-icon>
+      </button>
+      <span>Smart Work Permit</span>
+    </mat-toolbar>
+
+
+    
+  </mat-sidenav-content>
+</mat-sidenav-container>
