@@ -17,12 +17,15 @@
 
 .SignInButton{
 	width: 100%;
-	background-color: #4caf50;
+	background: linear-gradient(90deg, #008554 0%, #035539 100%);
 }
 
-.title{
-	font-size: 1.2rem;
-	font-weight: 550;
+.title {
+    font-size: 1.2rem;
+    font-weight: 550;
+    background: linear-gradient(90deg, #008554, #035539);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
 }
 
 @media screen and (max-width: 768px) {
