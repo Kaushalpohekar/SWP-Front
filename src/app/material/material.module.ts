@@ -26,8 +26,6 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
-import {FormControl, Validators} from '@angular/forms';
-import {NgIf} from '@angular/common';
 
 @NgModule({
   declarations: [],
@@ -89,7 +87,6 @@ import {NgIf} from '@angular/common';
     MatRadioModule,
     MatSidenavModule,
     MatSlideToggleModule,
-    FormControl, Validators,NgIf,
   ]
 })
 export class MaterialModule { }
