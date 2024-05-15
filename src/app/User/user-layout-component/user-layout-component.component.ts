@@ -6,5 +6,7 @@ import { Component } from '@angular/core';
   styleUrls: ['./user-layout-component.component.css']
 })
 export class UserLayoutComponentComponent {
-  showFiller = false;
+  isExpanded: boolean = false;
+
+  constructor() {}
 }
