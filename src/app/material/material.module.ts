@@ -87,6 +87,7 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
     MatRadioModule,
     MatSidenavModule,
     MatSlideToggleModule,
+
   ]
 })
 export class MaterialModule { }

@@ -1,8 +1,19 @@
+.content{
+  border-radius: 10px;
+  padding: 2px;
+  background-color: #f1f1f1;
+  height: calc(100vh - 50px);
+  overflow-y: auto;
+}
+
 mat-sidenav {
   background: linear-gradient(90deg, #008554 0%, #035539 100%);
   border-radius: 0 15px 15px 0; /* Adjust border radius */
 }
 
+mat-sidenav-content{
+  padding-left: 2px;
+}
 
 mat-sidenav-container {
   height: 100%;

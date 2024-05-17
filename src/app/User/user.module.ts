@@ -6,6 +6,7 @@ import{ UserRoutingModule } from './user-routing.module';
 import { NavComponent } from './nav/nav.component';
 import { PermitComponent } from './permit/permit.component';
 import { MaterialModule } from '../material/material.module';
+import { PrimeModule } from '../material/prime.module';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { MaterialModule } from '../material/material.module';
   imports: [
     CommonModule,
     UserRoutingModule,
-    MaterialModule
+    MaterialModule,
+    PrimeModule
   ]
 })
 export class UserModule { }
