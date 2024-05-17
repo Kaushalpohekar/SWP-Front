@@ -1,19 +1,26 @@
-<mat-toolbar>
+<!-- <mat-toolbar>
   <div class="d-flex align-items-center justify-content-between w-100">
     <div class="page-title">User Home Page</div>
-    <button mat-icon-button disabled aria-label="Example icon button with a open in new tab icon">
-        <mat-icon>notifications</mat-icon>
-      </button>
     <div class="user-profile">
       <img src="../../../assets/img/face.png" class="user-image">
     </div>
-
-<div class="card flex justify-content-center">
-<p-dropdown 
-[options]="cities" 
-[(ngModel)]="selectedCity" 
-optionLabel="name"
-placeholder="Select a City" />
-</div>
   </div>
-</mat-toolbar>
+</mat-toolbar> -->
+<div class="card">
+<p-toolbar>
+<div class="p-toolbar-group-start">
+    <p-button icon="pi pi-plus" class="mr-2"/>
+    <p-button icon="pi pi-print" class="mr-2"/>
+    <p-button icon="pi pi-upload" />
+</div>
+<div class="p-toolbar-group-center">
+    <span class="p-input-icon-left">
+        <i class="pi pi-search"></i>
+        <input pInputText placeholder="Search" />
+    </span>
+</div>
+<div class="p-toolbar-group-end">
+    <p-splitButton label="Save" icon="pi pi-check" [model]="items" />
+</div>
+</p-toolbar>
+</div>

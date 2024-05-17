@@ -1,26 +1,24 @@
 import { Component, OnInit } from '@angular/core';
-interface City {
-    name: string;
-    code: string;
-}
+import { MenuItem } from 'primeng/api';
 
 @Component({
   selector: 'app-nav',
   templateUrl: './nav.component.html',
   styleUrls: ['./nav.component.css']
 })
-export class NavComponent implements OnInit {
-  cities: City[] | undefined;
-
-    selectedCity: City | undefined;
+export class NavComponent implements OnInit{
+  items: MenuItem[] | undefined;
 
     ngOnInit() {
-        this.cities = [
-            { name: 'New York', code: 'NY' },
-            { name: 'Rome', code: 'RM' },
-            { name: 'London', code: 'LDN' },
-            { name: 'Istanbul', code: 'IST' },
-            { name: 'Paris', code: 'PRS' }
+        this.items = [
+            {
+                label: 'Update',
+                icon: 'pi pi-refresh'
+            },
+            {
+                label: 'Delete',
+                icon: 'pi pi-times'
+            }
         ];
-    }
+      }
 }
