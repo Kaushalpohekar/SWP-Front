@@ -1,26 +1,23 @@
-<!-- <mat-toolbar>
-  <div class="d-flex align-items-center justify-content-between w-100">
+<mat-toolbar>
+  <div class="toolbar-content">
     <div class="page-title">User Home Page</div>
-    <div class="user-profile">
-      <img src="../../../assets/img/face.png" class="user-image">
+    <button mat-icon-button>
+      <mat-icon>notifications</mat-icon>
+    </button>
+    <div class="user-profile" [matMenuTriggerFor]="menu">
+      <img src="../../../assets/img/face.png" class="user-image" alt="User Image">
     </div>
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item>
+        <div class="menu-item-text"><mat-icon>account_circle</mat-icon>Profile</div>
+      </button>
+      <button mat-menu-item>
+        <div class="menu-item-text"><mat-icon>settings</mat-icon>Settings</div>
+      </button>
+      <button mat-menu-item>
+        <div class="menu-item-text"><mat-icon>exit_to_app</mat-icon>Logout</div>
+      </button>
+    </mat-menu>
+
   </div>
-</mat-toolbar> -->
-<div class="card">
-<p-toolbar>
-<div class="p-toolbar-group-start">
-    <p-button icon="pi pi-plus" class="mr-2"/>
-    <p-button icon="pi pi-print" class="mr-2"/>
-    <p-button icon="pi pi-upload" />
-</div>
-<div class="p-toolbar-group-center">
-    <span class="p-input-icon-left">
-        <i class="pi pi-search"></i>
-        <input pInputText placeholder="Search" />
-    </span>
-</div>
-<div class="p-toolbar-group-end">
-    <p-splitButton label="Save" icon="pi pi-check" [model]="items" />
-</div>
-</p-toolbar>
-</div>
+</mat-toolbar>

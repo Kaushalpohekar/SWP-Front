@@ -1,8 +1,15 @@
-mat-toolbar{
+.mat-toolbar {
   height: 50px;
-  border-radius: 10px 0 0 10px ;
-  background: linear-gradient(270deg, rgba(255, 255, 255, 0.5) 0%, rgba(255, 255, 255, 0.2) 100%); /* White with transparency */
+  border-radius: 10px 0 0 10px;
+  background: linear-gradient(270deg, rgba(255, 255, 255, 0.5) 0%, rgba(255, 255, 255, 0.2) 100%);
   backdrop-filter: blur(10px);
+}
+
+.toolbar-content {
+  display: flex;
+  align-items: center; /* Align items vertically */
+  width: 100%;
+  gap: 10px;
 }
 
 .user-profile {
@@ -12,13 +19,27 @@ mat-toolbar{
 .user-image {
   border: 1px solid black;
   padding: 2px;
-  width: 40px;
-  height: 40px;
+  width: 30px;
+  height: 30px;
   border-radius: 50%;
   object-fit: cover;
 }
 
-.page-title{
+.page-title {
   font-size: 1rem;
   font-weight: 550;
+  margin-right: auto; /* Push the text to the left */
 }
+
+.menu-icon {
+  margin-right: 5px; /* Adjust as needed */
+}
+
+.menu-item-text {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 0.8rem; /* Reduce font size */
+  font-weight: 550; /* Set font weight */
+}
+
