@@ -7,8 +7,8 @@ import { Component } from '@angular/core';
 })
 export class UserhomeComponent {
   cards = [
-    { title: 'Card 1', subtitle: 'Subtitle 1', icon: 'home' },
-    { title: 'Card 2', subtitle: 'Subtitle 2', icon: 'user' },
+    { title: 'HWP', subtitle: 'Hot Work Permit', icon: 'home' },
+    { title: 'CWP', subtitle: 'Cold Work Permit', icon: 'home' },
     // Add more card data as needed
   ];
 }

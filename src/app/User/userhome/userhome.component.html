@@ -5,19 +5,19 @@
         <div class="col-12 pt-3 mb-3">
           <div class="title">Choose Permit type to Continue</div>
         </div>
-        <div class="col-4 mb-2" *ngFor="let card of cards">
-          <mat-card>
+        <div class="col-lg-4 col-md-6 col-sm-6 mb-4" *ngFor="let card of cards">
+          <mat-card class="outer-card">
             <mat-card-content>
               <div class="container-fluid">
                 <div class="row">
                   <div class="col-8">
-                    <div>{{ card.title }}</div>
-                    <div>{{ card.subtitle }}</div>
+                    <div class="card-title">{{ card.title }}</div>
+                    <div class="card-subtitle">{{ card.subtitle }}</div>
                   </div>
-                  <div class="col-4">
+                  <div class="col-4 ">
                     <mat-card class="inner-card">
                       <mat-card-content>
-                        <i class="material-icons">{{ card.icon }}</i> 
+                        <i class="material-icons icon-color">{{ card.icon }}</i> 
                       </mat-card-content>
                     </mat-card>
                   </div>
@@ -30,3 +30,5 @@
     </div>
   </div>
 </div>
+
+
