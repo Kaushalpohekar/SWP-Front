@@ -1,0 +1,34 @@
+.title {
+    font-size: 1rem;
+    font-weight: 550;
+}
+
+.custom-tab-group .mat-tab-label {
+  color: #ffffff; /* Text color */
+}
+
+.custom-tab-group .mat-tab-label-active {
+  background-color: #1976d2; /* Active tab background color */
+  color: #ffffff; /* Active tab text color */
+}
+
+.custom-tab-group .mat-ink-bar {
+  background-color: #1976d2; /* Ink bar color */
+}
+
+/* Adjust spacing and alignment */
+.d-flex {
+  display: flex;
+}
+
+.justify-content-between {
+  justify-content: space-between;
+}
+
+.align-items-center {
+  align-items: center;
+}
+
+button {
+  margin-left: 16px; /* Adjust as needed */
+}

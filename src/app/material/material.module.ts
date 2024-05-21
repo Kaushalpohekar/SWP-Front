@@ -26,6 +26,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { MatNativeDateModule } from '@angular/material/core';
 
 @NgModule({
   declarations: [],
@@ -58,6 +59,7 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
     MatRadioModule,
     MatSidenavModule,
     MatSlideToggleModule,
+    MatNativeDateModule
   ],
   exports: [ // Export Angular Material modules for use in other modules/components
     MatButtonModule,
@@ -87,7 +89,7 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
     MatRadioModule,
     MatSidenavModule,
     MatSlideToggleModule,
-
+    MatNativeDateModule
   ]
 })
 export class MaterialModule { }

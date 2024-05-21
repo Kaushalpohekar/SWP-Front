@@ -5,13 +5,17 @@ import { AdminUserNavComponent } from './admin-user-nav/admin-user-nav.component
 import { AdminUserHomeComponent } from './admin-user-home/admin-user-home.component';
 import{ AdminUserRoutingModule } from './admin-user-routing.module';
 import { MaterialModule } from '../material/material.module';
+import { AduObservationsComponent } from './adu-observations/adu-observations.component';
+import { AduAuditsComponent } from './adu-audits/adu-audits.component';
 
 
 @NgModule({
   declarations: [
     AdminUserLayoutComponent,
     AdminUserNavComponent,
-    AdminUserHomeComponent
+    AdminUserHomeComponent,
+    AduObservationsComponent,
+    AduAuditsComponent
   ],
   imports: [
     CommonModule,

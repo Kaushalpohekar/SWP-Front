@@ -1,3 +1,23 @@
 <mat-toolbar>
-  <h4>Hello everyone</h4>
+  <div class="toolbar-content">
+    <div class="page-title">Admin User</div>
+    <button mat-icon-button>
+      <mat-icon>notifications</mat-icon>
+    </button>
+    <div class="user-profile" [matMenuTriggerFor]="menu">
+      <img src="../../../assets/img/face.png" class="user-image" alt="User Image">
+    </div>
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item>
+        <div class="menu-item-text"><mat-icon>account_circle</mat-icon>Profile</div>
+      </button>
+      <button mat-menu-item>
+        <div class="menu-item-text"><mat-icon>settings</mat-icon>Settings</div>
+      </button>
+      <button mat-menu-item>
+        <div class="menu-item-text"><mat-icon>exit_to_app</mat-icon>Logout</div>
+      </button>
+    </mat-menu>
+
+  </div>
 </mat-toolbar>
