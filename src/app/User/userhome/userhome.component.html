@@ -6,7 +6,7 @@
           <div class="title">Choose Permit type to Continue</div>
         </div>
         <div class="col-lg-4 col-md-6 col-sm-6 mb-4" *ngFor="let card of cards">
-          <mat-card class="outer-card">
+          <mat-card class="outer-card" (click)="onCardClick(card.formId)">
             <mat-card-content>
               <div class="container-fluid">
                 <div class="row">

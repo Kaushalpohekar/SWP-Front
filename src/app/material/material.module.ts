@@ -27,6 +27,7 @@ import { MatRadioModule } from '@angular/material/radio';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatNativeDateModule } from '@angular/material/core';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
 
 @NgModule({
   declarations: [],
@@ -59,7 +60,8 @@ import { MatNativeDateModule } from '@angular/material/core';
     MatRadioModule,
     MatSidenavModule,
     MatSlideToggleModule,
-    MatNativeDateModule
+    MatNativeDateModule,
+    MatSnackBarModule
   ],
   exports: [ // Export Angular Material modules for use in other modules/components
     MatButtonModule,
@@ -89,7 +91,8 @@ import { MatNativeDateModule } from '@angular/material/core';
     MatRadioModule,
     MatSidenavModule,
     MatSlideToggleModule,
-    MatNativeDateModule
+    MatNativeDateModule,
+    MatSnackBarModule
   ]
 })
 export class MaterialModule { }

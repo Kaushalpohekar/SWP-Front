@@ -1,0 +1,23 @@
+<form>
+  <div *ngFor="let question of questions">
+    <label>{{ question.text }}</label>
+    <div *ngIf="question.type === 'multipleChoice'">
+      <mat-radio-group [(ngModel)]="question.answer">
+        <mat-radio-button *ngFor="let option of question.options" [value]="option">
+          {{ option }}
+        </mat-radio-button>
+      </mat-radio-group>
+    </div>
+    <div *ngIf="question.type === 'shortAnswer'">
+      <mat-form-field>
+        <input matInput type="text" [(ngModel)]="question.answer" (ngModelChange)="handleInputChange(question.id, question.answer)">
+      </mat-form-field>
+    </div>
+    <div *ngIf="question.type === 'longAnswer'">
+      <mat-form-field>
+        <textarea matInput [(ngModel)]="question.answer" (ngModelChange)="handleInputChange(question.id, question.answer)"></textarea>
+      </mat-form-field>
+    </div>
+  </div>
+  <button mat-raised-button type="submit">Submit</button>
+</form>

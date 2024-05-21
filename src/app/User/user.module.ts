@@ -7,13 +7,15 @@ import { NavComponent } from './nav/nav.component';
 import { PermitComponent } from './permit/permit.component';
 import { MaterialModule } from '../material/material.module';
 import { PrimeModule } from '../material/prime.module';
+import { FormComponent } from './form/form.component';
 
 @NgModule({
   declarations: [
     UserhomeComponent,
     UserLayoutComponentComponent,
     NavComponent,
-    PermitComponent
+    PermitComponent,
+    FormComponent
   ],
   imports: [
     CommonModule,
