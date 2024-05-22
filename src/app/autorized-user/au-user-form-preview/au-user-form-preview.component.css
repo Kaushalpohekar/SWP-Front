@@ -1,0 +1,62 @@
+.pdf-container {
+    width: 210mm; /* A4 width */
+    height: 297mm; /* A4 height */
+    padding: 20mm;
+    box-sizing: border-box;
+}
+
+.pdf-header, .pdf-footer {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.pdf-header h1 {
+    margin: 0;
+    font-size: 24px;
+}
+
+.pdf-header .sub-title {
+    margin: 0;
+    font-size: 14px;
+    color: #666;
+}
+
+.pdf-content {
+    margin-top: 20px;
+}
+
+.card {
+    border: 1px solid #ccc;
+    padding: 15px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+}
+
+.card-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.card-header .icon {
+    font-size: 24px;
+    margin-right: 10px;
+}
+
+.card-header .form-id {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.card-body p {
+    margin: 5px 0;
+}
+
+.pdf-footer {
+    position: absolute;
+    bottom: 20mm;
+    width: calc(100% - 40mm);
+    text-align: center;
+    font-size: 12px;
+    color: #666;
+}

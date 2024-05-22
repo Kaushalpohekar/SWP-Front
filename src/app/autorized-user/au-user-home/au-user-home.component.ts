@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
+import { ServiceService } from '../service.service';
 
 @Component({
   selector: 'app-au-user-home',
@@ -6,9 +8,17 @@ import { Component } from '@angular/core';
   styleUrls: ['./au-user-home.component.css']
 })
 export class AuUserHomeComponent {
-  cards = [
-    { title: 'HWP', subtitle: 'Hot Work Permit', icon: 'home' },
-    { title: 'CWP', subtitle: 'Cold Work Permit', icon: 'home' },
-    // Add more card data as needed
-  ];
+  cards!: any[];
+
+  constructor(private serviceService: ServiceService, private router: Router) {}
+
+  ngOnInit(): void {
+    this.serviceService.getCards().subscribe(cards => {
+      this.cards = cards;
+    });
+  }
+
+  onCardClick(formId: string): void {
+    this.router.navigate(['/au/permit', formId]);
+  }
 }

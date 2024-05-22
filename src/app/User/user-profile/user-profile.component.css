@@ -1,0 +1,9 @@
+.user-profile-head, .user-profile-name {
+    font-weight: bold;
+    font-size: 1.2rem;
+  }
+
+  .personal-details, .company-details{
+    font-size: 1rem;
+    font-weight: bold;
+  }
