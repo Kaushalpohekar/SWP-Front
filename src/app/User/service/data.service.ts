@@ -34,7 +34,66 @@ export class DataService {
       text: 'Tell us about yourself',
       type: 'longAnswer',
       answer: ''
-    }
+    },
+    { 
+      formId: '48afd8d5-46b2-4736-b9ba-x4e56h8un',
+      id: 4,
+      text: 'What is Your gender?',
+      options: ['Female', 'Male', 'Other'],
+      type: 'selectAnswer',
+      answer: ''
+    },
+    { 
+      formId: '48afd8d5-46b2-4736-b9ba-x4e56h8un',
+      id: 5,
+      text: 'What is your favorite color?',
+      type: 'multipleChoice',
+      options: ['Red', 'Blue', 'Green', 'Blue', 'Green', 'Blue', 'Green'],
+      answer: ''
+    },
+    { 
+      formId: '48afd8d5-46b2-4736-b9ba-x4e56h8un',
+      id: 6,
+      text: 'What is your favorite color?',
+      type: 'checkbox',
+      options: ['Red', 'Blue', 'Green', 'Blue', 'Green', 'Blue', 'Green', 'Blue', 'Green'],
+      answer: ''
+    },
+    { 
+      formId: '48afd8d5-46b2-4736-b9ba-x4e56h8un',
+      id: 6,
+      text: 'What is your favorite color?',
+      type: 'upload',
+      options: ['Red', 'Blue', 'Green'],
+      answer: ''
+    },
+    { 
+      formId: '48afd8d5-46b2-4736-b9ba-x4e56h8un',
+      id: 6,
+      text: 'What is your favorite color?',
+      type: 'upload',
+      options: ['Red', 'Blue', 'Green'],
+      answer: ''
+    },
+    { 
+      formId: '48afd8d5-46b2-4736-b9ba-x4e56h8un',
+      id: 6,
+      text: 'What is your favorite color?',
+      type: 'upload',
+      options: ['Red', 'Blue', 'Green'],
+      answer: ''
+    },
+    { 
+      formId: '48afd8d5-46b2-4736-b9ba-x4e56h8un',
+      id: 6,
+      text: 'What is your favorite color?',
+      type: 'upload',
+      options: ['Red', 'Blue', 'Green'],
+      answer: ''
+    },
+
+
+
   ];
 
   constructor() { }

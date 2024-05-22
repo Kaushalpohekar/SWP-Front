@@ -32,19 +32,25 @@ export class FormComponent implements OnInit {
   }
 
   loadFormData(id: string): void {
-    console.log('Form ID:', id);
-    this.selectedCard = this.cards.find(card => card.formId === id);
-    if (!this.selectedCard) {
-      this.snackBar.open('Error: Data for this form is not available', 'Close', {
-        duration: 5000, // 5 seconds
-        panelClass: ['error-snackbar']
-      });
-      this.router.navigate(['/u/h']);
-    } else {
-      this.dataService.getQuestions().subscribe(questions => {
-        this.questions = questions.filter(question => question.formId === id);
-      });
-    }
+      console.log('Form ID:', id);
+      this.selectedCard = this.cards.find(card => card.formId === id);
+      if (!this.selectedCard) {
+          this.snackBar.open('Error: Data for this form is not available', 'Close', {
+              duration: 5000, // 5 seconds
+              panelClass: ['error-snackbar']
+          });
+          this.router.navigate(['/u/h']);
+      } else {
+          this.dataService.getQuestions().subscribe(questions => {
+              this.questions = questions.filter(question => question.formId === id);
+              // Initialize question.answer for checkbox type questions
+              this.questions.forEach(question => {
+                  if (question.type === 'checkbox') {
+                      question.answer = {};
+                  }
+              });
+          });
+      }
   }
 
 
@@ -54,4 +60,47 @@ export class FormComponent implements OnInit {
       this.questions[questionIndex].answer = value;
     }
   }
+
+  handleCheckboxChange(questionId: number, checkedValues: any) {
+      const questionIndex = this.questions.findIndex(question => question.id === questionId);
+      if (questionIndex !== -1) {
+          let answer: any;
+          if (Array.isArray(checkedValues)) {
+              answer = {};
+              checkedValues.forEach(option => {
+                  answer[option] = true;
+              });
+          } else if (typeof checkedValues === 'object') {
+              answer = checkedValues;
+          } else {
+          }
+          this.questions[questionIndex].answer = answer;
+      }
+  }
+
+
+handleDragOver(event: Event) {
+  event.preventDefault();
+}
+
+displayFileName(event: any) {
+  const file = event.target.files[0];
+  const fileNameDisplay = document.getElementById('file-name');
+  if (file && fileNameDisplay) { // Add a null check for fileNameDisplay
+    fileNameDisplay.textContent = `Selected File: ${file.name}`;
+  }
+}
+
+handleDrop(event: any) {
+  event.preventDefault();
+  const file = event.dataTransfer.files[0];
+  const fileNameDisplay = document.getElementById('file-name');
+  if (file && fileNameDisplay) { // Add a null check for fileNameDisplay
+    fileNameDisplay.textContent = `Selected File: ${file.name}`;
+  }
+}
+
+
+
+
 }
