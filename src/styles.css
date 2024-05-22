@@ -2,6 +2,27 @@
 @import '~bootstrap/dist/css/bootstrap.min.css';
 
 html, body { height: 100%; }
+
+html {
+    --mdc-checkbox-disabled-selected-icon-color: rgba(0, 0, 0, 0.38);
+    --mdc-checkbox-disabled-unselected-icon-color: rgba(0, 0, 0, 0.38);
+    --mdc-checkbox-selected-checkmark-color: #fff;
+    --mdc-checkbox-selected-focus-icon-color: #008554;
+    --mdc-checkbox-selected-hover-icon-color: #008554;
+    --mdc-checkbox-selected-icon-color: #008554;
+    --mdc-checkbox-selected-pressed-icon-color: #008554;
+    --mdc-checkbox-unselected-focus-icon-color: #212121;
+    --mdc-checkbox-unselected-hover-icon-color: #212121;
+    --mdc-checkbox-unselected-icon-color: rgba(0, 0, 0, 0.54);
+    --mdc-checkbox-unselected-pressed-icon-color: rgba(0, 0, 0, 0.54);
+    --mdc-checkbox-selected-focus-state-layer-color: #008554;
+    --mdc-checkbox-selected-hover-state-layer-color: #008554;
+    --mdc-checkbox-selected-pressed-state-layer-color: #008554;
+    --mdc-checkbox-unselected-focus-state-layer-color: black;
+    --mdc-checkbox-unselected-hover-state-layer-color: black;
+    --mdc-checkbox-unselected-pressed-state-layer-color: black;
+}
+
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; background-color: #f5f5f5;}
 *::-webkit-scrollbar {
     width: 5px;
@@ -16,3 +37,66 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; background-
     background-color: #555;
 }
 
+/* Apply the same style to all form elements */
+.custom-form-input input[type="text"],
+.custom-form-input input[type="email"],
+.custom-form-input input[type="password"],
+.custom-form-input input[type="number"],
+.custom-form-input textarea,
+.custom-form-input select,
+.custom-form-input input[type="radio"],
+.custom-form-input input[type="checkbox"],
+.custom-form-input select[multiple] {
+  border: none;
+  border-bottom: 1px solid #dfe1e5;
+  border-radius: 5px;
+  padding: 5px;
+  font-size: 0.8rem;
+  width: 100%;
+  box-sizing: border-box;
+  transition: border-color 0.3s, border-width 0.3s;
+  background-color: #f1f1f1;
+}
+
+.custom-form-input input:hover,
+.custom-form-input textarea:hover,
+.custom-form-input select:hover,
+.custom-form-input input[type="radio"]:hover,
+.custom-form-input input[type="checkbox"]:hover {
+  border-bottom-color: #c1c1c1;
+}
+
+.custom-form-input input:focus,
+.custom-form-input textarea:focus,
+.custom-form-input select:focus,
+.custom-form-input input[type="radio"]:focus,
+.custom-form-input input[type="checkbox"]:focus {
+  border-bottom-color: #008554;
+  border-bottom-width: 1px;
+  outline: none;
+}
+
+.custom-form-input input:active,
+.custom-form-input textarea:active,
+.custom-form-input select:active,
+.custom-form-input input[type="radio"]:active,
+.custom-form-input input[type="checkbox"]:active {
+  border-bottom-color: #008554;
+  border-bottom-width: 1px;
+}
+
+
+.mat-mdc-radio-button.mat-accent {
+    --mdc-radio-disabled-selected-icon-color: #000;
+    --mdc-radio-disabled-unselected-icon-color: #000;
+    --mdc-radio-unselected-hover-icon-color: #212121;
+    --mdc-radio-unselected-icon-color: rgba(0, 0, 0, 0.54);
+    --mdc-radio-unselected-pressed-icon-color: rgba(0, 0, 0, 0.54);
+    --mdc-radio-selected-focus-icon-color: #008554;
+    --mdc-radio-selected-hover-icon-color: #008554 ;
+    --mdc-radio-selected-icon-color: #008554 ;
+    --mdc-radio-selected-pressed-icon-color: #008554 ;
+    --mat-radio-ripple-color: #000;
+    --mat-radio-checked-ripple-color: #008554 ;
+    --mat-radio-disabled-label-color: rgba(0, 0, 0, 0.38);
+}

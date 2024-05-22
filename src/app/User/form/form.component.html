@@ -1,23 +1,77 @@
-<form>
-  <div *ngFor="let question of questions">
-    <label>{{ question.text }}</label>
-    <div *ngIf="question.type === 'multipleChoice'">
-      <mat-radio-group [(ngModel)]="question.answer">
-        <mat-radio-button *ngFor="let option of question.options" [value]="option">
-          {{ option }}
-        </mat-radio-button>
-      </mat-radio-group>
+<div class="container">
+    <div class="row pt-2 mb-2">
+        <div class="col-12 mb-2">
+        	<mat-card>
+        		<mat-card-content>
+        			<div class="row mb-2">
+				        <div class="col-12 mb-2 d-flex justify-content-between align-items-center">
+									<div class="title">{{ selectedCard.subtitle }}</div>
+									<mat-icon class="icon">{{ selectedCard.icon }}</mat-icon>
+				        </div>
+				        <hr>
+								<div class="col-12 mb-12">
+									<form>
+										<div *ngFor="let question of questions" class="col-12 mb-2">
+											<div class="question mb-1">{{ question.text }}</div>
+											<div *ngIf="question.type === 'multipleChoice'">
+												<mat-radio-group [(ngModel)]="question.answer" name="multipleChoice_{{ question.id }}">
+													<mat-radio-button *ngFor="let option of question.options" [value]="option">
+														{{ option }}
+													</mat-radio-button>
+												</mat-radio-group>
+											</div>
+											<div *ngIf="question.type === 'shortAnswer'">
+												<div class="custom-form-input">
+													<input type="text" [(ngModel)]="question.answer" (ngModelChange)="handleInputChange(question.id, question.answer)" [ngModelOptions]="{standalone: true}">
+												</div>
+											</div>
+											<div *ngIf="question.type === 'longAnswer'">
+												<div class="custom-form-input">
+													<textarea [(ngModel)]="question.answer" (ngModelChange)="handleInputChange(question.id, question.answer)" name="longAnswer_{{ question.id }}"></textarea>
+												</div>
+											</div>
+											<div *ngIf="question.type === 'selectAnswer'">
+												<app-select 
+												    [options]="question.options" 
+												    [selectedOption]="question.answer"
+												    (optionSelected)="handleInputChange(question.id, $event)">
+												</app-select>
+											</div>
+											<div *ngIf="question.type === 'checkbox'">
+											  <div *ngFor="let option of question.options">
+											    <mat-checkbox [(ngModel)]="question.answer[option]" [ngModelOptions]="{standalone: true}" (change)="handleCheckboxChange(question.id, question.answer)">
+											      {{ option }}
+											    </mat-checkbox>
+											  </div>
+											</div>
+											<div *ngIf="question.type === 'upload'">
+												<div class="container">
+													<div class="row">
+														<div class="d-flex justify-content-center align-items-center">
+															<div class="upload-container" (drop)="handleDrop($event)" (dragover)="handleDragOver($event)">
+																<input type="file" id="file-upload" class="input-file" (change)="displayFileName($event)">
+																<div class="text-center">
+																	<mat-icon>upload</mat-icon>
+																	<div class="drag-drop">Drag & Drop</div>
+																	<div>or</div>
+																	<label for="file-upload" class="file-label">
+																			<span>Click to upload</span>
+																	</label>
+																	<span id="file-name" class="file-name"></span>
+																</div>
+															</div>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+										<button mat-raised-button type="submit">Submit</button>
+									</form>
+								</div>        
+				    </div>
+        		</mat-card-content>
+        	</mat-card>
+            
+        </div>
     </div>
-    <div *ngIf="question.type === 'shortAnswer'">
-      <mat-form-field>
-        <input matInput type="text" [(ngModel)]="question.answer" (ngModelChange)="handleInputChange(question.id, question.answer)">
-      </mat-form-field>
-    </div>
-    <div *ngIf="question.type === 'longAnswer'">
-      <mat-form-field>
-        <textarea matInput [(ngModel)]="question.answer" (ngModelChange)="handleInputChange(question.id, question.answer)"></textarea>
-      </mat-form-field>
-    </div>
-  </div>
-  <button mat-raised-button type="submit">Submit</button>
-</form>
+</div>

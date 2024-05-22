@@ -8,6 +8,7 @@ import { PermitComponent } from './permit/permit.component';
 import { MaterialModule } from '../material/material.module';
 import { PrimeModule } from '../material/prime.module';
 import { FormComponent } from './form/form.component';
+import { SelectComponent } from './select/select.component';
 
 @NgModule({
   declarations: [
@@ -15,7 +16,8 @@ import { FormComponent } from './form/form.component';
     UserLayoutComponentComponent,
     NavComponent,
     PermitComponent,
-    FormComponent
+    FormComponent,
+    SelectComponent
   ],
   imports: [
     CommonModule,
