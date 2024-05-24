@@ -1,43 +1,36 @@
-<!-- <div class="container-fluid mt-3">
-    <div class="row">
-        <div>{{ selectedCard.formId }}</div>
-        <div>{{ selectedCard.title }}</div>
-    </div>
-</div> -->
-
 <div class="container-fluid">
-    <div class="row mt-3">
-        <div class="col-lg-3 col-md-6 col-sm-12">
-            <div class="card card-with-border">
+    <div class="row pt-3 mb-2">
+        <div class="col-lg-3 col-md-4 col-sm-6 mb-2" *ngFor="let form of forms">
+            <div class="card card-form">
                 <div class="card-body">
-                    <div class="row">
-                        <div class="col-lg-1 col-md-1 col-sm-1">
-                            <mat-icon>{{selectedCard.icon}}</mat-icon>
+                    <div class="row mb-4">
+                        <div class="col-6">
+                            <div class="title">
+                                <i class="material-icons icon-color">{{ form.icon }}</i> 
+                                <span>{{ form.formUID }}</span>
+                            </div>
                         </div>
-                        <div class="col-lg-11 col-md-11 col-sm-11">
-                            <div class="my-1 mx-1">{{ selectedCard.formId }}</div>
-                        </div>
-                        <div class="col-lg-12 mx-1">
-                            time
-                        </div>
-                        <p></p><p></p>
-                        <div class="col-lg-12 mx-1">
-                            <div>{{selectedCard.organization}}</div>
-                        </div>
-                        <div class="col-lg-12 mx-1">
-                            <div>{{selectedCard.details}} details</div>
+                        <div class="col-6">
+                            <div class="title justify-content-center">
+                                <i class="material-icons icon-color">person</i> 
+                                <span>{{ form.worker }}</span>
+                            </div>
                         </div>
                     </div>
-                    <div class="row d-flex justify-content-center">
-                        <div class="col-lg-6 d-flex justify-content-center pt-2">
-                            <button mat-button color="primary">Approve</button>
+                    <div class="row d-flex align-items-center">
+                        <div class="col-12 mb-1 time-title">11:00 AM &#x23F1; 11:00 PM</div>
+                        <div class="col-12 mb-3 date-title">27 Feb, 2024  12 Hr  27 Feb, 2024</div>
+                        <div class="col-12 mb-1 organization">{{ form.organaztion }}</div>
+                        <div class="col-12 mb-1 form-name" title="{{ form.name }}">{{ form.name }}</div>
+                        <div class="col-6 button" (click)="Approved()">
+                            <div>Approved</div>
                         </div>
-                        <div class="col-lg-6 d-flex justify-content-center pt-2">
-                            <button mat-button routerLink="/au/preview">Preview</button>
+                        <div class="col-6 text-end button" (click)="Preview(form.formUID)">
+                            <div>Preview</div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
+        </div>        
     </div>
 </div>

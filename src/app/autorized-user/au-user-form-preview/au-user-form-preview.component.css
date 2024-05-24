@@ -1,62 +1,193 @@
-.pdf-container {
-    width: 210mm; /* A4 width */
-    height: 297mm; /* A4 height */
-    padding: 20mm;
-    box-sizing: border-box;
+.card-pdf {
+    border-radius: 0;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 }
 
-.pdf-header, .pdf-footer {
+.no-shadow {
+    box-shadow: none !important; /* No shadow */
+}
+
+.img-fluid {
+    height: 35px;
+    width: auto;
+}
+
+.card-pdf .title {
+    font-size: 1.2rem;
+    font-weight: 600;
+}
+
+.card-pdf .sub-title {
+    font-size: 0.8rem;
+    font-weight: 550;
+}
+
+
+.card-pdf .form-uid{
+    font-size: 0.8rem;
+    font-weight: 550;
+}
+
+.card-pdf .form-uid span{
+    font-weight: 500;
+}
+
+
+.card-box{
+    border-radius: 0;
+}
+
+.card-box .box-header{
+    background: #f2f3f5;
+    padding: 5px;
     text-align: center;
-    margin-bottom: 20px;
+    font-size: 0.9rem;
+    font-weight: 550;
+    border-bottom: 1px solid #d9dadb;
 }
 
-.pdf-header h1 {
-    margin: 0;
-    font-size: 24px;
+.card-box .worker-name{
+    font-size: 0.8rem;
+    font-weight: 550;
 }
 
-.pdf-header .sub-title {
-    margin: 0;
-    font-size: 14px;
-    color: #666;
+.card-box .worker-mb{
+    font-size: 0.8rem;
 }
 
-.pdf-content {
-    margin-top: 20px;
+.authorized{
+    font-size: 0.9rem;
+    font-weight: 550;
 }
 
-.card {
-    border: 1px solid #ccc;
-    padding: 15px;
-    margin-bottom: 20px;
-    border-radius: 5px;
+.footer-text{
+    font-size: 0.8rem;
+    font-weight: 550;
 }
 
-.card-header {
-    display: flex;
-    align-items: center;
-    margin-bottom: 10px;
+@media screen and (max-width: 768px) {
+    .img-fluid {
+        height: 25px;
+        width: auto;
+    }
+
+    .card-pdf .title {
+        font-size: 1rem;
+    }
+
+    .card-pdf .sub-title {
+        font-size: 0.6rem;
+    }
 }
 
-.card-header .icon {
-    font-size: 24px;
-    margin-right: 10px;
+@media screen and (max-width: 576px) {
+    .img-fluid {
+        height: 25px;
+        width: auto;
+    }
+
+    .card-pdf .title {
+        font-size: 1rem;
+    }
+
+    .card-pdf .sub-title {
+        font-size: 0.6rem;
+    }
 }
 
-.card-header .form-id {
-    font-size: 18px;
-    font-weight: bold;
+.card-box .card-body {
+    position: relative; /* Ensure the position context for absolute positioning */
 }
 
-.card-body p {
-    margin: 5px 0;
-}
-
-.pdf-footer {
+.card-box .card-box-line::before {
+    content: '';
     position: absolute;
-    bottom: 20mm;
-    width: calc(100% - 40mm);
+    top: 0;
+    bottom: 0;
+    left: 50%;
+    width: 1px;
+    background-color: #ccc; /* Adjust color as needed */
+    transform: translateX(-50%);
+}
+
+.card-box .card-box-line-2::before,
+.card-box .card-box-line-2::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 1px;
+    background-color: #ccc; /* Adjust color as needed */
+    transform: translateY(0%);
+}
+
+.card-box .card-box-line-2::before {
+    left: 33.33%;
+}
+
+.card-box .card-box-line-2::after {
+    left: 66.66%;
+}
+
+
+.form-button {
+  align-items: center;
+  border: 0 solid #E2E8F0;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  box-sizing: border-box;
+  display: inline-flex;
+  font-size: 0.8rem;
+  font-weight: 550;
+  height: auto;
+  justify-content: center;
+  overflow-wrap: break-word;
+  padding: 7px;
+  text-decoration: none;
+  width: 100%;
+  border-radius: 8px;
+  cursor: pointer;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  background: linear-gradient(to right, #32a852, #008554);
+  color: white;
+}
+
+.form-button-reject {
+  align-items: center;
+  border: 0 solid #E2E8F0;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  box-sizing: border-box;
+  display: inline-flex;
+  font-size: 0.8rem;
+  font-weight: 550;
+  height: auto;
+  justify-content: center;
+  overflow-wrap: break-word;
+  padding: 7px;
+  text-decoration: none;
+  width: 100%;
+  border-radius: 8px;
+  cursor: pointer;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  background: linear-gradient(to right, #f51d1d, #cc1212);
+  color: white;
+}
+
+.multipleChoice-box{
+    font-size: 0.75rem;
+    font-weight: 550;
+    padding: 2px;
+    border-radius: 2px;
+    border: 1px solid grey;
+    margin: 5px 5px;
+    height: auto;
+    width: 35px;
     text-align: center;
-    font-size: 12px;
-    color: #666;
+}
+
+ .true{
+    background-color: #c9f0bd;
 }

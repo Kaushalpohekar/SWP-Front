@@ -19,6 +19,6 @@ export class AuUserHomeComponent {
   }
 
   onCardClick(formId: string): void {
-    this.router.navigate(['/au/permit', formId]);
+    this.router.navigate(['/au/formList', formId]);
   }
 }

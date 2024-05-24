@@ -32,7 +32,6 @@ export class FormComponent implements OnInit {
   }
 
   loadFormData(id: string): void {
-      console.log('Form ID:', id);
       this.selectedCard = this.cards.find(card => card.formId === id);
       if (!this.selectedCard) {
           this.snackBar.open('Error: Data for this form is not available', 'Close', {
