@@ -30,7 +30,18 @@
     text-overflow: ellipsis;
 }
 
-.icon-color{background: linear-gradient(to right, blue, green);
+.icon-color {
+    background: linear-gradient(to right, #008554, #035539); /* Green shades */
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
+    animation: pulse 2.5s infinite alternate; /* Pulsating animation */
+}
+
+@keyframes pulse {
+    0% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0.5;
+    }
 }

@@ -9,6 +9,7 @@ import { MaterialModule } from '../material/material.module';
 import { PrimeModule } from '../material/prime.module';
 import { FormComponent } from './form/form.component';
 import { SelectComponent } from './select/select.component';
+import { FormSelectComponent } from './form-select/form-select.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { SelectComponent } from './select/select.component';
     NavComponent,
     PermitComponent,
     FormComponent,
-    SelectComponent
+    SelectComponent,
+    FormSelectComponent
   ],
   imports: [
     CommonModule,

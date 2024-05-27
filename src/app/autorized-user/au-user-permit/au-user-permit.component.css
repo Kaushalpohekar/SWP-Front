@@ -1,1 +1,110 @@
+.title {
+    font-size: 1rem;
+    font-weight: 550;
+}
+
+.outer-card {
+    height: 100%;
+    width: 100%;
+}
+
+.inner-card {
+    height: 50px;
+    margin-top: -25px;
+    width: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.card-title {
+    font-size: 1rem;
+    font-weight: 550;
+}
+
+.card-subtitle {
+    font-size: 0.8rem;
+    font-weight: 550;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/*.icon-color {
+    background: linear-gradient(to right, #3498db, #2ecc71);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}*/
+
+.icon-color {
+    background: linear-gradient(to right, #008554, #035539); /* Green shades */
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: pulse 2.5s infinite alternate; /* Pulsating animation */
+}
+
+@keyframes pulse {
+    0% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0.5;
+    }
+}
+
+
+.count-card{
+    border: none;
+    border-radius: 5px;
+}
+
+.new {
+    border-left: 5px solid;
+    border-image: linear-gradient(to bottom, #6a79d1, #4e5d96);
+    border-image-slice: 1;
+}
+
+.Approved {
+    border-left: 5px solid;
+    border-image: linear-gradient(to bottom, #1b8f29, #135c18);
+    border-image-slice: 1;
+}
+
+.Rejected {
+    border-left: 5px solid;
+    border-image: linear-gradient(to bottom, #e22a2a, #bd0f0f);
+    border-image-slice: 1;
+}
+
+.Revoked {
+    border-left: 5px solid;
+    border-image: linear-gradient(to bottom, #d4bc1d, #a19318);
+    border-image-slice: 1;
+}
+
+.Extend {
+    border-left: 5px solid;
+    border-image: linear-gradient(to bottom, #1d8a70, #0e6956);
+    border-image-slice: 1;
+}
+
+.Overdue {
+    border-left: 5px solid;
+    border-image: linear-gradient(to bottom, #f0424a, #d9111b);
+    border-image-slice: 1;
+}
+
+.count-card .card-title {
+    font-size: 0.9rem;
+    font-weight: 550;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.count-card .count {
+    padding-top: 5px;
+    font-size: 1.2rem;
+    font-weight: 600;
+}
 

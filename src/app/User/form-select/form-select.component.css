@@ -1,0 +1,52 @@
+.card-form {
+    border-left: 10px solid #008554;
+    height: 150px;
+}
+
+.title {
+    font-size: 0.95rem;
+    font-weight: 550;
+    display: flex;
+    align-items: center;
+}
+
+.title .icon-color{
+    font-size: 1.2rem;
+    margin-right: 5px;
+    color: black;
+}
+
+.time-title{
+    font-size: 0.95rem;
+    font-weight: 550;
+}
+
+.date-title{
+    font-size: 0.8rem;
+    font-weight: 550;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.organization{
+    font-size: 0.8rem;
+    font-weight: 550;
+}
+
+.form-name{
+    font-size: 0.8rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.button{
+    font-size: 0.8rem;
+    font-weight: 550;
+    cursor: pointer;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    color: #7771eb;
+}

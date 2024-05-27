@@ -8,7 +8,7 @@ import { AuUserFormPreviewComponent } from './au-user-form-preview/au-user-form-
 
 const routes: Routes = [
   { path: 'home', component: AuUserHomeComponent },
-  { path: 'permit', component: AuUserPermitComponent},
+  { path: 'f/:type', component: AuUserPermitComponent},
   { path: 'Preview/:formId/:formUID', component: AuUserFormPreviewComponent},
   { path: 'formList/:formId', component:AuUserFormComponent  },
   { path: '', redirectTo: 'home', pathMatch: 'full' },

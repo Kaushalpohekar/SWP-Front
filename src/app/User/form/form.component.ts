@@ -9,6 +9,8 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   styleUrls: ['./form.component.css']
 })
 export class FormComponent implements OnInit {
+  type!: string;
+  categoryID!: string;
   formId!: string;
   cards!: any[];
   selectedCard: any;
@@ -23,8 +25,10 @@ export class FormComponent implements OnInit {
 
   ngOnInit(): void {
     this.route.params.subscribe(params => {
+      this.type = params['type'];
+      this.categoryID = params['categoryID'];
       this.formId = params['formId'];
-      this.dataService.getCards().subscribe(cards => {
+      this.dataService.getCards2(this.categoryID).subscribe(cards => {
         this.cards = cards;
         this.loadFormData(this.formId);
       });

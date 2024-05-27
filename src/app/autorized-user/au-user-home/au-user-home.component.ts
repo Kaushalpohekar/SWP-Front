@@ -18,7 +18,7 @@ export class AuUserHomeComponent {
     });
   }
 
-  onCardClick(formId: string): void {
-    this.router.navigate(['/au/formList', formId]);
+  onCardClick(catagoryID: string): void {
+    this.router.navigate(['/au/f', catagoryID]);
   }
 }

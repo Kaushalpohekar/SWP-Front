@@ -7,10 +7,45 @@
         </mat-icon>
       </mat-list-item>
 
-      <mat-list-item [routerLink]="'dashboard'">
-        <div class="d-flex justify-content-center align-items-center">
+      <mat-list-item routerLink="/u/h">
+        <div class="d-flex align-items-center">
           <mat-icon mat-list-icon>home</mat-icon>
           <div *ngIf="isExpanded" class="menu-item">Dashboard</div>
+        </div>
+      </mat-list-item>
+
+      <mat-list-item routerLink="/u/f/observations">
+        <div class="d-flex justify-content-center align-items-center">
+          <mat-icon mat-list-icon>visibility</mat-icon>
+          <div *ngIf="isExpanded" class="menu-item">Observations</div>
+        </div>
+      </mat-list-item>
+
+      <mat-list-item routerLink="/u/f/incidents">
+        <div class="d-flex justify-content-center align-items-center">
+          <mat-icon mat-list-icon>warning</mat-icon>
+          <div *ngIf="isExpanded" class="menu-item">Incidents</div>
+        </div>
+      </mat-list-item>
+
+      <mat-list-item routerLink="/u/f/permits">
+        <div class="d-flex justify-content-center align-items-center">
+          <mat-icon mat-list-icon>assignment_turned_in</mat-icon>
+          <div *ngIf="isExpanded" class="menu-item">Permits</div>
+        </div>
+      </mat-list-item>
+
+      <mat-list-item routerLink="/u/f/action">
+        <div class="d-flex justify-content-center align-items-center">
+          <mat-icon mat-list-icon>task</mat-icon>
+          <div *ngIf="isExpanded" class="menu-item">Action</div>
+        </div>
+      </mat-list-item>
+
+      <mat-list-item routerLink="/u/f/audits">
+        <div class="d-flex justify-content-center align-items-center">
+          <mat-icon mat-list-icon>assignment</mat-icon>
+          <div *ngIf="isExpanded" class="menu-item">Audits</div>
         </div>
       </mat-list-item>
 

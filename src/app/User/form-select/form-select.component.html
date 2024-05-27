@@ -1,0 +1,25 @@
+<div class="container-fluid">
+    <div class="row pt-3 mb-2">
+        <div class="col-lg-3 col-md-4 col-sm-6 mb-2" *ngFor="let form of forms">
+            <div class="card card-form">
+                <div class="card-body">
+                    <div class="row mb-3">
+                        <div class="col-12">
+                            <div class="title">
+                                <i class="material-icons icon-color">home</i> 
+                                <span>Hot Work Form</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row d-flex align-items-center">
+                        <div class="col-12 mb-1 time-title">Required the permission to acess the welding work?</div>
+                        <div class="col-6 button"></div>
+                        <div class="col-6 text-end button" (click)="proceed(form.formId)">
+                            <div>Proceed</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>        
+    </div>
+</div>

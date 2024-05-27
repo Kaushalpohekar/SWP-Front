@@ -8,6 +8,7 @@ import{ AutorizedUserRoutingModule } from './autorized-user-routing.module';
 import { AuUserFormComponent } from './au-user-form/au-user-form.component';
 import { SuccessComponent } from './success/success.component';
 import { AuUserFormPreviewComponent } from './au-user-form-preview/au-user-form-preview.component';
+import { AuUserPermitComponent } from './au-user-permit/au-user-permit.component';
 
 @NgModule({
   declarations: [
@@ -17,6 +18,7 @@ import { AuUserFormPreviewComponent } from './au-user-form-preview/au-user-form-
     AuUserFormComponent,
     SuccessComponent,
     AuUserFormPreviewComponent,
+    AuUserPermitComponent
   ],
   imports: [
     CommonModule,

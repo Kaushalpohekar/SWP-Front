@@ -7,48 +7,47 @@
         </mat-icon>
       </mat-list-item>
 
-      <mat-list-item [routerLink]="'dashboard'">
+      <mat-list-item routerLink="/au/home">
         <div class="d-flex justify-content-center align-items-center">
           <mat-icon mat-list-icon>home</mat-icon>
           <div *ngIf="isExpanded" class="menu-item">Dashboard</div>
         </div>
       </mat-list-item>
 
-      <mat-list-item routerLink="observations">
+      <mat-list-item routerLink="/au/f/observations">
         <div class="d-flex justify-content-center align-items-center">
           <mat-icon mat-list-icon>visibility</mat-icon>
           <div *ngIf="isExpanded" class="menu-item">Observations</div>
         </div>
       </mat-list-item>
 
-      <mat-list-item routerLink="incidents">
+      <mat-list-item routerLink="/au/f/incidents">
         <div class="d-flex justify-content-center align-items-center">
           <mat-icon mat-list-icon>warning</mat-icon>
           <div *ngIf="isExpanded" class="menu-item">Incidents</div>
         </div>
       </mat-list-item>
 
-      <mat-list-item routerLink="permit">
+      <mat-list-item routerLink="/au/f/permits">
         <div class="d-flex justify-content-center align-items-center">
           <mat-icon mat-list-icon>assignment_turned_in</mat-icon>
           <div *ngIf="isExpanded" class="menu-item">Permits</div>
         </div>
       </mat-list-item>
 
-      <mat-list-item routerLink="action">
+      <mat-list-item routerLink="/au/f/action">
         <div class="d-flex justify-content-center align-items-center">
           <mat-icon mat-list-icon>task</mat-icon>
           <div *ngIf="isExpanded" class="menu-item">Action</div>
         </div>
       </mat-list-item>
 
-      <mat-list-item routerLink="audits">
+      <mat-list-item routerLink="/au/f/audits">
         <div class="d-flex justify-content-center align-items-center">
           <mat-icon mat-list-icon>assignment</mat-icon>
           <div *ngIf="isExpanded" class="menu-item">Audits</div>
         </div>
       </mat-list-item>
-
     </mat-nav-list>
   </mat-sidenav>
 

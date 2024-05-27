@@ -10,6 +10,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 })
 
 export class AuUserFormComponent implements OnInit {
+  type!: string;
   formId!: string;
   cards!: any[];
   selectedCard: any;
@@ -24,6 +25,7 @@ export class AuUserFormComponent implements OnInit {
 
   ngOnInit(): void {
     this.route.params.subscribe(params => {
+      this.type = params['type'];
       this.formId = params['formId'];
       this.serviceService.getCards().subscribe(cards => {
         this.cards = cards;
