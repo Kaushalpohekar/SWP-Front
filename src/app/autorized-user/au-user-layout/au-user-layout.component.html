@@ -2,6 +2,13 @@
   <mat-sidenav #sidenav mode="side" opened="isExpanded">
     <mat-nav-list>
 
+<!--       <mat-list-item>
+        <div class="d-flex justify-content-center align-items-center">
+          <img src="../../../assets/senselivelogo.png" class="img-fluid">
+          <div *ngIf="isExpanded" class="menu-item">SenseLive</div>
+        </div>
+      </mat-list-item> -->
+
       <mat-list-item (click)="isExpanded = !isExpanded">
         <mat-icon mat-list-icon class="chevron-button" [ngClass]="{ rotated: isExpanded }">chevron_right
         </mat-icon>

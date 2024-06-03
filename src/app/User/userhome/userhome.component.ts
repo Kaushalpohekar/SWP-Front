@@ -14,9 +14,9 @@ export class UserhomeComponent {
   constructor(private dataService: DataService, private router: Router) {}
 
   ngOnInit(): void {
-    this.dataService.getCards().subscribe(cards => {
-      this.cards = cards;
-    });
+    // this.dataService.getCards().subscribe(cards => {
+    //   this.cards = cards;
+    // });
   }
 
   onCardClick(formId: string): void {

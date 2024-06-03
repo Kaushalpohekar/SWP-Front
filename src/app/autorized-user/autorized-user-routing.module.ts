@@ -10,7 +10,7 @@ const routes: Routes = [
   { path: 'home', component: AuUserHomeComponent },
   { path: 'f/:type', component: AuUserPermitComponent},
   { path: 'Preview/:formId/:formUID', component: AuUserFormPreviewComponent},
-  { path: 'formList/:formId', component:AuUserFormComponent  },
+  { path: 'f/:type/:categoryID', component:AuUserFormComponent  },
   { path: '', redirectTo: 'home', pathMatch: 'full' },
 ];
 

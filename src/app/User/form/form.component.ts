@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { DataService } from '../service/data.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { CookieService } from 'ngx-cookie-service';
+import { EncryptService } from '../../Authentication/AuthService/encrypt.service';
 
 @Component({
   selector: 'app-form',
@@ -9,18 +11,27 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   styleUrls: ['./form.component.css']
 })
 export class FormComponent implements OnInit {
+
+  selectedDate: Date | null = null;
+
+  onDateSelected(date: Date) {
+    this.selectedDate = date;
+  }
+
   type!: string;
   categoryID!: string;
   formId!: string;
   cards!: any[];
-  selectedCard: any;
+  categoryDetails: any;
   questions!: any[];
 
   constructor(
     private dataService: DataService,
     private route: ActivatedRoute,
     private snackBar: MatSnackBar,
-    private router: Router
+    private router: Router,
+    private cookieService: CookieService,
+    private EncryptService: EncryptService
   ) {}
 
   ngOnInit(): void {
@@ -28,32 +39,17 @@ export class FormComponent implements OnInit {
       this.type = params['type'];
       this.categoryID = params['categoryID'];
       this.formId = params['formId'];
-      this.dataService.getCards2(this.categoryID).subscribe(cards => {
-        this.cards = cards;
-        this.loadFormData(this.formId);
-      });
+      const EncodedCategoryDetails = this.cookieService.get('_cat_dtls');
+      this.categoryDetails = this.EncryptService.decryptData(EncodedCategoryDetails);
+      this.dataService.getQuestions(this.formId).subscribe(
+        (data)=>{
+          console.log(data);
+          this.questions = data.questions;
+        },
+        (error)=>{
+          console.error(error);
+        });
     });
-  }
-
-  loadFormData(id: string): void {
-      this.selectedCard = this.cards.find(card => card.formId === id);
-      if (!this.selectedCard) {
-          this.snackBar.open('Error: Data for this form is not available', 'Close', {
-              duration: 5000, // 5 seconds
-              panelClass: ['error-snackbar']
-          });
-          this.router.navigate(['/u/h']);
-      } else {
-          this.dataService.getQuestions().subscribe(questions => {
-              this.questions = questions.filter(question => question.formId === id);
-              // Initialize question.answer for checkbox type questions
-              this.questions.forEach(question => {
-                  if (question.type === 'checkbox') {
-                      question.answer = {};
-                  }
-              });
-          });
-      }
   }
 
 

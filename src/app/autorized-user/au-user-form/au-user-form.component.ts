@@ -11,7 +11,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 
 export class AuUserFormComponent implements OnInit {
   type!: string;
-  formId!: string;
+  categoryID!: string;
   cards!: any[];
   selectedCard: any;
   forms!: any[];
@@ -26,17 +26,17 @@ export class AuUserFormComponent implements OnInit {
   ngOnInit(): void {
     this.route.params.subscribe(params => {
       this.type = params['type'];
-      this.formId = params['formId'];
+      this.categoryID = params['categoryID'];
       this.serviceService.getCards().subscribe(cards => {
         this.cards = cards;
-        this.loadFormData(this.formId);
+        this.loadFormData(this.categoryID);
       });
     });
   }
 
   loadFormData(id: string): void {
       console.log('Form ID:', id);
-      this.selectedCard = this.cards.find(card => card.formId === id);
+      this.selectedCard = this.cards.find(card => card.categoryID === id);
       if (!this.selectedCard) {
           this.snackBar.open('Error: Data for this form is not available', 'Close', {
               duration: 5000, // 5 seconds
@@ -45,7 +45,7 @@ export class AuUserFormComponent implements OnInit {
           this.router.navigate(['/au/home']);
       } else {
           this.serviceService.getForms().subscribe(forms => {
-              this.forms = forms.filter(form => form.formId === id);
+              this.forms = forms.filter(form => form.categoryID === id);
           });
       }
   }
@@ -55,6 +55,6 @@ export class AuUserFormComponent implements OnInit {
   }
 
   Preview(formUID: string): void{
-    this.router.navigate(['/au/Preview', this.formId, formUID, ]);
+    this.router.navigate(['/au/Preview', this.categoryID, formUID, ]);
   }
 }

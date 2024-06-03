@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { AuthService } from '../../Authentication/AuthService/auth.service';
 
 @Component({
   selector: 'app-au-user-nav',
@@ -6,5 +7,8 @@ import { Component } from '@angular/core';
   styleUrls: ['./au-user-nav.component.css']
 })
 export class AuUserNavComponent {
-
+  constructor (private AuthService: AuthService) {}
+  Logout() {
+    this.AuthService.logout();
+  }
 }

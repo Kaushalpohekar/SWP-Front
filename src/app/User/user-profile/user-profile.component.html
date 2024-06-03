@@ -1,0 +1,16 @@
+<div class="calendar-container">
+  <div class="calendar-header">
+    <button (click)="prevMonth()">&larr;</button>
+    <h2>{{ monthNames[currentMonth] }} {{ currentYear }}</h2>
+    <button (click)="nextMonth()">&rarr;</button>
+  </div>
+  <div class="calendar-grid">
+    <div class="day" *ngFor="let day of weekDays">{{ day }}</div>
+    <div class="date" 
+         *ngFor="let date of dates; let i = index" 
+         [class.selected]="date.selected"
+         (click)="selectDate(i)">
+      {{ date.day }}
+    </div>
+  </div>
+</div>

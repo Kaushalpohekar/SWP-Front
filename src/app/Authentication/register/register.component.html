@@ -59,7 +59,7 @@
                                     <mat-error *ngIf="registerForm.get('password')?.invalid && (registerForm.get('password')?.dirty || registerForm.get('password')?.touched)">{{ getErrorMessage('password') }}</mat-error>
                                 </mat-form-field>
                             </div>
-                            <div class="col-12">
+                            <div class="col-6">
                                 <mat-form-field appearance="outline" class="from-feild">
                                     <mat-label>Compnay Email</mat-label>
                                     <input matInput placeholder="Registered Email" formControlName="CompanyEmail">
@@ -67,9 +67,17 @@
                                         <mat-error *ngIf="registerForm.get('CompanyEmail')?.invalid && (registerForm.get('CompanyEmail')?.dirty || registerForm.get('CompanyEmail')?.touched)">{{ getErrorMessage('CompanyEmail') }}</mat-error>
                                 </mat-form-field>
                             </div>
+                            <div class="col-6">
+                                <mat-form-field appearance="outline" class="from-feild">
+                                    <mat-label>Address</mat-label>
+                                    <input matInput placeholder="Company Address" formControlName="CompanyAddress">
+                                    <mat-icon matSuffix>location_on</mat-icon>
+                                        <mat-error *ngIf="registerForm.get('CompanyAddress')?.invalid && (registerForm.get('CompanyAddress')?.dirty || registerForm.get('CompanyAddress')?.touched)">Company Address is Required</mat-error>
+                                </mat-form-field>
+                            </div>
                             <!-- Confirm Password field removed -->
                             <div class="col-12 mb-2">
-                                <button mat-stroked-button class="SignInButton" style="color: white;">Sign In</button>
+                                <button mat-stroked-button class="SignInButton" style="color: white;">Sign Up</button>
                             </div>
                         </div>
                     </form>

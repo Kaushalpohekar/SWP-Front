@@ -9,6 +9,7 @@ import { AuUserFormComponent } from './au-user-form/au-user-form.component';
 import { SuccessComponent } from './success/success.component';
 import { AuUserFormPreviewComponent } from './au-user-form-preview/au-user-form-preview.component';
 import { AuUserPermitComponent } from './au-user-permit/au-user-permit.component';
+import { BreadcrumbComponent } from './breadcrumb/breadcrumb.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { AuUserPermitComponent } from './au-user-permit/au-user-permit.component
     AuUserFormComponent,
     SuccessComponent,
     AuUserFormPreviewComponent,
-    AuUserPermitComponent
+    AuUserPermitComponent,
+    BreadcrumbComponent
   ],
   imports: [
     CommonModule,

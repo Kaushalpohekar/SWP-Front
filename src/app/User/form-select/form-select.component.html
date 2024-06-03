@@ -6,15 +6,15 @@
                     <div class="row mb-3">
                         <div class="col-12">
                             <div class="title">
-                                <i class="material-icons icon-color">home</i> 
-                                <span>Hot Work Form</span>
+                                <i class="material-icons icon-color">{{ this.categoryDetails.icon}}</i> 
+                                <span>{{ this.categoryDetails.subtitle}}</span>
                             </div>
                         </div>
                     </div>
                     <div class="row d-flex align-items-center">
-                        <div class="col-12 mb-1 time-title">Required the permission to acess the welding work?</div>
+                        <div class="col-12 mb-1 time-title">{{ form.form_name }}</div>
                         <div class="col-6 button"></div>
-                        <div class="col-6 text-end button" (click)="proceed(form.formId)">
+                        <div class="col-6 text-end button" (click)="proceed(form.form_id)">
                             <div>Proceed</div>
                         </div>
                     </div>

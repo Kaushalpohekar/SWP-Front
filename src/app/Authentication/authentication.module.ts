@@ -10,6 +10,7 @@ import{ AuthenticationRoutingModule } from './authentication-routing.module';
 import { RegisterComponent } from './register/register.component';
 import { AfterRegComponent } from './after-reg/after-reg.component';
 import { ContactComponent } from './contact/contact.component';
+import { SendResetMailComponent } from './send-reset-mail/send-reset-mail.component';
 
 
 
@@ -21,7 +22,8 @@ import { ContactComponent } from './contact/contact.component';
     AuthenticationLayoutComponent,
     RegisterComponent,
     AfterRegComponent,
-    ContactComponent
+    ContactComponent,
+    SendResetMailComponent
   ],
   imports: [
     CommonModule,

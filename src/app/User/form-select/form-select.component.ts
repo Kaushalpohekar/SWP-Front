@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { DataService } from '../service/data.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { CookieService } from 'ngx-cookie-service';
+import { EncryptService } from '../../Authentication/AuthService/encrypt.service';
 
 @Component({
   selector: 'app-form-select',
@@ -15,21 +17,26 @@ export class FormSelectComponent implements OnInit {
   cards!: any[];
   selectedCard: any;
   forms!: any[];
+  categoryDetails!: any;
 
   constructor(
-    private serviceService: DataService,
+    private dataService: DataService,
     private route: ActivatedRoute,
     private snackBar: MatSnackBar,
-    private router: Router
+    private router: Router,
+    private cookieService: CookieService,
+    private EncryptService: EncryptService
   ) {}
 
   ngOnInit(): void {
     this.route.params.subscribe(params => {
       this.type = params['type'];
       this.categoryID = params['categoryID'];
-      this.serviceService.getFormsList(this.categoryID).subscribe(forms => {
+      this.dataService.getAllForms(this.categoryID).subscribe(forms => {
         this.forms = forms;
       });
+      const EncodedCategoryDetails = this.cookieService.get('_cat_dtls');
+      this.categoryDetails = this.EncryptService.decryptData(EncodedCategoryDetails);
     });
   }
 

@@ -44,7 +44,6 @@ mat-sidenav-container mat-sidenav mat-nav-list mat-list-item:hover {
 
 mat-sidenav-container mat-sidenav mat-nav-list mat-list-item.active {
   background-color: rgba(255, 255, 255, 0.2);
-  
 }
 
 mat-sidenav-container mat-sidenav mat-nav-list .chevron-button {
@@ -55,4 +54,11 @@ mat-sidenav-container mat-sidenav mat-nav-list .chevron-button {
 
 mat-sidenav-container mat-sidenav mat-nav-list .chevron-button.rotated {
   transform: rotate(180deg);
+}
+
+
+.img-fluid{
+  height: 20px;
+  width: auto;
+  margin-right: 5px;
 }

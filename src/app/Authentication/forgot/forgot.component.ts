@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AuthService } from '../AuthService/auth.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { Router, NavigationExtras } from '@angular/router';
+import { EncryptService } from '../AuthService/encrypt.service';
 
 @Component({
   selector: 'app-forgot',
@@ -7,13 +11,17 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
   styleUrls: ['./forgot.component.css']
 })
 export class ForgotComponent implements OnInit {
-  hidePassword: boolean = true;
   forgotForm!: FormGroup;
 
-  constructor(private fb: FormBuilder) { 
+  constructor(
+    private fb: FormBuilder, 
+    private snackBar: MatSnackBar,
+    private router: Router, 
+    private AuthService: AuthService,
+    private EncryptService: EncryptService
+    ) { 
     this.forgotForm = this.fb.group({
-      usernameOrEmail: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required]]
+      usernameOrEmail: ['', [Validators.required, Validators.email]]
     });
   }
 
@@ -21,13 +29,26 @@ export class ForgotComponent implements OnInit {
     
   }
 
-  togglePasswordVisibility() {
-    this.hidePassword = !this.hidePassword;
-  }
-
   submitForm() {
     if (this.forgotForm.valid) {
-      console.log(this.forgotForm.value);
+      const personalEmailControl = this.forgotForm.get('usernameOrEmail');
+      if(personalEmailControl){
+        const PersonalEmail = personalEmailControl.value;
+        this.AuthService.forgot(this.forgotForm.value).subscribe(
+          ()=>{
+            this.redirectToRegVerify(PersonalEmail);
+          },
+          (error)=>{
+            this.snackBar.open(
+              error.error.message || 'Failed! Please try again.',
+              'Dismiss',
+              { duration: 2000 }
+            );
+          }
+        );
+      } else {
+        console.error('Perosnal Email is not fetched!')
+      }
     } else {
       this.forgotForm.markAllAsTouched();
     }
@@ -40,5 +61,20 @@ export class ForgotComponent implements OnInit {
       return 'Please enter a valid email';
     }
     return '';
+  }
+
+  redirectToRegVerify(PersonalEmail: string | null) {
+    if (PersonalEmail) {
+       const encryptedEmail = this.EncryptService.encryptData(PersonalEmail);
+      const queryParams = {
+        state: encryptedEmail 
+      };
+      const navigationExtras: NavigationExtras = {
+        queryParams: queryParams
+      };
+      this.router.navigate(['/l/send-reset'], navigationExtras);
+    } else {
+      console.error('Personal email is null');
+    }
   }
 }

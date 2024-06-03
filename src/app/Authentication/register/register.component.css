@@ -19,7 +19,7 @@
 
 .SignInButton{
 	width: 100%;
-	background-color: #4caf50;
+	background: linear-gradient(90deg, #008554 0%, #035539 100%);
 }
 
 .title{
