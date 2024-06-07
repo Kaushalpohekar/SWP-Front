@@ -1,30 +1,127 @@
 <div class="container">
-    <div class="row pt-2 mb-2">
-        <div class="col-12 mb-2">
-        	<mat-card>
-        		<mat-card-content>
-        			<div class="row mb-2">
-				        <div class="col-12 mb-2 d-flex justify-content-between align-items-center">
-									<div class="title">{{ categoryDetails.subtitle }}</div>
-									<mat-icon class="icon">{{ categoryDetails.icon }}</mat-icon>
-				        </div>
-				        <hr>
+	<form [formGroup]="form" (ngSubmit)="collectFormData()">
+	    <div class="row pt-2 mb-2">
+	    	<div class="col-12">
+	    		<div class="col-12 mb-2 d-flex justify-content-between align-items-center">
+					<div class="title">{{ categoryDetails.subtitle }}
+					</div>
+					<button mat-raised-button type="submit">Submit</button>
+				</div>
+	    	</div>
+	    	<div class="col-lg-4 col-md-12 col-sm-12 mb-2">
+	    		<mat-card>
+	        		<mat-card-content>
+	        			<div class="row mb-2">
+							<div class="col-12 mb-2 d-flex justify-content-between align-items-center">
+								<div class="title">Required</div>
+								<mat-icon class="icon">{{ categoryDetails.icon }}</mat-icon>
+							</div>
+							<hr>
 							<div class="col-12 mb-12">
-								<form>
-									<div class="col-lg-3 col-md-6 col-sm-12 mb-2">
-										<app-user-profile (dateSelected)="onDateSelected($event)"></app-user-profile>
-										<div *ngIf="selectedDate">
-										Selected Date: {{ selectedDate | date: 'fullDate' }}
-										</div>
-
+								<div class="row">						
+									<div class="col-12 mb-2">
+										<label class="reuired-title">Select Authorizer <span class="red">*</span></label>
+										<app-select2
+											[options]="authorizer"
+											[displayField]="'first_name'"
+											[valueField]="'user_id'"
+											(optionSelected)="onOptionSelected($event)">
+										</app-select2>
 									</div>
-									<div class="col-lg-3 col-md-6 col-sm-12 mb-2"></div>
-									<div class="col-lg-3 col-md-6 col-sm-12 mb-2"></div>
-									<div class="col-lg-3 col-md-6 col-sm-12 mb-2"></div>
+									<div class="col-12 mb-2">
+										<label class="reuired-title">Start Date <span class="red">*</span> </label>
+										<div class="custom-form-input">
+											<input type="date" formControlName="startDate">
+										</div>
+										<label class="reuired-title">Start Time <span class="red">*</span></label>
+										<div class="custom-form-input">
+											<input type="time" formControlName="startTime">
+										</div>
+									</div>
+									<div class="col-12 mb-2">
+										<label class="reuired-title">End Date <span class="red">*</span></label>
+										<div class="custom-form-input">
+											<input type="date" formControlName="endDate">
+										</div>
+										<label class="reuired-title">End Time <span class="red">*</span></label>
+										<div class="custom-form-input">
+											<input type="time" formControlName="endTime">
+										</div>
+									</div>
+									<div class="col-12 mb-2">
+										<div class="d-flex justify-content-between align-items-center">
+											<div class="reuired-title">Worker</div>
+											<div class="add-button" (click)="worker()"> + Add</div>
+										</div>
+										<app-user-add *ngIf="toggle1" userType="workers"></app-user-add>
+										<div class="row" *ngIf="(usersWorkers$ | async) as users; else noUsers">
+											<div class="col-12 mb-2">
+												<div class="card worker-card" >
+													<ol class="user-list">
+														<li *ngFor="let user of users">
+															{{ user.name }} - {{ user.mobileNumber }}
+														</li>
+													</ol>
+												</div>
+											</div>
+										</div>
+										<ng-template #noUsers>
+											<p>No users available.</p>
+										</ng-template>	
+									</div>
+									<div class="col-12 mb-2">
+										<div class="d-flex justify-content-between align-items-center">
+											<div class="reuired-title">Contractor</div>
+											<div class="add-button" (click)="contractor()"> + Add</div>
+										</div>
+										<app-user-add *ngIf="toggle2" userType="contractors"></app-user-add>
+										<div class="row" *ngIf="(usersContractors$ | async) as users; else noUsers">
+											<div class="col-12 mb-2">
+												<div class="card worker-card" >
+													<ol class="user-list">
+														<li *ngFor="let user of users">
+															{{ user.name }} - {{ user.mobileNumber }}
+														</li>
+													</ol>
+												</div>
+											</div>
+										</div>
+										<ng-template #noUsers>
+											<p>No users available.</p>
+										</ng-template>	
+									</div>					
+									<div class="col-12 mb-2">
+										<label class="reuired-title">Location <span class="red">*</span></label>
+										<div class="custom-form-input">
+											<textarea formControlName="location"></textarea>
+										</div>
+									</div>
+									<div class="col-12 mb-2">
+										<label class="reuired-title">Remarks <span class="red">*</span></label>
+										<div class="custom-form-input">
+											<textarea formControlName="remarks"></textarea>
+										</div>
+									</div>	
+								</div>
+							</div>        
+					    </div>
+					</mat-card-content>
+				</mat-card>
+	    	</div>
+	        <div class="col-lg-8 col-md-12 col-sm-12 mb-2">
+	        	<mat-card>
+	        		<mat-card-content>
+	        			<div class="row mb-2">
+	        				<div class="col-12 mb-2 d-flex justify-content-between align-items-center">
+								<div class="title">{{ formDetails.form_name }}</div>
+								<mat-icon class="icon">{{ categoryDetails.icon }}</mat-icon>
+							</div>
+							<hr>
+							<div class="col-12 mb-12">								
 									<div *ngFor="let question of questions" class="col-12 mb-2">
 										<div class="question mb-1">{{ question.question_text }}</div>
 										<div *ngIf="question.question_type === 'multipleChoice'">
-											<mat-radio-group name="multipleChoice_{{ question.id }}">
+											<mat-radio-group name="multipleChoice_{{ question.question_id }}">
 												<mat-radio-button *ngFor="let option of question.options" [value]="option">
 													{{ option }}
 												</mat-radio-button>
@@ -32,24 +129,24 @@
 										</div>
 										<div *ngIf="question.question_type === 'shortAnswer'">
 											<div class="custom-form-input">
-												<input type="text" (ngModelChange)="handleInputChange(question.id, question.answer)">
+												<input type="text" (ngModelChange)="handleInputChange(question.question_id, question.answer)">
 											</div>
 										</div>
 										<div *ngIf="question.question_type === 'longAnswer'">
 											<div class="custom-form-input">
-												<textarea  (ngModelChange)="handleInputChange(question.id, question.answer)" name="longAnswer_{{ question.id }}"></textarea>
+												<textarea  (ngModelChange)="handleInputChange(question.question_id, question.answer)" name="longAnswer_{{ question.question_id }}"></textarea>
 											</div>
 										</div>
 										<div *ngIf="question.question_type === 'selectAnswer'">
 											<app-select 
 											    [options]="question.options" 
 											    [selectedOption]="question.answer"
-											    (optionSelected)="handleInputChange(question.id, $event)">
+											    (optionSelected)="handleInputChange(question.question_id, $event)">
 											</app-select>
 										</div>
 										<div *ngIf="question.question_type === 'checkbox'">
 										  <div *ngFor="let option of question.options">
-										    <mat-checkbox  (change)="handleCheckboxChange(question.id, question.answer)">
+										    <mat-checkbox  (change)="handleCheckboxChange(question.question_id, question.answer)">
 										      {{ option }}
 										    </mat-checkbox>
 										  </div>
@@ -75,13 +172,11 @@
 											</div>
 										</div>
 									</div>
-									<button mat-raised-button type="submit">Submit</button>
-								</form>
 							</div>        
-				    </div>
-        		</mat-card-content>
-        	</mat-card>
-            
-        </div>
-    </div>
+					    </div>
+					</mat-card-content>
+				</mat-card>
+	        </div>
+	    </div>
+	</form>
 </div>

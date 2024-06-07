@@ -29,18 +29,20 @@ export class FormSelectComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    const EncodedCategoryDetails = this.cookieService.get('_cat_dtls');
+    this.categoryDetails = this.EncryptService.decryptData(EncodedCategoryDetails);
     this.route.params.subscribe(params => {
       this.type = params['type'];
       this.categoryID = params['categoryID'];
       this.dataService.getAllForms(this.categoryID).subscribe(forms => {
         this.forms = forms;
       });
-      const EncodedCategoryDetails = this.cookieService.get('_cat_dtls');
-      this.categoryDetails = this.EncryptService.decryptData(EncodedCategoryDetails);
     });
   }
 
-  proceed(formId: string): void {
-    this.router.navigate(['/u/f', this.type, this.categoryID, formId]);
+  proceed(form: any): void {
+    this.router.navigate(['/u/f', this.type, this.categoryID, form.form_id]);
+    const formDetails = this.EncryptService.encryptData(form);
+    this.cookieService.set('_frm_dtls', formDetails, { path: '/u' });
   }
 }

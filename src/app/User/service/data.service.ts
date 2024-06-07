@@ -23,4 +23,13 @@ export class DataService {
     return this.http.get(`${this.apiUrl}/getQuestions/${formId}`);
   }
 
+  private data = [
+    { user_id: 'qeiqio34-vfjn3-vfvmmnd', first_name: 'Kaushal'},
+    { user_id: 'qeiqio34-sdcsd-dsmmnd', first_name: 'Niket'}
+  ];
+
+  getAuthorizer(): Observable<any[]> {
+    // Simulate fetching data from the backend
+    return of(this.data);
+  }
 }

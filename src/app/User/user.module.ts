@@ -6,11 +6,12 @@ import { UserRoutingModule } from './user-routing.module';
 import { NavComponent } from './nav/nav.component';
 import { PermitComponent } from './permit/permit.component';
 import { MaterialModule } from '../material/material.module';
-import { PrimeModule } from '../material/prime.module';
 import { FormComponent } from './form/form.component';
 import { SelectComponent } from './select/select.component';
 import { FormSelectComponent } from './form-select/form-select.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
+import { Select2Component } from './select2/select2.component';
+import { UserAddComponent } from './user-add/user-add.component';
 
 @NgModule({
   declarations: [
@@ -21,13 +22,14 @@ import { UserProfileComponent } from './user-profile/user-profile.component';
     FormComponent,
     SelectComponent,
     FormSelectComponent,
-    UserProfileComponent
+    UserProfileComponent,
+    Select2Component,
+    UserAddComponent
   ],
   imports: [
     CommonModule,
     UserRoutingModule,
-    MaterialModule,
-    PrimeModule
+    MaterialModule
   ]
 })
 export class UserModule { }

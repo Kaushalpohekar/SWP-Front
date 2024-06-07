@@ -1,59 +1,92 @@
-.title{
-  font-size: 1rem;
-  font-weight: 550;
+.red {
+    color: red;
 }
 
-.question{
-  font-size: 0.9rem;
-  font-weight: 550;
+.title {
+    font-size: 1rem;
+    font-weight: 550;
 }
 
-.drag-drop{
-  font-size: 1rem;
-  font-weight: 550;
+.question {
+    font-size: 0.9rem;
+    font-weight: 550;
+}
+
+.drag-drop {
+    font-size: 1rem;
+    font-weight: 550;
 }
 
 .upload-container {
-  width: 80%;
-  height: 200px;
-  border: 1px dashed #008554 ;
-  border-radius: 5px;
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  background-color: #f1f1f1;
-  align-items: center;
+    width: 80%;
+    height: 200px;
+    border: 1px dashed #008554;
+    border-radius: 5px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background-color: #f1f1f1;
+    align-items: center;
 }
 
 .input-file {
-  display: none;
+    display: none;
 }
 
 .file-label {
-  padding: 10px;
-  background-color: #008554;
-  color: #fff;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+    padding: 10px;
+    font-size: 0.7rem;
+    font-weight: 550;
+    background-color: #008554;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
 }
 
 .file-label:hover {
-  background-color: #24ad7b;
-  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    background-color: #24ad7b;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
 }
 
 .file-name {
-  margin-top: 10px;
-  text-align: center;
-  color: #333;
-  font-weight: bold;
+    margin-top: 10px;
+    text-align: center;
+    color: #333;
+    font-weight: bold;
 }
 
 .icon {
-  margin-right: 10px;
+    margin-right: 10px;
+}
+
+textarea {
+    min-height: 80px;
+}
+
+.add-button {
+    cursor: pointer;
+    color: darkblue;
+    font-weight: 550;
+}
+
+.worker-card {
+    border: none;
+    border-bottom: 1px solid #dfe1e5;
+    border-radius: 5px;
+    padding: 5px;
+    font-size: 0.8rem;
+    width: 100%;
+    box-sizing: border-box;
+    transition: border-color 0.3s, border-width 0.3s;
+    background-color: #f1f1f1;
+}
+
+.reuired-title {
+    font-weight: 550;
+    font-size: 0.8rem;
 }
