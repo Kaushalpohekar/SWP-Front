@@ -1,0 +1,71 @@
+.title {
+    font-size: 1rem;
+    font-weight: 550;
+}
+
+.card-flex{
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.Approved {
+    border-left: 5px solid;
+    border-image: linear-gradient(to bottom, #1b8f29, #135c18);
+    border-image-slice: 1;
+}
+
+.count-card{
+    border: none;
+    border-radius: 5px;
+}
+
+.card-title {
+    font-size: 1rem;
+    font-weight: 550;
+}
+
+.count-card .card-title {
+    font-size: 1.1rem;
+    font-weight: 550;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.count-card .count {
+    padding-top: 5px;
+    font-size: 1.3rem;
+    font-weight: 600;
+}
+
+.Approved {
+    border-left: 5px solid;
+    border-image: linear-gradient(to bottom, #1b8f29, #135c18);
+    border-image-slice: 1;
+}
+
+.update-flex{
+    display: flex; 
+    justify-content: flex-end;
+    margin-bottom: -0.75vh;
+}
+
+.no-data-msg{
+    display: flex;
+    justify-content: center;
+    font-weight: 550;
+}
+
+.custom-theme-table {
+    table-layout: fixed;
+}
+
+.custom-theme-table th{
+    position: sticky;
+    top: 0;
+    background: #00794d;
+    z-index: 2;
+    color: whitesmoke;
+    text-align: center;
+}

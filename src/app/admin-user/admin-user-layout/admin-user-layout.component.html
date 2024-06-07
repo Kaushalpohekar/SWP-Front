@@ -14,6 +14,13 @@
         </div>
       </mat-list-item>
 
+      <mat-list-item routerLink="/ad/users">
+        <div class="d-flex align-items-center">
+          <mat-icon mat-list-icon>person</mat-icon>
+          <div *ngIf="isExpanded" class="menu-item">User</div>
+        </div>
+      </mat-list-item>
+
       <mat-list-item routerLink="/ad/observations">
         <div class="d-flex justify-content-center align-items-center">
           <mat-icon mat-list-icon>visibility</mat-icon>
