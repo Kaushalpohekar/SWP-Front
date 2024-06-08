@@ -9,6 +9,14 @@ import { environment } from '../../../environments/environment';
 export class DataService {
 
   private apiUrl = environment.apiUrl;
+  private types = [
+    { id: 'observations', name: 'Observations' },
+    { id: 'incidents', name: 'Incidents' },
+    { id: 'permits', name: 'Permits' },
+    { id: 'action', name: 'Action' },
+    { id: 'audits', name: 'Audits' }
+  ];
+
   constructor(private http: HttpClient) {}
 
   getAllCaterogy(formType: string, department_id: string): Observable<any> {
@@ -28,6 +36,9 @@ export class DataService {
     { user_id: 'qeiqio34-sdcsd-dsmmnd', first_name: 'Niket'}
   ];
 
+  getTypes(): Observable<any[]> {
+    return of(this.types);
+  }
   getAuthorizer(): Observable<any[]> {
     // Simulate fetching data from the backend
     return of(this.data);

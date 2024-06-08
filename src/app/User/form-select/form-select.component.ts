@@ -10,7 +10,6 @@ import { EncryptService } from '../../Authentication/AuthService/encrypt.service
   templateUrl: './form-select.component.html',
   styleUrls: ['./form-select.component.css']
 })
-
 export class FormSelectComponent implements OnInit {
   type!: string;
   categoryID!: string;
@@ -18,6 +17,7 @@ export class FormSelectComponent implements OnInit {
   selectedCard: any;
   forms!: any[];
   categoryDetails!: any;
+  isLoadingForms: boolean = false;
 
   constructor(
     private dataService: DataService,
@@ -25,24 +25,60 @@ export class FormSelectComponent implements OnInit {
     private snackBar: MatSnackBar,
     private router: Router,
     private cookieService: CookieService,
-    private EncryptService: EncryptService
+    private encryptService: EncryptService
   ) {}
 
   ngOnInit(): void {
-    const EncodedCategoryDetails = this.cookieService.get('_cat_dtls');
-    this.categoryDetails = this.EncryptService.decryptData(EncodedCategoryDetails);
-    this.route.params.subscribe(params => {
-      this.type = params['type'];
-      this.categoryID = params['categoryID'];
-      this.dataService.getAllForms(this.categoryID).subscribe(forms => {
-        this.forms = forms;
+    try {
+      // Fetch and decrypt category details from cookies
+      const encodedCategoryDetails = this.cookieService.get('_cat_dtls');
+      this.categoryDetails = this.encryptService.decryptData(encodedCategoryDetails);
+
+      // Subscribe to route params and fetch forms when categoryID is available
+      this.route.params.subscribe(params => {
+        this.type = params['type'];
+        this.categoryID = params['categoryID'];
+        if (this.categoryID) {
+          this.loadForms(this.categoryID);
+        }
       });
-    });
+    } catch (error) {
+      console.error('Error during initialization:', error);
+      this.snackBar.open('An error occurred during initialization. Please try again.', 'Close', {
+        duration: 3000,
+      });
+    }
   }
 
+  // Method to load forms based on the category ID
+  loadForms(category_id: string): void {
+    this.isLoadingForms = true;
+    this.dataService.getAllForms(category_id).subscribe(
+      forms => {
+        this.forms = forms;
+        this.isLoadingForms = false;
+      },
+      error => {
+        this.isLoadingForms = false;
+        console.error('Error loading forms:', error);
+        this.snackBar.open('Failed to load forms. Please try again.', 'Close', {
+          duration: 3000,
+        });
+      }
+    );
+  }
+
+  // Method to proceed with the selected form
   proceed(form: any): void {
-    this.router.navigate(['/u/f', this.type, this.categoryID, form.form_id]);
-    const formDetails = this.EncryptService.encryptData(form);
-    this.cookieService.set('_frm_dtls', formDetails, { path: '/u' });
+    try {
+      const formDetails = this.encryptService.encryptData(form);
+      this.cookieService.set('_frm_dtls', formDetails, { path: '/u' });
+      this.router.navigate(['/u/f', this.type, this.categoryID, form.form_id]);
+    } catch (error) {
+      console.error('Error during proceed:', error);
+      this.snackBar.open('An error occurred while processing your request. Please try again.', 'Close', {
+        duration: 3000,
+      });
+    }
   }
 }

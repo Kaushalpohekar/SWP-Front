@@ -39,6 +39,7 @@ export class FormComponent implements OnInit, OnDestroy {
   toggle2 = false;
   workersData: User[] = [];
   contractorsData: User[] = [];
+  checkedValues: { [key: number]: { [key: string]: boolean } } = {};
 
   constructor(
     private fb: FormBuilder,
@@ -71,11 +72,7 @@ export class FormComponent implements OnInit, OnDestroy {
       endDate: ['', Validators.required],
       endTime: ['', Validators.required],
       location: ['', Validators.required],
-      remarks: ['', Validators.required],
-      workers: this.fb.array([]),
-      contractors: this.fb.array([]),
-      questions: this.fb.array([]),
-      attachments: this.fb.array([])
+      remarks: ['', Validators.required]
     });
   }
 
@@ -100,6 +97,14 @@ private initializeData() {
         console.log(this.questions); // Moved the console.log outside of the map function
 
         this.authorizer = authorizerData;
+        this.questions.forEach(question => {
+          if (question.question_type === 'checkbox') {
+            this.checkedValues[question.id] = {};
+            question.options.forEach((option: any) => {
+              this.checkedValues[question.id][option] = false;
+            });
+          }
+        });
       },
       error => console.error(error)
     );
@@ -124,12 +129,6 @@ private initializeData() {
         this.workersData = workers;
         this.contractorsData = contractors;
 
-        const answersData = this.form.value.questions.map((q: any) => ({
-          question_id: q.question_id,
-          answer: q.answer
-        }));
-
-        console.log("collected Answer", answersData);
         const formData = {
           formId: this.formId,
           categoryID: this.categoryID,
@@ -142,7 +141,14 @@ private initializeData() {
           remarks: this.form.value.remarks,
           workers: this.workersData,
           contractors: this.contractorsData,
-          questions: answersData
+          questions: this.questions.map(question => ({
+            question_id: question.question_id,
+            question_text: question.question_text,
+            question_type: question.question_type,
+            options: question.options,
+            answer: question.answer,
+            attachment: question.attachment
+          }))
         };
 
         console.log('Form Data:', formData);
@@ -160,25 +166,19 @@ private initializeData() {
     const questionIndex = this.questions.findIndex(question => question.question_id === questionId);
     if (questionIndex !== -1) {
       this.questions[questionIndex].answer = value;
+      console.log(`Question ID: ${questionId}, Answer: ${value}`);
     }
   }
 
-  handleCheckboxChange(questionId: number, checkedValues: any) {
-    const questionIndex = this.questions.findIndex(question => question.question_id === questionId);
+  handleCheckboxChange(questionId: number) {
+    const questionIndex = this.questions.findIndex(question => question.id === questionId);
     if (questionIndex !== -1) {
-      let answer: string = ''; 
+      const checkedValuesForQuestion = this.checkedValues[questionId];
+      const selectedOptions = Object.keys(checkedValuesForQuestion)
+        .filter(key => checkedValuesForQuestion[key])
+        .join(':');
       
-      if (Array.isArray(checkedValues)) {
-        // Join the array elements into a colon-separated string
-        answer = checkedValues.join(':');
-      } else if (typeof checkedValues === 'object') {
-        // Get the keys where the value is true and join them into a colon-separated string
-        answer = Object.keys(checkedValues)
-                       .filter(key => checkedValues[key])
-                       .join(':');
-      }
-      
-      this.questions[questionIndex].answer = answer;
+      this.questions[questionIndex].answer = selectedOptions;
     }
   }
 
@@ -187,20 +187,37 @@ private initializeData() {
     event.preventDefault();
   }
 
-  displayFileName(event: any) {
+  displayFileName(event: any, question: any) {
     const file = event.target.files[0];
-    const fileNameDisplay = document.getElementById('file-name');
-    if (file && fileNameDisplay) {
-      fileNameDisplay.textContent = `Selected File: ${file.name}`;
+    if (file) {
+      this.readFile(file, question);
+      const fileNameDisplay = document.getElementById(`file-name-${question.question_id}`);
+      if (fileNameDisplay) {
+        fileNameDisplay.textContent = `Selected File: ${file.name}`;
+      }
     }
   }
 
-  handleDrop(event: any) {
+  handleDrop(event: any, question: any) {
     event.preventDefault();
     const file = event.dataTransfer.files[0];
-    const fileNameDisplay = document.getElementById('file-name');
-    if (file && fileNameDisplay) {
-      fileNameDisplay.textContent = `Selected File: ${file.name}`;
+    if (file) {
+      this.readFile(file, question);
+      const fileNameDisplay = document.getElementById(`file-name-${question.question_id}`);
+      if (fileNameDisplay) {
+        fileNameDisplay.textContent = `Selected File: ${file.name}`;
+      }
     }
+  }
+
+  readFile(file: File, question: any) {
+    const reader = new FileReader();
+    reader.onload = () => {
+      question.attachment = {
+        file_name: file.name,
+        data: reader.result
+      };
+    };
+    reader.readAsDataURL(file);
   }
 }
