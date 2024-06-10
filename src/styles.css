@@ -38,10 +38,14 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; background-
 }
 
 /* Apply the same style to all form elements */
+/* Apply the same style to all form elements */
 .custom-form-input input[type="text"],
 .custom-form-input input[type="email"],
 .custom-form-input input[type="password"],
 .custom-form-input input[type="number"],
+.custom-form-input input[type="date"],
+.custom-form-input input[type="time"],
+.custom-form-input input[type="tel"],
 .custom-form-input textarea,
 .custom-form-input select,
 .custom-form-input input[type="radio"],
@@ -62,7 +66,10 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; background-
 .custom-form-input textarea:hover,
 .custom-form-input select:hover,
 .custom-form-input input[type="radio"]:hover,
-.custom-form-input input[type="checkbox"]:hover {
+.custom-form-input input[type="checkbox"]:hover,
+.custom-form-input input[type="date"]:hover,
+.custom-form-input input[type="time"]:hover,
+.custom-form-input input[type="tel"]:hover {
   border-bottom-color: #c1c1c1;
 }
 
@@ -70,7 +77,10 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; background-
 .custom-form-input textarea:focus,
 .custom-form-input select:focus,
 .custom-form-input input[type="radio"]:focus,
-.custom-form-input input[type="checkbox"]:focus {
+.custom-form-input input[type="checkbox"]:focus,
+.custom-form-input input[type="date"]:focus,
+.custom-form-input input[type="time"]:focus,
+.custom-form-input input[type="tel"]:focus {
   border-bottom-color: #008554;
   border-bottom-width: 1px;
   outline: none;
@@ -80,7 +90,10 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; background-
 .custom-form-input textarea:active,
 .custom-form-input select:active,
 .custom-form-input input[type="radio"]:active,
-.custom-form-input input[type="checkbox"]:active {
+.custom-form-input input[type="checkbox"]:active,
+.custom-form-input input[type="date"]:active,
+.custom-form-input input[type="time"]:active,
+.custom-form-input input[type="tel"]:active {
   border-bottom-color: #008554;
   border-bottom-width: 1px;
 }

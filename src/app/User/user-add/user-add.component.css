@@ -1,0 +1,27 @@
+.form-button {
+  align-items: center;
+  border: 0 solid #E2E8F0;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  box-sizing: border-box;
+  display: inline-flex;
+  font-size: 0.8rem;
+  font-weight: 550;
+  height: auto;
+  justify-content: center;
+  overflow-wrap: break-word;
+  padding: 5px;
+  text-decoration: none;
+  width: 100%;
+  border-radius: 8px;
+  cursor: pointer;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  background: linear-gradient(to right, #32a852, #008554);
+  color: white;
+}
+
+.user-list li {
+  font-size: 0.8rem;
+  font-weight: 550;
+}

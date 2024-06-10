@@ -1,0 +1,23 @@
+<div class="col-12 mb-2">
+  <form [formGroup]="userForm" (ngSubmit)="addUser()">
+    <div class="row mb-2">
+      <div class="col-6 mb-1">
+        <div class="custom-form-input">
+          <label for="name">Name:</label>
+          <input type="text" id="name" formControlName="name">
+        </div>
+      </div>
+      <div class="col-6 mb-1">
+        <div class="custom-form-input">
+          <label for="mobileNumber">Mobile Number:</label>
+          <input type="tel" id="mobileNumber" formControlName="mobileNumber">
+        </div>
+      </div>
+      <div class="col-12 mb-1">
+        <button class="form-button" type="submit">Add</button>
+        <mat-error *ngIf="userForm.get('mobileNumber')?.invalid && (userForm.get('mobileNumber')?.dirty || userForm.get('mobileNumber')?.touched)">{{ getErrorMessage('mobileNumber') }}</mat-error>
+      </div>
+    </div>
+  </form>
+  
+</div>

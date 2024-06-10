@@ -9,6 +9,8 @@ import { AuthService } from '../../Authentication/AuthService/auth.service';
 export class NavComponent{
   constructor(private AuthService: AuthService) {}
 
+  title = 'Smart Work Permit';
+
   Logout() {
     this.AuthService.logout();
   }

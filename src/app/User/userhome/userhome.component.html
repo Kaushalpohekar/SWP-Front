@@ -1,32 +1,37 @@
-<!-- <div class="container-fluid">
+<div class="container">
   <div class="row pt-2 mb-2">
-    <div class="col-xl-8 col-lg-8 col-md-8 col-sm-12 mb-2">
-      <div class="row">
-        <div class="col-12 pt-3 mb-3">
-          <div class="title">Choose Permit type to Continue</div>
-        </div>
-        <div class="col-lg-4 col-md-6 col-sm-6 mb-4" *ngFor="let card of cards">
-          <mat-card class="outer-card" (click)="onCardClick(card.formId)">
-            <mat-card-content>
-              <div class="container-fluid">
-                <div class="row">
-                  <div class="col-8">
-                    <div class="card-title">{{ card.title }}</div>
-                    <div class="card-subtitle">{{ card.subtitle }}</div>
-                  </div>
-                  <div class="col-4 ">
-                    <mat-card class="inner-card">
-                      <mat-card-content>
-                        <i class="material-icons icon-color">{{ card.icon }}</i> 
-                      </mat-card-content>
-                    </mat-card>
-                  </div>
-                </div>
+    <div class="col-12">
+      <form [formGroup]="form" (ngSubmit)="onSubmit()">
+        <!-- Questions Section -->
+        <div formArrayName="questions" *ngFor="let question of questions.controls; let i=index">
+          <div [formGroupName]="i" class="mb-3">
+            <label>{{ question.value.question_text }}</label>
+
+            <!-- Different input types based on question type -->
+            <div *ngIf="question.value.question_type === 'shortAnswer'">
+              <input formControlName="answer" type="text" class="form-control">
+            </div>
+            <div *ngIf="question.value.question_type === 'longAnswer'">
+              <textarea formControlName="answer" class="form-control"></textarea>
+            </div>
+            <div *ngIf="question.value.question_type === 'multipleChoice'">
+              <div *ngFor="let option of question.value.options">
+                <input type="radio" [value]="option" formControlName="answer">{{ option }}
               </div>
-            </mat-card-content>
-          </mat-card>
+            </div>
+            <div *ngIf="question.value.question_type === 'checkbox'">
+              <div *ngFor="let option of question.value.options; let j=index">
+                <input type="checkbox" [formControlName]="j">{{ option }}
+              </div>
+            </div>
+            <div *ngIf="question.value.question_type === 'upload'">
+              <input type="file" (change)="onFileChange($event, i)">
+              <span id="file-name-{{ i }}" class="file-name"></span>
+            </div>
+          </div>
         </div>
-      </div>
+        <button type="submit" class="btn btn-primary mt-3">Submit</button>
+      </form>
     </div>
   </div>
-</div> -->
+</div>
