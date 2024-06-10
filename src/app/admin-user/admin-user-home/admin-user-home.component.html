@@ -1,6 +1,45 @@
 <div class="container-fluid">
   <div class="row pt-2 mb-2">
-    <div class="col-xl-8 col-lg-8 col-md-8 col-sm-12 mb-2">
+    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+      <div class="outer-card">
+        <h4 class="mt-2">Hello, User Name</h4>
+      </div>
+      <mat-card class="Linear-Approved">
+        <mat-card-content>
+          <div class="container-fluid">
+            <div class="card-title">Organization Name :</div>
+            <div class="card-flex">
+              <div class="card-subtitle pt-2">World</div>
+              <div class="card-subtitle2 pt-2">World Government JCS CSLV</div>
+            </div>
+          </div>
+        </mat-card-content>
+      </mat-card>
+      <div class="outer-card card-flex mt-2">
+        <h2 class=" mt-3">Plants</h2>
+        <button mat-icon-button class=" mt-2">
+          <mat-icon>add</mat-icon>
+        </button>
+      </div>
+      <div class="row">
+        <div class="col-xl-3 col-lg-3 col-md-4 col-sm-12 mt-2" *ngFor="let card of cards">
+          <mat-card class="Approved">
+            <mat-card-content>
+              <div class="container-fluid">
+                <div class="card-title">Plant Name :</div>
+                <div class="card-flex">
+                  <div class="card-subtitle pt-2">{{card.title}}</div>
+                  <div class="card-subtitle2 pt-2">{{card.subtitle}}</div>
+                </div>
+                <div class="mt-1 update-flex">
+                  <button mat-button style="color:#135c18;">Update</button>
+                  <button mat-button color="warn">Delete</button>
+                </div>
+              </div>
+            </mat-card-content>
+          </mat-card>
+        </div>
+      </div>
     </div>
   </div>
 </div>

@@ -4,33 +4,61 @@
 }
 
 .outer-card {
-    height: 100%;
     width: 100%;
 }
 
 .inner-card {
     height: 50px;
-    margin-top: -25px;
     width: 50px;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
+.update-flex{
+    display: flex; 
+    justify-content: flex-end;
+    margin-bottom: -0.75vh;
+}
+
 .card-title {
-    font-size: 1rem;
+    font-size: 0.9rem;
     font-weight: 550;
 }
 
 .card-subtitle {
-    font-size: 0.8rem;
+    font-size: 1.3rem;
     font-weight: 550;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
 }
 
+.card-subtitle2 {
+    font-size: 0.9rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.card-flex{
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
 .icon-color{background: linear-gradient(to right, blue, green);
-    -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
+}
+
+.Approved {
+    border-left: 5px solid;
+    border-image: linear-gradient(to bottom, #1b8f29, #135c18);
+    border-image-slice: 1;
+}
+
+.Linear-Approved {
+    border-left: 5px solid;
+    border-image: linear-gradient(to bottom, #1b8f29, #135c18);
+    border-image-slice: 1;
 }

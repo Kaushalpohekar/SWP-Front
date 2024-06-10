@@ -1,0 +1,79 @@
+.title {
+    font-size: 1rem;
+    font-weight: 550;
+}
+
+.card-flex{
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.outer-card{
+    height: 100%;
+    width: 100%;
+}
+
+.count-card{
+    border: none;
+    border-radius: 5px;
+}
+
+.card-title {
+    font-size: 1rem;
+    font-weight: 550;
+}
+
+.count-card .card-title {
+    font-size: 1.1rem;
+    font-weight: 550;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.inner-card {
+    height: 50px;
+    margin-top: -25px;
+    width: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.card-subtitle {
+    font-size: 0.9rem;
+    font-weight: 550;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.from-feild{
+	width: 100%;
+}
+
+.card-subtitle2 {
+    font-size: 0.8rem;
+    font-weight: 350;
+    color: #878787e6;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.icon-color {
+    background: linear-gradient(to right, #008554, #035539); /* Green shades */
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: pulse 2.5s infinite alternate; /* Pulsating animation */
+}
+
+@keyframes pulse {
+    0% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0.5;
+    }
+}

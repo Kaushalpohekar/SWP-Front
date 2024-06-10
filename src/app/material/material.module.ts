@@ -29,6 +29,7 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatNativeDateModule } from '@angular/material/core';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import {MatStepperModule} from '@angular/material/stepper';
 
 @NgModule({
   declarations: [],
@@ -63,7 +64,8 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     MatSlideToggleModule,
     MatNativeDateModule,
     MatSnackBarModule,
-    MatTooltipModule
+    MatTooltipModule,
+    MatStepperModule
   ],
   exports: [ // Export Angular Material modules for use in other modules/components
     MatButtonModule,
@@ -95,7 +97,8 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     MatSlideToggleModule,
     MatNativeDateModule,
     MatSnackBarModule,
-    MatTooltipModule
+    MatTooltipModule,
+    MatStepperModule
   ]
 })
 export class MaterialModule { }

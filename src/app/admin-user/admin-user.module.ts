@@ -8,6 +8,8 @@ import { MaterialModule } from '../material/material.module';
 import { AduObservationsComponent } from './adu-observations/adu-observations.component';
 import { AduAuditsComponent } from './adu-audits/adu-audits.component';
 import { HighchartsChartModule } from 'highcharts-angular';
+import { AdminUserComponent } from './admin-user/admin-user.component';
+import { AdminFormsComponent } from './admin-forms/admin-forms.component';
 
 @NgModule({
   declarations: [
@@ -15,7 +17,9 @@ import { HighchartsChartModule } from 'highcharts-angular';
     AdminUserNavComponent,
     AdminUserHomeComponent,
     AduObservationsComponent,
-    AduAuditsComponent
+    AduAuditsComponent,
+    AdminUserComponent,
+    AdminFormsComponent
   ],
   imports: [
     CommonModule,
