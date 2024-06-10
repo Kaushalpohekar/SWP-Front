@@ -49,6 +49,10 @@
     text-overflow: ellipsis;
 }
 
+.from-feild{
+	width: 100%;
+}
+
 .card-subtitle2 {
     font-size: 0.8rem;
     font-weight: 350;
