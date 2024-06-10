@@ -4,13 +4,15 @@ import { UserhomeComponent } from './userhome/userhome.component';
 import { PermitComponent } from './permit/permit.component';
 import { FormComponent } from './form/form.component';
 import { FormSelectComponent } from './form-select/form-select.component';
+import { UserProfileComponent } from './user-profile/user-profile.component';
 
 const routes: Routes = [
   { path: 'h', component: UserhomeComponent },
   { path: '', redirectTo: 'h', pathMatch: 'full' },
   { path: 'f/:type', component: PermitComponent },
   { path: 'f/:type/:categoryID', component:FormSelectComponent  },
-  { path: 'f/:type/:categoryID/:formId', component:FormComponent  }
+  { path: 'f/:type/:categoryID/:formId', component:FormComponent  },
+  { path: 'profile', component:UserProfileComponent  }
 ];
 
 

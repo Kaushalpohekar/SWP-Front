@@ -84,8 +84,8 @@ export class PermitComponent implements OnInit {
   }
 
   onCardClick(card: any): void {
-    this.router.navigate(['/u/f', this.type, card.category_id]);
     const categoryDetails = this.encryptService.encryptData(card);
-    this.cookieService.set('_cat_dtls', categoryDetails, { path: '/u' });
+    this.cookieService.set('_cat_dtls', categoryDetails, { path: '/' });
+    this.router.navigate(['/u/f', this.type, card.category_id]);
   }
 }

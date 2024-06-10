@@ -4,6 +4,7 @@ import { AuthService } from '../AuthService/auth.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router, NavigationExtras } from '@angular/router';
 import { EncryptService } from '../AuthService/encrypt.service';
+import { AlertService } from '../../service/alert.service';
 
 @Component({
   selector: 'app-login',
@@ -19,7 +20,8 @@ export class LoginComponent implements OnInit {
     private snackBar: MatSnackBar,
     private router: Router, 
     private AuthService: AuthService,
-    private EncryptService: EncryptService
+    private EncryptService: EncryptService,
+    private alertService: AlertService
     ) { 
     this.loginForm = this.fb.group({
       usernameOrEmail: ['', [Validators.required, Validators.email]],
@@ -52,6 +54,7 @@ export class LoginComponent implements OnInit {
                 this.snackBar.open('Login successful!', 'Dismiss', {
                   duration: 2000
                 });
+                this.alertService.showAlert("Login successful!", "success", 5000);
               } else {
                 setTimeout(checkUserType, 100);
               }
@@ -65,6 +68,7 @@ export class LoginComponent implements OnInit {
             'Dismiss',
             { duration: 2000 }
           );
+          this.alertService.showAlert("Login failed. Please try again.", "error", 5000);
         }
       );
     } else {

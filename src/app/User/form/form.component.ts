@@ -123,40 +123,82 @@ private initializeData() {
     this.toggle2 = !this.toggle2;
   }
 
-  collectFormData(): void {
-    combineLatest([this.usersWorkers$, this.usersContractors$]).pipe(takeUntil(this.unsubscribe$)).subscribe(
-      ([workers, contractors]) => {
-        this.workersData = workers;
-        this.contractorsData = contractors;
+  // collectFormData(): void {
+  //   combineLatest([this.usersWorkers$, this.usersContractors$]).pipe(takeUntil(this.unsubscribe$)).subscribe(
+  //     ([workers, contractors]) => {
+  //       this.workersData = workers;
+  //       this.contractorsData = contractors;
 
-        const formData = {
-          formId: this.formId,
-          categoryID: this.categoryID,
-          authorizer: this.form.value.authorizer,
-          startDate: this.form.value.startDate,
-          startTime: this.form.value.startTime,
-          endDate: this.form.value.endDate,
-          endTime: this.form.value.endTime,
-          location: this.form.value.location,
-          remarks: this.form.value.remarks,
-          workers: this.workersData,
-          contractors: this.contractorsData,
-          questions: this.questions.map(question => ({
-            question_id: question.question_id,
-            question_text: question.question_text,
-            question_type: question.question_type,
-            options: question.options,
-            answer: question.answer,
-            attachment: question.attachment
-          }))
-        };
+  //       const formData = {
+  //         formId: this.formId,
+  //         categoryID: this.categoryID,
+  //         authorizer: this.form.value.authorizer,
+  //         startDate: this.form.value.startDate,
+  //         startTime: this.form.value.startTime,
+  //         endDate: this.form.value.endDate,
+  //         endTime: this.form.value.endTime,
+  //         location: this.form.value.location,
+  //         remarks: this.form.value.remarks,
+  //         workers: this.workersData,
+  //         contractors: this.contractorsData,
+  //         questions: this.questions.map(question => ({
+  //           question_id: question.question_id,
+  //           question_text: question.question_text,
+  //           question_type: question.question_type,
+  //           options: question.options,
+  //           answer: question.answer,
+  //           attachment: question.attachment
+  //         }))
+  //       };
 
-        console.log('Form Data:', formData);
-        // You can now send formData to your backend or use it as needed
-      },
-      error => console.error(error)
-    );
+  //       console.log('Form Data:', formData);
+  //       // You can now send formData to your backend or use it as needed
+  //     },
+  //     error => console.error(error)
+  //   );
+  // }
+collectFormData(): void {
+  if (this.form.invalid) {
+    this.snackBar.open('All fields marked with * are required.', 'Close', {
+      duration: 3000,
+    });
+    return;
   }
+
+  combineLatest([this.usersWorkers$, this.usersContractors$]).pipe(takeUntil(this.unsubscribe$)).subscribe(
+    ([workers, contractors]) => {
+      this.workersData = workers;
+      this.contractorsData = contractors;
+
+      const formData = {
+        formId: this.formId,
+        categoryID: this.categoryID,
+        authorizer: this.form.value.authorizer,
+        startDate: this.form.value.startDate,
+        startTime: this.form.value.startTime,
+        endDate: this.form.value.endDate,
+        endTime: this.form.value.endTime,
+        location: this.form.value.location,
+        remarks: this.form.value.remarks,
+        workers: this.workersData,
+        contractors: this.contractorsData,
+        questions: this.questions.map(question => ({
+          question_id: question.question_id,
+          question_text: question.question_text,
+          question_type: question.question_type,
+          options: question.options,
+          answer: question.answer,
+          attachment: question.attachment
+        }))
+      };
+
+      console.log('Form Data:', formData);
+      // You can now send formData to your backend or use it as needed
+    },
+    error => console.error(error)
+  );
+}
+
 
   onOptionSelected(selectedUser: any) {
     this.authorizerControl.setValue(selectedUser.user_id);

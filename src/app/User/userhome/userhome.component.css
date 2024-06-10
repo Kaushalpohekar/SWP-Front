@@ -1,0 +1,69 @@
+.count-card{
+    border: none;
+    border-radius: 5px;
+}
+
+.new {
+    border-left: 5px solid;
+    border-image: linear-gradient(to bottom, #6a79d1, #4e5d96);
+    border-image-slice: 1;
+}
+
+.Approved {
+    border-left: 5px solid;
+    border-image: linear-gradient(to bottom, #1b8f29, #135c18);
+    border-image-slice: 1;
+}
+
+.Rejected {
+    border-left: 5px solid;
+    border-image: linear-gradient(to bottom, #e22a2a, #bd0f0f);
+    border-image-slice: 1;
+}
+
+.Revoked {
+    border-left: 5px solid;
+    border-image: linear-gradient(to bottom, #d4bc1d, #a19318);
+    border-image-slice: 1;
+}
+
+.Extend {
+    border-left: 5px solid;
+    border-image: linear-gradient(to bottom, #1d8a70, #0e6956);
+    border-image-slice: 1;
+}
+
+.Overdue {
+    border-left: 5px solid;
+    border-image: linear-gradient(to bottom, #f0424a, #d9111b);
+    border-image-slice: 1;
+}
+
+.count-card .card-title {
+    font-size: 0.9rem;
+    font-weight: 550;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.count-card .count {
+    padding-top: 5px;
+    font-size: 1.2rem;
+    font-weight: 600;
+}
+
+
+.table-header{
+    background: linear-gradient(180deg, #00a366 0%, #047d4b 100%);
+    color: whitesmoke;
+    height: 45px;
+    font-size: 0.9rem;
+    font-weight: 550;
+}
+
+.table-body{
+    height: 40px;
+    font-size: 0.7rem;
+    font-weight: 550;
+}

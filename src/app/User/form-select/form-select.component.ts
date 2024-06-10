@@ -30,16 +30,20 @@ export class FormSelectComponent implements OnInit {
 
   ngOnInit(): void {
     try {
-      // Fetch and decrypt category details from cookies
       const encodedCategoryDetails = this.cookieService.get('_cat_dtls');
+      if (!encodedCategoryDetails) {
+        throw new Error('Category details cookie is missing');
+      }
       this.categoryDetails = this.encryptService.decryptData(encodedCategoryDetails);
-
-      // Subscribe to route params and fetch forms when categoryID is available
       this.route.params.subscribe(params => {
         this.type = params['type'];
         this.categoryID = params['categoryID'];
+        console.log('Type:', this.type);
+        console.log('Category ID:', this.categoryID);
         if (this.categoryID) {
           this.loadForms(this.categoryID);
+        } else {
+          throw new Error('Category ID is missing in route parameters');
         }
       });
     } catch (error) {
@@ -57,6 +61,11 @@ export class FormSelectComponent implements OnInit {
       forms => {
         this.forms = forms;
         this.isLoadingForms = false;
+        if (!forms || forms.length === 0) {
+          this.snackBar.open('No forms available for this category.', 'Close', {
+            duration: 3000,
+          });
+        }
       },
       error => {
         this.isLoadingForms = false;
@@ -72,7 +81,7 @@ export class FormSelectComponent implements OnInit {
   proceed(form: any): void {
     try {
       const formDetails = this.encryptService.encryptData(form);
-      this.cookieService.set('_frm_dtls', formDetails, { path: '/u' });
+      this.cookieService.set('_frm_dtls', formDetails, { path: '/' });
       this.router.navigate(['/u/f', this.type, this.categoryID, form.form_id]);
     } catch (error) {
       console.error('Error during proceed:', error);

@@ -1,69 +1,36 @@
-.calendar-container {
-  width: 200px;
+.profile-img {
+  width: 75px;
   height: auto;
-  margin: 0 auto;
-  padding: 5px;
-  background-color: #fff;
-  border: 1px solid #dfe1e5;
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  box-sizing: border-box;
-  display: flex;
-  flex-direction: column;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-top: -75px;
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
 }
 
-.calendar-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 5px;
-}
 
-.calendar-header button {
-  background: none;
+.card-profile{
   border: none;
+}
+
+.card-profile .head{
+  height: 50px;
+  font-size: 1rem;
+  font-weight: 550;
+  background: linear-gradient(180deg, #00a366 0%, #047d4b 100%);
+  color: whitesmoke;
+}
+
+.card-profile .content{
   font-size: 0.8rem;
-  color: #008554;
+  font-weight: 550;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+
+
+.card-profile .link{
+  color: blue;
   cursor: pointer;
-  padding: 0;
-}
-
-.calendar-header h2 {
-  margin: 0;
-  font-size: 0.9rem;
-  color: #212121;
-  text-align: center;
-  flex-grow: 1;
-  padding: 0 5px;
-  box-sizing: border-box;
-}
-
-.calendar-grid {
-  display: grid;
-  grid-template-columns: repeat(7, 1fr);
-  gap: 2px;
-  flex-grow: 1;
-}
-
-.day, .date {
-  text-align: center;
-  padding: 3px;
-  background-color: #f1f1f1;
-  border-radius: 4px;
-  box-sizing: border-box;
-  font-size: 0.6rem;
-}
-
-.date {
-  cursor: pointer;
-  transition: background-color 0.3s;
-}
-
-.date:hover {
-  background-color: #e1e1e1;
-}
-
-.date.selected {
-  background-color: #008554;
-  color: #fff;
 }
