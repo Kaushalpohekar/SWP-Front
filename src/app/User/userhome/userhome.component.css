@@ -1,3 +1,8 @@
+.title{
+    font-size: 0.9rem;
+    font-weight: 550;
+}
+
 .count-card{
     border: none;
     border-radius: 5px;
@@ -66,4 +71,24 @@
     height: 40px;
     font-size: 0.7rem;
     font-weight: 550;
+}
+
+.custom-circle-button {
+  background: linear-gradient(90deg, #008554 0%, #035539 100%);
+  border: none;
+  border-radius: 50%;
+  width: 30px; /* Adjust the size as needed */
+  height: 30px; /* Adjust the size as needed */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  padding: 0;
+  outline: none;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+.custom-circle-button mat-icon {
+  color: white; /* Icon color */
+  font-size: 24px; /* Adjust icon size as needed */
 }

@@ -43,3 +43,49 @@
   font-weight: 550; /* Set font weight */
 }
 
+.badge {
+  font-size: 0.8rem;
+}
+
+.notification-menu {
+  max-width: 300px;
+}
+
+.notification-title {
+  font-size: 0.8rem;
+  font-weight: 550;
+}
+
+.notification-time {
+  font-size: 0.7rem;
+  font-weight: 550;
+}
+
+.notification-item {
+  font-size: 0.7rem;
+  font-weight: 550;
+  color: grey;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.row.unread {
+  border-left: 2px solid #008554;
+  border-right: 2px solid #008554;
+  border-radius: 5px; /* Add border radius to make the corners rounded */
+  background: rgba(0, 133, 84, 0.1); /* Green background with 10% opacity */
+  backdrop-filter: blur(5px); /* Apply blur effect */
+}
+
+
+
+.notification-view-all {
+  text-align: center;
+  font-size: 0.8rem;
+  font-weight: 550;
+  color: blue; /* Change to desired color */
+  cursor: pointer;
+  border-top: 1px solid #f1f1f1;
+}
+

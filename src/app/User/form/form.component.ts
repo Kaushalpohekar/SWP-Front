@@ -8,6 +8,9 @@ import { EncryptService } from '../../Authentication/AuthService/encrypt.service
 import { UserDataService } from '../service/user-data.service';
 import { Observable, combineLatest, Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
+import { LoadingService } from '../../service/loading.service';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { ConfirmSubmitComponent } from '../confirm-submit/confirm-submit.component';
 
 interface User {
   name: string;
@@ -40,6 +43,8 @@ export class FormComponent implements OnInit, OnDestroy {
   workersData: User[] = [];
   contractorsData: User[] = [];
   checkedValues: { [key: number]: { [key: string]: boolean } } = {};
+  department_id!: string;
+  user_id!: string;
 
   constructor(
     private fb: FormBuilder,
@@ -49,13 +54,16 @@ export class FormComponent implements OnInit, OnDestroy {
     private router: Router,
     private cookieService: CookieService,
     private encryptService: EncryptService,
-    private userDataService: UserDataService
+    private userDataService: UserDataService,
+    public loadingService: LoadingService,
+    public dialog: MatDialog
   ) {
     this.authorizerControl = new FormControl('', Validators.required);
     this.initializeForm();
   }
 
   ngOnInit(): void {
+    this.loadingService.isPageLoading(true);
     this.initializeData();
   }
 
@@ -76,43 +84,49 @@ export class FormComponent implements OnInit, OnDestroy {
     });
   }
 
-private initializeData() {
-  this.route.params.pipe(takeUntil(this.unsubscribe$)).subscribe(params => {
-    this.type = params['type'];
-    this.categoryID = params['categoryID'];
-    this.formId = params['formId'];
-    this.categoryDetails = this.encryptService.decryptData(this.cookieService.get('_cat_dtls'));
-    this.formDetails = this.encryptService.decryptData(this.cookieService.get('_frm_dtls'));
+  private initializeData() {
+    this.route.params.pipe(takeUntil(this.unsubscribe$)).subscribe(params => {
+      this.type = params['type'];
+      this.categoryID = params['categoryID'];
+      this.formId = params['formId'];
+      this.categoryDetails = this.encryptService.decryptData(this.cookieService.get('_cat_dtls'));
+      this.formDetails = this.encryptService.decryptData(this.cookieService.get('_frm_dtls'));
+      const userDetails = this.encryptService.decryptData(this.cookieService.get('_usr_dtls'));
+      this.department_id = userDetails.department_id;
+      this.user_id = userDetails.user_id;
 
-    combineLatest([
-      this.dataService.getQuestions(this.formId),
-      this.dataService.getAuthorizer()
-    ]).pipe(takeUntil(this.unsubscribe$)).subscribe(
-      ([questionsData, authorizerData]) => {
-        this.questions = questionsData.questions.map((question: any) => ({
-          ...question,
-          answer: '', 
-          attachment: null
-        }));
-        console.log(this.questions); // Moved the console.log outside of the map function
+      combineLatest([
+        this.dataService.getQuestions(this.formId),
+        this.dataService.getAuthorizer(this.department_id)
+      ]).pipe(takeUntil(this.unsubscribe$)).subscribe(
+        ([questionsData, authorizerData]) => {
+          this.questions = questionsData.questions.map((question: any) => ({
+            ...question,
+            answer: '', 
+            attachment: null
+          }));
+          this.authorizer = authorizerData.map((authorizer: any) => ({
+              full_name: `${authorizer.first_name} ${authorizer.last_name}`,
+              user_id: authorizer.user_id
+          }));
+          this.loadingService.isPageLoading(false);
 
-        this.authorizer = authorizerData;
-        this.questions.forEach(question => {
-          if (question.question_type === 'checkbox') {
-            this.checkedValues[question.id] = {};
-            question.options.forEach((option: any) => {
-              this.checkedValues[question.id][option] = false;
-            });
-          }
-        });
-      },
-      error => console.error(error)
-    );
+          this.questions.forEach(question => {
+            if (question.question_type === 'checkbox') {
+              this.checkedValues[question.id] = {};
+              question.options.forEach((option: any) => {
+                this.checkedValues[question.id][option] = false;
+              });
+            }
+          });
+        },
+        error => console.error(error)
+      );
 
-    this.usersWorkers$ = this.userDataService.getUsers$('workers');
-    this.usersContractors$ = this.userDataService.getUsers$('contractors');
-  });
-}
+      this.usersWorkers$ = this.userDataService.getUsers$('workers');
+      this.usersContractors$ = this.userDataService.getUsers$('contractors');
+    });
+  }
 
 
   worker() {
@@ -122,82 +136,49 @@ private initializeData() {
   contractor() {
     this.toggle2 = !this.toggle2;
   }
+  
+  collectFormData(): void {
+    if (this.form.invalid) {
+      this.snackBar.open('All fields marked with * are required.', 'Close', {
+        duration: 3000,
+      });
+      return;
+    }
 
-  // collectFormData(): void {
-  //   combineLatest([this.usersWorkers$, this.usersContractors$]).pipe(takeUntil(this.unsubscribe$)).subscribe(
-  //     ([workers, contractors]) => {
-  //       this.workersData = workers;
-  //       this.contractorsData = contractors;
+    combineLatest([this.usersWorkers$, this.usersContractors$]).pipe(takeUntil(this.unsubscribe$)).subscribe(
+      ([workers, contractors]) => {
+        this.workersData = workers;
+        this.contractorsData = contractors;
 
-  //       const formData = {
-  //         formId: this.formId,
-  //         categoryID: this.categoryID,
-  //         authorizer: this.form.value.authorizer,
-  //         startDate: this.form.value.startDate,
-  //         startTime: this.form.value.startTime,
-  //         endDate: this.form.value.endDate,
-  //         endTime: this.form.value.endTime,
-  //         location: this.form.value.location,
-  //         remarks: this.form.value.remarks,
-  //         workers: this.workersData,
-  //         contractors: this.contractorsData,
-  //         questions: this.questions.map(question => ({
-  //           question_id: question.question_id,
-  //           question_text: question.question_text,
-  //           question_type: question.question_type,
-  //           options: question.options,
-  //           answer: question.answer,
-  //           attachment: question.attachment
-  //         }))
-  //       };
-
-  //       console.log('Form Data:', formData);
-  //       // You can now send formData to your backend or use it as needed
-  //     },
-  //     error => console.error(error)
-  //   );
-  // }
-collectFormData(): void {
-  if (this.form.invalid) {
-    this.snackBar.open('All fields marked with * are required.', 'Close', {
-      duration: 3000,
-    });
-    return;
+        const formData = {
+          requestedBy: this.user_id,
+          formId: this.formId,
+          categoryID: this.categoryID,
+          authorizer: this.form.value.authorizer,
+          startDate: this.form.value.startDate,
+          startTime: this.form.value.startTime,
+          endDate: this.form.value.endDate,
+          endTime: this.form.value.endTime,
+          location: this.form.value.location,
+          remarks: this.form.value.remarks,
+          workers: this.workersData,
+          contractors: this.contractorsData,
+          questions: this.questions.map(question => ({
+            question_id: question.question_id,
+            question_text: question.question_text,
+            question_type: question.question_type,
+            options: question.options,
+            answer: question.answer,
+            attachment: question.attachment
+          }))
+        };
+        if(formData){
+          this.openConfirmDialog(formData);
+        }
+      },
+      error => console.error(error)
+    );
   }
-
-  combineLatest([this.usersWorkers$, this.usersContractors$]).pipe(takeUntil(this.unsubscribe$)).subscribe(
-    ([workers, contractors]) => {
-      this.workersData = workers;
-      this.contractorsData = contractors;
-
-      const formData = {
-        formId: this.formId,
-        categoryID: this.categoryID,
-        authorizer: this.form.value.authorizer,
-        startDate: this.form.value.startDate,
-        startTime: this.form.value.startTime,
-        endDate: this.form.value.endDate,
-        endTime: this.form.value.endTime,
-        location: this.form.value.location,
-        remarks: this.form.value.remarks,
-        workers: this.workersData,
-        contractors: this.contractorsData,
-        questions: this.questions.map(question => ({
-          question_id: question.question_id,
-          question_text: question.question_text,
-          question_type: question.question_type,
-          options: question.options,
-          answer: question.answer,
-          attachment: question.attachment
-        }))
-      };
-
-      console.log('Form Data:', formData);
-      // You can now send formData to your backend or use it as needed
-    },
-    error => console.error(error)
-  );
-}
 
 
   onOptionSelected(selectedUser: any) {
@@ -261,5 +242,29 @@ collectFormData(): void {
       };
     };
     reader.readAsDataURL(file);
+  }
+
+  openConfirmDialog(data: any): void {
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.data = { data };
+    const dialogRef = this.dialog.open(ConfirmSubmitComponent, dialogConfig);
+    dialogRef.afterClosed().subscribe(result => {
+      if (result === 'Success') {
+        this.openSnackBar('Operation successful', 'Close');
+        this.router.navigate(['/u/h']);
+      } else if (result === 'notSure') {
+        this.openSnackBar('Operation status: Not sure', 'Close');
+      } else if (result instanceof Error) {
+        this.openSnackBar('An error occurred: ' + result.message, 'Close');
+      } else {
+        this.openSnackBar('Unknown result: ' + result, 'Close');
+      }
+    });
+  }
+
+  openSnackBar(message: string, action: string) {
+    this.snackBar.open(message, action, {
+      duration: 5000, // Duration in milliseconds
+    });
   }
 }

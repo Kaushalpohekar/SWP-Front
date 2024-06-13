@@ -18,7 +18,11 @@ export class DataService {
   ];
 
   constructor(private http: HttpClient) {}
-
+  
+  getTypes(): Observable<any[]> {
+    return of(this.types);
+  }
+  
   getAllCaterogy(formType: string, department_id: string): Observable<any> {
     return this.http.get(`${this.apiUrl}/getCategories/${department_id}/${formType}`);
   }
@@ -31,16 +35,20 @@ export class DataService {
     return this.http.get(`${this.apiUrl}/getQuestions/${formId}`);
   }
 
-  private data = [
-    { user_id: 'qeiqio34-vfjn3-vfvmmnd', first_name: 'Kaushal'},
-    { user_id: 'qeiqio34-sdcsd-dsmmnd', first_name: 'Niket'}
-  ];
+  getAuthorizer(department_id: string): Observable<any> {
+    return this.http.get(`${this.apiUrl}/getAuthorizers/${department_id}`);
+  }
 
-  getTypes(): Observable<any[]> {
-    return of(this.types);
+  submitFormData(data: any): Observable<any> {
+    return this.http.post(`${this.apiUrl}/insertDetails`, data);
   }
-  getAuthorizer(): Observable<any[]> {
-    // Simulate fetching data from the backend
-    return of(this.data);
+
+  getFormsList(user_id: string, interval: string): Observable<any> {
+    return this.http.get(`${this.apiUrl}/getSubmissionByInterval/${user_id}/${interval}`);
   }
+
+  getFormsListCount(user_id: string, interval: string): Observable<any> {
+    return this.http.get(`${this.apiUrl}/getSubmissionByIntervalCount/${user_id}/${interval}`);
+  }
+
 }

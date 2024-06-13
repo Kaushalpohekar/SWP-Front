@@ -1,0 +1,26 @@
+<div class="container dialog">
+    <div class="row pt-4 mb-4">
+        <div class="col-12 d-flex justify-content-center mb-3">
+            <div class="info-circle">
+                <span class="info-icon">&#8505;</span>
+            </div>
+        </div>
+        <div class="col-12 mb-3">
+            <div class="dialog-title">
+                Are you sure that the filled data is correct and you want to proceed?
+            </div>
+        </div>
+        <div class="col-12 mb-3">
+        	<div class="container">
+        		<div class="row">
+        			<div class="col-6">
+        				<button mat-raised-button class="dialog-button" (click)="onNoClick()">Cancel</button>
+        			</div>
+        			<div class="col-6">
+        				<button mat-raised-button class="dialog-button sucess" (click)="onSaveClick()">Submit</button>
+        			</div>
+        		</div>
+        	</div>
+        </div>
+    </div>
+</div>

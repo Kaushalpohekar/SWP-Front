@@ -1,0 +1,51 @@
+.dialog{
+    max-width: 500px;
+    height: auto;
+    border: 1px solid #008554;
+    border-radius: 4px;
+}
+
+.dialog-title {
+    font-size: 1.2rem;
+    font-weight: 550;
+    text-align: center;
+    line-height: 1;
+    color: grey;
+    animation: fadeIn 0.5s ease forwards; /* Animation */
+}
+
+.info-circle {
+    display: inline-block;
+    width: 50px; /* Adjust size of the circle */
+    height: 50px; /* Adjust size of the circle */
+    border: 2px solid #333; /* Add border */
+    border-radius: 50%; /* Make it a circle */
+    line-height: 50px; /* Center the icon vertically */
+    text-align: center; /* Center the icon horizontally */
+    animation: moveIcon 0.5s ease forwards; /* Animation */
+    color: grey;
+}
+
+.info-icon {
+    font-size: 1.2rem;
+    animation: moveIcon 0.5s ease forwards; /* Animation */
+}
+
+@keyframes moveIcon {
+    0% { transform: translateY(-50px); opacity: 0; }
+    100% { transform: translateY(0); opacity: 1; }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.dialog-button{
+  width: 100%;
+}
+
+.sucess{
+  background-color: #008554;
+  color: whitesmoke;
+}
