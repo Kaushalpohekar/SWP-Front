@@ -92,3 +92,8 @@
   color: white; /* Icon color */
   font-size: 24px; /* Adjust icon size as needed */
 }
+
+.view-button{
+    cursor: pointer;
+    
+}

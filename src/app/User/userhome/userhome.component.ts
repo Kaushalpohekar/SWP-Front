@@ -6,6 +6,7 @@ import { forkJoin, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { EncryptService } from '../../Authentication/AuthService/encrypt.service';
 import { CookieService } from 'ngx-cookie-service';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-userhome',
@@ -36,7 +37,7 @@ export class UserhomeComponent implements OnInit {
     { name: 'Rejected', value: 'rejected' },
     { name: 'New', value: 'opened' }
   ];
-  displayedColumns: string[] = ['serial', 'name', 'date', 'authorizer', 'status'];
+  displayedColumns: string[] = ['serial', 'name', 'date', 'authorizer', 'status', 'action'];
   dataSource!: any[];
   countCards = [
     { title: 'Total', count: this.totalCount, type: 'new' },
@@ -50,7 +51,8 @@ export class UserhomeComponent implements OnInit {
     private router: Router,
     public loadingService: LoadingService,
     private cookieService: CookieService,
-    private encryptService: EncryptService
+    private encryptService: EncryptService,
+    private datePipe: DatePipe
   ) {}
 
   ngOnInit(): void {
@@ -129,5 +131,66 @@ export class UserhomeComponent implements OnInit {
 
   applyFilter(): void {
     this.fetchData(); // Re-fetch data when filter is applied
+  }
+
+  onViewClick(submission_id: string): void {
+    this.router.navigate(['/u/view', submission_id]);
+  }
+
+  formatDate(dateString: string): string {
+    const date = new Date(dateString);
+    date.setMinutes(date.getMinutes() + 330);
+    const formattedDate = this.datePipe.transform(date, 'MMM d, y hh:mm a');
+    return formattedDate ?? 'Invalid Date';
+  }
+
+  getStatusClasses(status: string): any {
+    // Define your classes based on status
+    switch (status) {
+      case 'opened':
+        return 'new-status'; // CSS class for new status
+      case 'approved':
+        return 'approved-status'; // CSS class for approved status
+      case 'rejected':
+        return 'rejected-status'; // CSS class for rejected status
+      case 'extended':
+        return 'extended-status'; // CSS class for extended status
+      case 'revoked':
+        return 'revoked-status'; // CSS class for revoked status
+      default:
+        return ''; // Default class if none of the above
+    }
+  }
+
+  getStatusStyles(status: string): any {
+    // Define your inline styles based on status
+    switch (status) {
+      case 'opened':
+        return { color: 'blue' }; // Blue color for new status
+      case 'approved':
+        return { color: 'green' }; // Green color for approved status
+      default:
+        return {
+          color: 'grey'
+        }; // Default style if none of the above
+    }
+  }
+
+  getStatusLabel(status: string): string {
+    // Define your label based on status
+    switch (status) {
+      case 'opened':
+        return 'New';
+      case 'approved':
+        return 'Approved';
+      case 'rejected':
+        return 'Rejected';
+      case 'extended':
+        return 'Extended';
+      case 'revoked':
+        return 'Revoked';
+      default:
+        return ''; // Default label if none of the above
+    }
   }
 }

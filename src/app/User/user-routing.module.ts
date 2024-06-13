@@ -5,6 +5,7 @@ import { PermitComponent } from './permit/permit.component';
 import { FormComponent } from './form/form.component';
 import { FormSelectComponent } from './form-select/form-select.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
+import { UserViewComponent } from './user-view/user-view.component';
 
 const routes: Routes = [
   { path: 'h', component: UserhomeComponent },
@@ -12,7 +13,8 @@ const routes: Routes = [
   { path: 'f/:type', component: PermitComponent },
   { path: 'f/:type/:categoryID', component:FormSelectComponent  },
   { path: 'f/:type/:categoryID/:formId', component:FormComponent  },
-  { path: 'profile', component:UserProfileComponent  }
+  { path: 'profile', component:UserProfileComponent  },
+  { path: 'view/:submission_id', component:UserViewComponent  }
 ];
 
 
