@@ -12,6 +12,9 @@ import { FormSelectComponent } from './form-select/form-select.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 import { Select2Component } from './select2/select2.component';
 import { UserAddComponent } from './user-add/user-add.component';
+import { LoadingComponent } from './../loading/loading.component';
+import { ConfirmSubmitComponent } from './confirm-submit/confirm-submit.component';
+import { SpinnerComponent } from './../spinner/spinner.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +27,10 @@ import { UserAddComponent } from './user-add/user-add.component';
     FormSelectComponent,
     UserProfileComponent,
     Select2Component,
-    UserAddComponent
+    UserAddComponent,
+    LoadingComponent,
+    ConfirmSubmitComponent,
+    SpinnerComponent
   ],
   imports: [
     CommonModule,

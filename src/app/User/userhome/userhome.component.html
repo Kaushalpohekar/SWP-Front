@@ -1,102 +1,106 @@
-<div class="container-fluid">
-  <div class="row pt-4 mb-2">
-    <div class="col-8">Request Details</div>
-    <div class="col-4"></div>
-  </div>
-  <div class="row mb-2">
-    <div class="col-lg-3 col-md-3 col-sm-4 mb-3">
-      <div class="card count-card new">
-        <div class="card-body">
-          <div class="row">
-            <div class="col-12 ">
-              <div class="card-title">Total</div>
-            </div>
-            <div class="col-12">
-              <div class="text-end count">12</div>
+<div *ngIf="loadingService.pageLoading">
+  <app-loading></app-loading>
+</div>
+<div *ngIf="!loadingService.pageLoading">
+  <div class="container-fluid">
+    <div class="row pt-4">
+      <div class="col-lg-9 col-md-8 col-sm-12 mb-2 d-flex align-items-center">
+        <div class="title">Overall Request</div>
+      </div>
+      <div class="col-lg-3 col-md-4 col-sm-12 mb-2">
+        <div class="row d-flex align-items-center">
+          <div class="col-2">
+            <div class="title">Filter:</div>
+          </div>
+          <div class="col-8">
+            <app-select2
+              [options]="intervalData"
+              [displayField]="'name'"
+              [valueField]="'value'"
+              [(ngModel)]="selectedInterval"
+              (optionSelected)="onOptionSelected($event)">
+            </app-select2>
+          </div>
+          <div class="col-2">
+            <button class="custom-circle-button" (click)="applyFilter()">
+              <mat-icon>filter_list</mat-icon>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="row">
+      <div class="col-lg-3 col-md-3 col-sm-4 mb-3" *ngFor="let countCard of countCards">
+        <div [ngClass]="'card count-card ' + countCard.type">
+          <div class="card-body">
+            <div class="row">
+              <div class="col-12">
+                <div class="card-title">{{ countCard.title }}</div>
+              </div>
+              <div class="col-12 text-end" *ngIf="loadingService.displaying">
+                <app-spinner></app-spinner>
+              </div>
+              <div class="col-12" *ngIf="!loadingService.displaying">
+                <div class="text-end count">{{ countCard.count }}</div>
+              </div>
             </div>
           </div>
         </div>
       </div>
     </div>
-
-    <div class="col-lg-3 col-md-3 col-sm-4 mb-3">
-      <div class="card count-card Approved">
-        <div class="card-body">
-          <div class="row">
-            <div class="col-12 ">
-              <div class="card-title">Approved</div>
-              
-            </div>
-            <div class="col-12">
-              <div class="text-end count">12</div>
-            </div>
+    
+    <div class="row">
+      <div class="col-lg-10 col-md-6 col-sm-6 mb-2 d-flex align-items-center">
+        <div class="title">Request Details</div>
+      </div>
+      <div class="col-lg-2 col-md-6 col-sm-6 mb-2">
+        <div class="row d-flex align-items-center">
+          <div class="col-3">
+            <div class="title">Sort:</div>
+          </div>
+          <div class="col-9">
+            <app-select2
+              [options]="sortData"
+              [displayField]="'name'"
+              [valueField]="'value'"
+              [(ngModel)]="selectedSort"
+              (optionSelected)="onOptionSelected2($event)">
+            </app-select2>
           </div>
         </div>
       </div>
     </div>
+    
+    <div class="row mb-2">
+      <div class="col-12">
+        <div class="table-container" style="overflow: auto; max-height: 60vh; border-radius: 5px;">
+          <table mat-table [dataSource]="cards">
+            <ng-container matColumnDef="serial">
+              <th mat-header-cell *matHeaderCellDef> Unique No. </th>
+              <td mat-cell *matCellDef="let element"> {{element.submission_id}} </td>
+            </ng-container>
+            <ng-container matColumnDef="name">
+              <th mat-header-cell *matHeaderCellDef> Name </th>
+              <td mat-cell *matCellDef="let element"> {{element.form_data.form_name}} </td>
+            </ng-container>
+            <ng-container matColumnDef="date">
+              <th mat-header-cell *matHeaderCellDef> Date </th>
+              <td mat-cell *matCellDef="let element"> {{element.created_at}} </td>
+            </ng-container>
+            <ng-container matColumnDef="authorizer">
+              <th mat-header-cell *matHeaderCellDef> Authorizer </th>
+              <td mat-cell *matCellDef="let element"> {{element.authorizer_details.first_name}} {{element.authorizer_details.last_name}} </td>
+            </ng-container>
+            <ng-container matColumnDef="status">
+              <th mat-header-cell *matHeaderCellDef> Status </th>
+              <td mat-cell *matCellDef="let element"> {{element.status}} </td>
+            </ng-container>
 
-    <div class="col-lg-3 col-md-3 col-sm-4 mb-3">
-      <div class="card count-card Rejected">
-        <div class="card-body">
-          <div class="row">
-            <div class="col-12 ">
-              <div class="card-title">Rejected</div>
-            </div>
-            <div class="col-12">
-              <div class="text-end count">12</div>
-            </div>
-          </div>
+            <tr class="table-header" mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+            <tr class="table-body" mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+          </table>
         </div>
-      </div>
-    </div>
-
-    <div class="col-lg-3 col-md-3 col-sm-4 mb-3">
-      <div class="card count-card Extend">
-        <div class="card-body">
-          <div class="row">
-            <div class="col-12 ">
-              <div class="card-title">Extend</div>
-            </div>
-            <div class="col-12">
-              <div class="text-end count">12</div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="row mb-2">
-    <div class="col-12">
-      <div class="table-container" style="overflow: auto; max-height: 60vh; border-radius: 5px;">
-        <table mat-table [dataSource]="dataSource" style="">
-          <ng-container matColumnDef="position">
-            <th mat-header-cell *matHeaderCellDef> Umique No. </th>
-            <td mat-cell *matCellDef="let element"> {{element.position}} </td>
-          </ng-container>
-
-          <ng-container matColumnDef="name">
-            <th mat-header-cell *matHeaderCellDef> Name </th>
-            <td mat-cell *matCellDef="let element"> {{element.name}} </td>
-          </ng-container>
-
-          <ng-container matColumnDef="weight">
-            <th mat-header-cell *matHeaderCellDef> Category </th>
-            <td mat-cell *matCellDef="let element"> {{element.weight}} </td>
-          </ng-container>
-
-          <ng-container matColumnDef="symbol">
-            <th mat-header-cell *matHeaderCellDef> Requested Date </th>
-            <td mat-cell *matCellDef="let element"> {{element.symbol}} </td>
-          </ng-container>
-
-          <ng-container matColumnDef="status">
-            <th mat-header-cell *matHeaderCellDef> Status </th>
-            <td mat-cell *matCellDef="let element"> {{element.status}} </td>
-          </ng-container>
-
-          <tr class="table-header" mat-header-row *matHeaderRowDef="displayedColumns; sticky: true" style="z-index: 1;"></tr>
-          <tr class="table-body" mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-        </table>
       </div>
     </div>
   </div>

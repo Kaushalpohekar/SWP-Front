@@ -1,112 +1,117 @@
-<div class="container-fluid">
-  <div class="row pt-3 mb-2">
-    <div class="col-lg-4 col-md-6 col-sm-12 mb-3">
-      <div class="card card-profile mb-3">
-        <div class="card-header head">
-          <div class="pt-2">Your Profile</div>
-        </div>
-        <div class="card-body">
-          <div class="row">
-            <div class="col-8">
-              <div class="content">Kaushal Pohekar</div>
-              <div class="content">Software Development Engineer</div>
-              <div class="content" style="font-style: italic;">Software</div>
-            </div>
-            <div class="col-4 d-flex align-items-center">
-              <img src="../../../assets/img/face.png" class="profile-img">
-            </div>
+<div *ngIf="loadingService.pageLoading">
+  <app-loading></app-loading>
+</div>
+<div *ngIf="!loadingService.pageLoading">
+  <div class="container-fluid">
+    <div class="row pt-3 mb-2">
+      <div class="col-lg-4 col-md-6 col-sm-12 mb-3">
+        <div class="card card-profile mb-3">
+          <div class="card-header head">
+            <div class="pt-2">Your Profile</div>
           </div>
-        </div>
-      </div>
-      <div class="card card-profile mb-3">
-        <div class="card-header head">
-          <div class="pt-2">Contact Details</div>
-        </div>
-        <div class="card-body">
-          <div class="row">
-            <div class="col-12 mb-2">
-              <div class="content">Personal Mail </div>
-              <div class="custom-form-input">
-                <input type="text" value="kaushalpohekar1@gmail.com" readonly>
+          <div class="card-body">
+            <div class="row">
+              <div class="col-8">
+                <div class="content">Kaushal Pohekar</div>
+                <div class="content">Software Development Engineer</div>
+                <div class="content" style="font-style: italic;">Software</div>
               </div>
-            </div>
-            <div class="col-12 mb-2">
-              <div class="content">Company Email </div>
-              <div class="custom-form-input">
-                <input type="text" value="kaushalpohekar@senselive.com" readonly>
-              </div>
-            </div>
-            <div class="col-12 mb-2">
-              <div class="content">Contact No </div>
-              <div class="custom-form-input">
-                <input type="text" value="9309865924" readonly>
+              <div class="col-4 d-flex align-items-center">
+                <img src="../../../assets/img/face.png" class="profile-img">
               </div>
             </div>
           </div>
         </div>
-      </div>
-    </div>
-    <div class="col-lg-8 col-md-6 col-sm-12 mb-3">
-      <div class="card card-profile mb-3">
-        <div class="card-header head">
-          <div class="pt-2">Organizations</div>
-        </div>
-        <div class="card-body">
-          <div class="row">
-            <div class="col-12 mb-2">
-              <div class="content">Name of the Organization </div>
-              <div class="custom-form-input">
-                <input type="text" value="SenseLive Technologies pvt ltd" readonly>
+        <div class="card card-profile mb-3">
+          <div class="card-header head">
+            <div class="pt-2">Contact Details</div>
+          </div>
+          <div class="card-body">
+            <div class="row">
+              <div class="col-12 mb-2">
+                <div class="content">Personal Mail </div>
+                <div class="custom-form-input">
+                  <input type="text" value="kaushalpohekar1@gmail.com" readonly>
+                </div>
               </div>
-            </div>
-            <div class="col-12 mb-2">
-              <div class="content">Organization Address</div>
-              <div class="custom-form-input">
-                <input type="text" value="GHRTBIF, Nagpur" readonly>
+              <div class="col-12 mb-2">
+                <div class="content">Company Email </div>
+                <div class="custom-form-input">
+                  <input type="text" value="kaushalpohekar@senselive.com" readonly>
+                </div>
               </div>
-            </div>
-            <div class="col-12 mb-2">
-              <div class="content">Plant Name</div>
-              <div class="custom-form-input">
-                <input type="text" value="Software Dept." readonly>
-              </div>
-            </div>
-            <div class="col-12 mb-2">
-              <div class="content">Plant Location</div>
-              <div class="custom-form-input">
-                <input type="text" value="GHRTBIF, Nagpur" readonly>
+              <div class="col-12 mb-2">
+                <div class="content">Contact No </div>
+                <div class="custom-form-input">
+                  <input type="text" value="9309865924" readonly>
+                </div>
               </div>
             </div>
           </div>
         </div>
       </div>
-      <div class="card card-profile mb-3">
-        <div class="card-header head">
-          <div class="pt-2">Setting</div>
-        </div>
-        <div class="card-body">
-          <div class="row d-flex justify-content-center">
-            <div class="col-lg-2 col-md-4 col-sm-6 mb-2 text-center">
-              <div class="content link">Edit Details</div>
-            </div>
-            <div class="col-lg-2 col-md-4 col-sm-6 mb-2 text-center">
-              <div class="content link">Change Password</div>
-            </div>
-            <div class="col-lg-2 col-md-4 col-sm-6 mb-2 text-center">
-              <div class="content link">Edit Contact</div>
-            </div>
-            <div class="col-lg-2 col-md-4 col-sm-6 mb-2 text-center">
-              <div class="content link">Change Profile</div>
-            </div>
-            <div class="col-lg-2 col-md-4 col-sm-6 mb-2 text-center">
-              <div class="content link">Contact Admin </div>
-            </div>
-            <div class="col-lg-2 col-md-4 col-sm-6 mb-2 text-center">
-              <div class="content link">Raise an Issue</div>
+      <div class="col-lg-8 col-md-6 col-sm-12 mb-3">
+        <div class="card card-profile mb-3">
+          <div class="card-header head">
+            <div class="pt-2">Organizations</div>
+          </div>
+          <div class="card-body">
+            <div class="row">
+              <div class="col-12 mb-2">
+                <div class="content">Name of the Organization </div>
+                <div class="custom-form-input">
+                  <input type="text" value="SenseLive Technologies pvt ltd" readonly>
+                </div>
+              </div>
+              <div class="col-12 mb-2">
+                <div class="content">Organization Address</div>
+                <div class="custom-form-input">
+                  <input type="text" value="GHRTBIF, Nagpur" readonly>
+                </div>
+              </div>
+              <div class="col-12 mb-2">
+                <div class="content">Plant Name</div>
+                <div class="custom-form-input">
+                  <input type="text" value="Software Dept." readonly>
+                </div>
+              </div>
+              <div class="col-12 mb-2">
+                <div class="content">Plant Location</div>
+                <div class="custom-form-input">
+                  <input type="text" value="GHRTBIF, Nagpur" readonly>
+                </div>
+              </div>
             </div>
           </div>
         </div>
-      </div>      
+        <div class="card card-profile mb-3">
+          <div class="card-header head">
+            <div class="pt-2">Setting</div>
+          </div>
+          <div class="card-body">
+            <div class="row d-flex justify-content-center">
+              <div class="col-lg-2 col-md-4 col-sm-6 mb-2 text-center">
+                <div class="content link">Edit Details</div>
+              </div>
+              <div class="col-lg-2 col-md-4 col-sm-6 mb-2 text-center">
+                <div class="content link">Change Password</div>
+              </div>
+              <div class="col-lg-2 col-md-4 col-sm-6 mb-2 text-center">
+                <div class="content link">Edit Contact</div>
+              </div>
+              <div class="col-lg-2 col-md-4 col-sm-6 mb-2 text-center">
+                <div class="content link">Change Profile</div>
+              </div>
+              <div class="col-lg-2 col-md-4 col-sm-6 mb-2 text-center">
+                <div class="content link">Contact Admin </div>
+              </div>
+              <div class="col-lg-2 col-md-4 col-sm-6 mb-2 text-center">
+                <div class="content link">Raise an Issue</div>
+              </div>
+            </div>
+          </div>
+        </div>      
+      </div>
     </div>
   </div>
 </div>

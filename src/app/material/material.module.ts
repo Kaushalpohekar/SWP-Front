@@ -30,6 +30,7 @@ import { MatNativeDateModule } from '@angular/material/core';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import {MatStepperModule} from '@angular/material/stepper';
+import {MatDialogModule} from '@angular/material/dialog';
 
 @NgModule({
   declarations: [],
@@ -65,7 +66,8 @@ import {MatStepperModule} from '@angular/material/stepper';
     MatNativeDateModule,
     MatSnackBarModule,
     MatTooltipModule,
-    MatStepperModule
+    MatStepperModule,
+    MatDialogModule
   ],
   exports: [ // Export Angular Material modules for use in other modules/components
     MatButtonModule,
@@ -98,7 +100,8 @@ import {MatStepperModule} from '@angular/material/stepper';
     MatNativeDateModule,
     MatSnackBarModule,
     MatTooltipModule,
-    MatStepperModule
+    MatStepperModule,
+    MatDialogModule
   ]
 })
 export class MaterialModule { }

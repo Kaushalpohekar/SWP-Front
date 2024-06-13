@@ -5,6 +5,8 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { CookieService } from 'ngx-cookie-service';
 import { EncryptService } from '../../Authentication/AuthService/encrypt.service';
 import { forkJoin, Observable, Observer } from 'rxjs';
+import { LoadingService } from '../../service/loading.service';
+import { AlertService } from '../../service/alert.service';
 
 @Component({
   selector: 'app-permit',
@@ -23,13 +25,17 @@ export class PermitComponent implements OnInit {
     private route: ActivatedRoute,
     private snackBar: MatSnackBar,
     private cookieService: CookieService,
-    private encryptService: EncryptService
+    private encryptService: EncryptService,
+    public loadingService: LoadingService,
+    private alertService: AlertService
   ) {}
 
   ngOnInit(): void {
     this.route.params.subscribe(params => {
       this.type = params['type'];
+      this.loadingService.isPageLoading(true);
       this.loadInitialData();
+      this.cards = [];
     });
   }
 
@@ -50,8 +56,7 @@ export class PermitComponent implements OnInit {
         this.loadCategories();
       },
       error: (error) => {
-        console.error('Error loading initial data:', error);
-        this.snackBar.open('Error loading data. Please try again later.', 'Close', { duration: 3000 });
+        this.alertService.showAlert("Error loading data. Please try again later.", "error", 3000);
         this.router.navigate(['/u/h']);
       }
     });
@@ -75,10 +80,10 @@ export class PermitComponent implements OnInit {
       next: (data) => {
         console.log(data);
         this.cards = data;
+        this.loadingService.isPageLoading(false);
       },
       error: (error) => {
-        console.error('Error loading categories:', error);
-        this.snackBar.open('Error loading categories. Please try again later.', 'Close', { duration: 3000 });
+        this.loadingService.isPageLoading(false);
       }
     });
   }

@@ -1,6 +1,18 @@
 .card-form {
     border-left: 10px solid #008554;
     height: 150px;
+    display: flex;
+    flex-direction: column;
+}
+
+.card-body {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.content-wrapper {
+    flex-grow: 1;
 }
 
 .title {
@@ -10,18 +22,18 @@
     align-items: center;
 }
 
-.title .icon-color{
+.title .icon-color {
     font-size: 1.2rem;
     margin-right: 5px;
     color: black;
 }
 
-.time-title{
+.time-title {
     font-size: 0.95rem;
     font-weight: 550;
 }
 
-.date-title{
+.date-title {
     font-size: 0.8rem;
     font-weight: 550;
     white-space: nowrap;
@@ -29,19 +41,19 @@
     text-overflow: ellipsis;
 }
 
-.organization{
+.organization {
     font-size: 0.8rem;
     font-weight: 550;
 }
 
-.form-name{
+.form-name {
     font-size: 0.8rem;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
 }
 
-.button{
+.button {
     font-size: 0.8rem;
     font-weight: 550;
     cursor: pointer;

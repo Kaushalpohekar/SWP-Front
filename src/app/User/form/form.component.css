@@ -90,3 +90,24 @@ textarea {
     font-weight: 550;
     font-size: 0.8rem;
 }
+
+
+
+.my-dialog {
+ 
+}
+
+.my-dialog.ng-enter,
+.my-dialog.ng-leave {
+  transition: transform 0.5s;
+}
+
+.my-dialog.ng-enter,
+.my-dialog.ng-leave.ng-leave-active {
+  transform: translateX(100%);
+}
+
+.my-dialog.ng-enter.ng-enter-active,
+.my-dialog.ng-leave {
+  transform: translateX(0);
+}
