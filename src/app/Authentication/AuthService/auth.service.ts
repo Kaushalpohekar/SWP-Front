@@ -79,6 +79,10 @@ export class AuthService {
             const encodedUserId = this.EncryptService.encryptData(user_id);
             this.cookieService.set('_user_id', encodedUserId, { path: '/' });
 
+            const organization_id = user.userDetails.organization_id;
+            const encodedOrgId = this.EncryptService.encryptData(organization_id);
+            this.cookieService.set('_organization_id', encodedOrgId, { path: '/' });
+
             const encodedUserDetails = this.EncryptService.encryptData(user.userDetails);
             this.cookieService.set('_usr_dtls', encodedUserDetails, { path: '/' });
           },

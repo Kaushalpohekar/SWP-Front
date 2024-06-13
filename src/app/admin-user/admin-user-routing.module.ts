@@ -8,8 +8,8 @@ import { AdminFormsComponent } from './admin-forms/admin-forms.component';
 
 const routes: Routes = [
   { path: 'home', component: AdminUserHomeComponent },
-  { path: 'users', component: AdminUserComponent },
-  { path: 'forms', component: AdminFormsComponent },
+  { path: 'home/users/:id', component: AdminUserComponent },
+  { path: 'home/users/:id/forms/:dep_id', component: AdminFormsComponent },
   { path: 'audits', component: AduAuditsComponent },
   { path: 'observations', component: AduObservationsComponent },
   { path: '', redirectTo: 'home', pathMatch: 'full' },

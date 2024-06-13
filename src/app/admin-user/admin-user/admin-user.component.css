@@ -57,15 +57,22 @@
     font-weight: 550;
 }
 
-.custom-theme-table {
+.table-container {
     table-layout: fixed;
 }
 
-.custom-theme-table th{
+.table-header{
     position: sticky;
     top: 0;
-    background: #00794d;
-    z-index: 2;
+    background: linear-gradient(180deg, #00a366 0%, #047d4b 100%);
     color: whitesmoke;
-    text-align: center;
+    height: 45px;
+    font-size: 0.9rem;
+    font-weight: 550;
+}
+
+.table-body{
+    height: 40px;
+    font-size: 0.7rem;
+    font-weight: 550;
 }
