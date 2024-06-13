@@ -77,3 +77,8 @@
         opacity: 0.5;
     }
 }
+
+.card-height {
+    max-height: 50vh;
+    overflow: auto;
+}

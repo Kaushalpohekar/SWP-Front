@@ -9,8 +9,8 @@
           <div class="container-fluid">
             <div class="card-title">Organization Name :</div>
             <div class="card-flex">
-              <div class="card-subtitle pt-2">World</div>
-              <div class="card-subtitle2 pt-2">World Government JCS CSLV</div>
+              <div class="card-subtitle pt-2">{{data?.name}}</div>
+              <div class="card-subtitle2 pt-2">{{data?.address}}</div>
             </div>
           </div>
         </mat-card-content>
@@ -22,14 +22,14 @@
         </button>
       </div>
       <div class="row">
-        <div class="col-xl-3 col-lg-3 col-md-4 col-sm-12 mt-2" *ngFor="let card of cards">
+        <div class="col-xl-3 col-lg-3 col-md-4 col-sm-12 mt-2" *ngFor="let card of plantData" (click)="viewDetails(card)">
           <mat-card class="Approved">
             <mat-card-content>
               <div class="container-fluid">
                 <div class="card-title">Plant Name :</div>
                 <div class="card-flex">
-                  <div class="card-subtitle pt-2">{{card.title}}</div>
-                  <div class="card-subtitle2 pt-2">{{card.subtitle}}</div>
+                  <div class="card-subtitle pt-2">{{card?.name}}</div>
+                  <div class="card-subtitle2 pt-2">{{card?.location}}</div>
                 </div>
                 <div class="mt-1 update-flex">
                   <button mat-button style="color:#135c18;">Update</button>
