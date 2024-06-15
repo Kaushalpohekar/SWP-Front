@@ -16,8 +16,9 @@ export class AdminFormsComponent implements OnInit {
   numberOfQuestions = 0;
   requireOptions: boolean[] = [];
   data:any;
-  dataSource:any;
+  dataSource:any[]=[];
   categorySelected:boolean=false;
+  activeCard: any = null;
 
   constructor(private _formBuilder: FormBuilder,private router: Router,private route: ActivatedRoute, private dataService: AdminService) { }
 
@@ -43,9 +44,10 @@ export class AdminFormsComponent implements OnInit {
   }
 
   CategorySelect(data:any){
+    this.dataSource=[]
     if(data){
       this.categorySelected=true;
-      this.dataService.usersDataByDepartments(data.department_id).subscribe(
+      this.dataService.prevForms(data.category_id).subscribe(
         (response) => {
           this.dataSource = response;
         },
@@ -108,5 +110,13 @@ export class AdminFormsComponent implements OnInit {
   getQuestionsAndAnswers() {
     const questionsArray = this.secondFormGroup.get('questionsArray')?.value;
     console.log(questionsArray);
+  }
+
+  setActiveCard(card: any): void {
+    this.activeCard = card;
+  }
+
+  isActive(card: any): boolean {
+    return this.activeCard === card;
   }
 }

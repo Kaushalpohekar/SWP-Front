@@ -79,7 +79,7 @@
 }
 
 .card-height {
-    max-height: 50vh;
+    max-height: 52vh;
     overflow: auto;
 }
 
@@ -87,4 +87,9 @@
     display: flex;
     justify-content: center;
     font-weight: 550;
+}
+
+.active{
+    background-color: #008554;
+    border-color: #035539;
 }
