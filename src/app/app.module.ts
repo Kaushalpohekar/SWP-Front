@@ -8,6 +8,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './material/material.module';
 import { HttpClientModule } from '@angular/common/http';
 import { AlertComponent } from './alert/alert.component';
+import { AdminUserRoutingModule } from './admin-user/admin-user-routing.module';
 
 
 @NgModule({
@@ -20,6 +21,7 @@ import { AlertComponent } from './alert/alert.component';
     BrowserAnimationsModule,
     AppRoutingModule,
     MaterialModule,
+    AdminUserRoutingModule,
     HttpClientModule,
     OverlayModule
   ],

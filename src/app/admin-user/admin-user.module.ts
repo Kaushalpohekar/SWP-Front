@@ -10,6 +10,7 @@ import { AduAuditsComponent } from './adu-audits/adu-audits.component';
 import { HighchartsChartModule } from 'highcharts-angular';
 import { AdminUserComponent } from './admin-user/admin-user.component';
 import { AdminFormsComponent } from './admin-forms/admin-forms.component';
+import { AdminBreadcrumsComponent } from './admin-breadcrums/admin-breadcrums.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { AdminFormsComponent } from './admin-forms/admin-forms.component';
     AduObservationsComponent,
     AduAuditsComponent,
     AdminUserComponent,
-    AdminFormsComponent
+    AdminFormsComponent,
+    AdminBreadcrumsComponent
   ],
   imports: [
     CommonModule,
