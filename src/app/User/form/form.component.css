@@ -92,11 +92,6 @@ textarea {
 }
 
 
-
-.my-dialog {
- 
-}
-
 .my-dialog.ng-enter,
 .my-dialog.ng-leave {
   transition: transform 0.5s;

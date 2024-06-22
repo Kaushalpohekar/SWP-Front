@@ -11,6 +11,7 @@ import { HighchartsChartModule } from 'highcharts-angular';
 import { AdminUserComponent } from './admin-user/admin-user.component';
 import { AdminFormsComponent } from './admin-forms/admin-forms.component';
 import { AdminBreadcrumsComponent } from './admin-breadcrums/admin-breadcrums.component';
+import { InsertUpdateComponent } from './admin-user-layout/insert-update/insert-update.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { AdminBreadcrumsComponent } from './admin-breadcrums/admin-breadcrums.co
     AduAuditsComponent,
     AdminUserComponent,
     AdminFormsComponent,
-    AdminBreadcrumsComponent
+    AdminBreadcrumsComponent,
+    InsertUpdateComponent
   ],
   imports: [
     CommonModule,

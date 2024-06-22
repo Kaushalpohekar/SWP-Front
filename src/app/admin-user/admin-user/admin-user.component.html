@@ -2,12 +2,12 @@
     <div class="row pt-2 mb-2">
         <div class="outer-card card-flex">
             <h2 class="mt-2">Departments</h2>
-            <button mat-icon-button>
-            <mat-icon>add</mat-icon>
+            <button mat-icon-button (click)="updateToggleSidenav('','addDepartment')">
+              <mat-icon>add</mat-icon>
             </button>
         </div>
         <div class="row">
-            <div class="col-lg-2 col-md-3 col-sm-12 mb-3" *ngFor="let card of data">
+            <div class="col-lg-2 col-md-4 col-sm-12 mb-3" *ngFor="let card of data">
                 <div class="card count-card Approved" (click)="departmentsSelect(card)">
                     <div class="card-body">
                         <div class="row">
@@ -18,9 +18,9 @@
                                 <div class="text-end count">{{card?.total_users}}</div>
                             </div>
                             <div class="mt-2 update-flex">
-                                <button mat-button color="primary" (click)="$event.stopPropagation();viewForms(card)">Forms</button>
-                                <button mat-button style="color:#135c18;" (click)="$event.stopPropagation()">Update</button>
-                                <button mat-button color="warn" style="margin-right: -10px;" (click)="$event.stopPropagation()">Delete</button>
+                                <button mat-button color="primary" style="margin-right: -5px;" (click)="$event.stopPropagation();viewForms(card)">Forms</button>
+                                <button mat-button style="color:#135c18;margin-right: -5px;" (click)="$event.stopPropagation();updateToggleSidenav(card,'editDepartment')">Update</button>
+                                <button mat-button color="warn" style="margin-right: -5px;" (click)="$event.stopPropagation()">Delete</button>
                             </div>
                         </div>
                     </div>
@@ -31,8 +31,8 @@
             <mat-card style="border-radius: 5px;">
                 <div class="outer-card card-flex mt-2">
                     <h2 class="mt-2" style="margin-left: 10px;">Users</h2>
-                    <button style="margin-right: 10px;" mat-icon-button>
-                    <mat-icon>add</mat-icon>
+                    <button style="margin-right: 10px;" mat-icon-button (click)="updateToggleSidenav('','addUser')">
+                      <mat-icon>add</mat-icon>
                     </button>
                 </div>
 
@@ -62,7 +62,7 @@
                           <ng-container matColumnDef="action">
                             <th mat-header-cell *matHeaderCellDef> Action </th>
                             <td mat-cell *matCellDef="let element">
-                                <button mat-icon-button color="dark" style="white-space: nowrap;">
+                                <button mat-icon-button color="dark" style="white-space: nowrap;" (click)="updateToggleSidenav(element,'editUser')">
                                   <mat-icon>edit</mat-icon>
                                 </button>
                                 <button mat-icon-button color="dark" style="white-space: nowrap;">

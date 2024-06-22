@@ -2,8 +2,8 @@
     <div class="row pt-2 mb-2">
         <div class="outer-card card-flex">
             <h2 class="mt-2">Categories</h2>
-            <button mat-icon-button>
-            <mat-icon>add</mat-icon>
+            <button mat-icon-button (click)="updateToggleSidenav('','addCategory')">
+              <mat-icon>add</mat-icon>
             </button>
         </div>
         <div class="row" style="padding-right: 0;">
@@ -132,7 +132,7 @@
                               <button mat-button matStepperPrevious>
                                 <mat-icon>navigate_before</mat-icon>
                               </button>
-                              <button mat-raised-button style="background-color: #1b8f29;color: whitesmoke;" (click)="getQuestionsAndAnswers()">
+                              <button mat-raised-button style="background-color: #017048;color: whitesmoke;" (click)="Submit()">
                                 Submit
                               </button>
                             </div>

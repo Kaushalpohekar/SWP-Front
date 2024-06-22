@@ -15,14 +15,6 @@ export class AdminService {
 
   constructor(private http: HttpClient, private router: Router, private cookieService: CookieService, private encryptService: EncryptService) {}
 
-  // setCardData(data: any) {
-  //   this.cardData = data;
-  // }
-
-  // getCardData() {
-  //   return this.cardData;
-  // }
-
   retrieveUserId(): string {
     const encodedUserId = this.cookieService.get('_user_id');
     return this.encryptService.decryptData(encodedUserId);      
@@ -64,4 +56,8 @@ export class AdminService {
   roles(): Observable<any> {
     return this.http.get(`${this.apiUrl}/roles`);
   }  
+
+  addForm(data: any): Observable<any> {
+    return this.http.post(`${this.apiUrl}/addForm`, data);
+  }
 }
