@@ -3,7 +3,12 @@
 </div>
 <div *ngIf="!loadingService.pageLoading">
 	<div class="container">
-		<div class="row pt-2 mb-2">
+		<div class="row pt-2 mb-2" *ngIf="questions.length === 0">
+			<div class="col-12">
+				<div  class="alert alert-warning">No questions found.</div>
+			</div>
+		</div>
+		<div class="row pt-2 mb-2" *ngIf="questions.length !== 0">
 			<div class="col-12">
 				<div class="col-12 mb-2 d-flex justify-content-between align-items-center">
 					<div class="title">{{ categoryDetails.subtitle }}</div>
@@ -170,7 +175,7 @@
 						
 									<div *ngIf="question.question_type === 'checkbox'">
 										<div *ngFor="let option of question.options">
-											<mat-checkbox  [(ngModel)]="checkedValues[question.id][option]" (change)="handleCheckboxChange(question.id)">
+											<mat-checkbox  [(ngModel)]="checkedValues[question.question_id][option]" (change)="handleCheckboxChange(question.question_id)">
 												{{ option }}
 											</mat-checkbox>
 										</div>

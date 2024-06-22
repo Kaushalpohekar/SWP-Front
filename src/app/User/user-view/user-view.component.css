@@ -204,3 +204,30 @@
     color: #008554;
     cursor: pointer;
 }
+
+/* Common styles for all statuses */
+.status {
+    font-size: 0.8rem;
+    font-weight: 550;
+}
+
+/* Specific styles for each status */
+.status-approved {
+    background: linear-gradient(90deg, #008554 0%, #035539 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.status-rejected {
+    color: red;
+}
+
+.status-new {
+    color: blue;
+}
+
+.status-unknown {
+    background: linear-gradient(to bottom, #ffff00, #ffaa00);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}

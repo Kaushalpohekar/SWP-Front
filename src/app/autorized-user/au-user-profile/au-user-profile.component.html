@@ -1,0 +1,167 @@
+<div *ngIf="loadingService.pageLoading">
+  <app-loading></app-loading>
+</div>
+<div *ngIf="!loadingService.pageLoading">
+  <div class="container-fluid">
+    <div class="row pt-3 mb-2">
+      <div class="col-lg-4 col-md-6 col-sm-12 mb-3">
+        <div class="card card-profile mb-3">
+          <div class="card-header head">
+            <div class="pt-2">Your Profile</div>
+          </div>
+          <div class="card-body">
+            <div class="row">
+              <div class="col-8">
+                <div class="content">{{user.first_name}} {{user.last_name}}</div>
+                <div class="content">{{user.designation || 'Employee'}}</div>
+                <div class="content" style="font-style: italic;">{{user.department_name}}</div>
+              </div>
+              <div class="col-4 d-flex align-items-center">
+                <img [src]="user.profile.profile_photo || '../../../assets/img/face.png'" class="profile-img">
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="card card-profile mb-3">
+          <div class="card-header head">
+            <div class="pt-2">Contact Details</div>
+          </div>
+          <div class="card-body">
+            <div class="row">
+              <div class="col-12 mb-2">
+                <div class="content">Personal Mail </div>
+                <div class="custom-form-input">
+                  <input type="text" value="{{user.personal_email}}" readonly>
+                </div>
+              </div>
+              <div class="col-12 mb-2">
+                <div class="content">Company Email </div>
+                <div class="custom-form-input">
+                  <input type="text" value="{{user.company_email}}" readonly>
+                </div>
+              </div>
+              <div class="col-12 mb-2">
+                <div class="content">Contact No </div>
+                <div class="custom-form-input">
+                  <input type="text" value="{{user.contact_no}}" readonly>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="card card-profile mb-3">
+          <div class="card-header head">
+            <div class="pt-2">Uploads</div>
+          </div>
+          <div class="card-body">
+            <div class="row mb-2">
+              <div class="col-10 d-flex align-items-center">
+                <div class="content">Signature</div>
+              </div>
+              <div class="col-2">
+              	<mat-icon (click)="toggleSignature()">{{ showSignature ? 'visibility_off' : 'visibility' }}</mat-icon>
+              </div>
+              <div class="col-12 mb-2">
+              	<img *ngIf="showSignature && user.sign.sign_photo" [src]="user.sign.sign_photo" class="img-fluid sign">
+				<div *ngIf="showSignature && !user.sign.sign_photo" class="content error-list">
+					Signature image not uploaded yet.
+				</div>
+              </div>
+              <div class="col-12 mb-2">
+				<div class="content">
+					<p>Signature should meet the following criteria:</p>
+					<ul>
+						<li>Be in image format</li>
+						<li>Be properly horizontally aligned</li>
+						<li>Be in PNG, JPG, or JPEG format</li>
+						<li>Be less than 250 KB in size</li>
+					</ul>
+					<div href="#" (click)="triggerFileInput()" class="content link">Upload Signature</div>
+					<input type="file" #fileInput style="display: none;" (change)="onFileSelected($event)">
+					<ul class="error-list" *ngIf="errorMessage">
+						<li>{{ errorMessage }}</li>
+					</ul>
+				</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-8 col-md-6 col-sm-12 mb-3">
+        <div class="card card-profile mb-3">
+          <div class="card-header head">
+            <div class="pt-2">Organizations</div>
+          </div>
+          <div class="card-body">
+            <div class="row">
+              <div class="col-12 mb-2">
+                <div class="content">Name of the Organization </div>
+                <div class="custom-form-input">
+                  <input type="text" value="{{user.organization_name}}" readonly>
+                </div>
+              </div>
+              <div class="col-12 mb-2">
+                <div class="content">Organization Address</div>
+                <div class="custom-form-input">
+                  <input type="text" value="{{user.organization_address}}" readonly>
+                </div>
+              </div>
+              <div class="col-12 mb-2">
+                <div class="content">Plant Name</div>
+                <div class="custom-form-input">
+                  <input type="text" value="{{user.plant_name}}" readonly>
+                </div>
+              </div>
+              <div class="col-12 mb-2">
+                <div class="content">Plant Location</div>
+                <div class="custom-form-input">
+                  <input type="text" value="{{user.plant_location}}" readonly>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="card card-profile mb-3">
+          <div class="card-header head">
+            <div class="pt-2">Setting</div>
+          </div>
+          <div class="card-body">
+            <div class="row d-flex justify-content-center">
+              <div class="col-lg-2 col-md-4 col-sm-6 mb-2 text-center">
+                <div class="content link">Edit Details</div>
+              </div>
+              <div class="col-lg-2 col-md-4 col-sm-6 mb-2 text-center">
+                <div class="content link">Change Password</div>
+              </div>
+              <div class="col-lg-2 col-md-4 col-sm-6 mb-2 text-center">
+                <div class="content link">Edit Contact</div>
+              </div>
+              <div class="col-lg-2 col-md-4 col-sm-6 mb-2 text-center">
+                <div class="content link">Change Profile</div>
+              </div>
+              <div class="col-lg-2 col-md-4 col-sm-6 mb-2 text-center">
+                <div class="content link">Contact Admin </div>
+              </div>
+              <div class="col-lg-2 col-md-4 col-sm-6 mb-2 text-center">
+                <div class="content link">Raise an Issue</div>
+              </div>
+            </div>
+            <div class="row mb-2">
+				<div class="col-12">
+					<div class="content">Instructions:</div>
+					<ul class="content">
+						<li>Modify personal information.</li>
+						<li>Change password and log out immediately after.</li>
+						<li>Update contact information.</li>
+						<li>Upload an image less than 500 KB in PNG or JPG format.</li>
+						<li>Contact organization admin for messages or coordination.</li>
+						<li>Report dashboard bugs or defects.</li>
+					</ul>
+				</div>
+			</div>
+          </div>
+        </div>      
+      </div>
+    </div>
+  </div>
+</div>

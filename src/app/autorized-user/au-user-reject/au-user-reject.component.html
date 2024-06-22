@@ -1,0 +1,46 @@
+<div class="container dialog" [formGroup]="rejectForm">
+    <div class="row pt-4 mb-4">
+        <div class="col-12 mb-3">
+            <div class="dialog-title">
+                Use your account password to continue
+            </div>
+        </div>
+        <div class="col-12 mb-3" [@fadeInOutPassword]>
+            <div class="custom-form-input">
+                <input formControlName="password" type="password" />
+                <div *ngIf="rejectForm.get('password')?.invalid && (rejectForm.get('password')?.dirty || rejectForm.get('password')?.touched)" class="error-msg">
+                    Password is required
+                </div>
+                <div *ngIf="rejectForm.get('password')?.valid && !rejectForm.get('password')?.pristine" class="normal-msg">
+                    Recently Used Password!
+                </div>
+            </div>
+        </div>
+        <div class="col-12">
+            <div class="container">
+                <div class="row">
+                    <div class="col-6">
+                        <button (click)="onNoClick()" class="dialog-button" mat-raised-button>
+                            <ng-container *ngIf="(isLoading$ | async); else cancelLabel">
+                                <app-spinner></app-spinner>
+                            </ng-container>
+                            <ng-template #cancelLabel>
+                                Cancel
+                            </ng-template>
+                        </button>
+                    </div>
+                    <div class="col-6">
+                        <button (click)="onSaveClick()" [disabled]="!rejectForm.valid || (isLoading$ | async)" class="dialog-button reject-button" mat-raised-button>
+                            <ng-container *ngIf="(isLoading$ | async); else rejectLabel">
+                                <app-spinner></app-spinner>
+                            </ng-container>
+                            <ng-template #rejectLabel>
+                                Reject
+                            </ng-template>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -5,7 +5,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatBadgeModule } from '@angular/material/badge';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms'; // Import FormsModule and ReactiveFormsModule for form-related modules
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatInputModule } from '@angular/material/input';
@@ -27,49 +27,35 @@ import { MatRadioModule } from '@angular/material/radio';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatNativeDateModule } from '@angular/material/core';
-import {MatSnackBarModule} from '@angular/material/snack-bar';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatTooltipModule } from '@angular/material/tooltip';
-import {MatStepperModule} from '@angular/material/stepper';
-import {MatDialogModule} from '@angular/material/dialog';
+import { MatStepperModule } from '@angular/material/stepper';
+import { MatDialogModule } from '@angular/material/dialog';
+
+import { LoadingComponent } from './../loading/loading.component';
+import { AlertComponent } from './../alert/alert.component';
+import { SpinnerComponent } from './../spinner/spinner.component';
+import { EditDetailsComponent } from '../edit-details/edit-details.component';
+import { ChangePasswordComponent } from '../change-password/change-password.component';
+import { EditContactComponent } from '../edit-contact/edit-contact.component';
+import { ChangeProfileComponent } from '../change-profile/change-profile.component';
+import { ContactAdminComponent } from '../contact-admin/contact-admin.component';
+import { RaiseAnIssueComponent } from '../raise-an-issue/raise-an-issue.component';
 
 @NgModule({
-  declarations: [],
+  declarations: [
+    LoadingComponent,
+    AlertComponent,
+    SpinnerComponent,
+    EditDetailsComponent,
+    ChangePasswordComponent,
+    EditContactComponent,
+    ChangeProfileComponent,
+    ContactAdminComponent,
+    RaiseAnIssueComponent
+  ],
   imports: [
     CommonModule,
-    MatButtonModule,
-    MatCardModule,
-    MatIconModule,
-    MatDividerModule,
-    MatBadgeModule,
-    FormsModule, // Include FormsModule for template-driven forms
-    ReactiveFormsModule, // Include ReactiveFormsModule for reactive forms
-    MatCheckboxModule,
-    MatDatepickerModule,
-    MatInputModule,
-    MatFormFieldModule,
-    MatTableModule,
-    MatTabsModule,
-    MatToolbarModule,
-    MatButtonToggleModule,
-    MatChipsModule,
-    MatListModule,
-    MatExpansionModule,
-    MatSelectModule,
-    MatGridListModule,
-    MatMenuModule,
-    MatPaginatorModule,
-    MatProgressBarModule,
-    MatProgressSpinnerModule,
-    MatRadioModule,
-    MatSidenavModule,
-    MatSlideToggleModule,
-    MatNativeDateModule,
-    MatSnackBarModule,
-    MatTooltipModule,
-    MatStepperModule,
-    MatDialogModule
-  ],
-  exports: [ // Export Angular Material modules for use in other modules/components
     MatButtonModule,
     MatCardModule,
     MatIconModule,
@@ -102,6 +88,49 @@ import {MatDialogModule} from '@angular/material/dialog';
     MatTooltipModule,
     MatStepperModule,
     MatDialogModule
+  ],
+  exports: [
+    MatButtonModule,
+    MatCardModule,
+    MatIconModule,
+    MatDividerModule,
+    MatBadgeModule,
+    FormsModule,
+    ReactiveFormsModule,
+    MatCheckboxModule,
+    MatDatepickerModule,
+    MatInputModule,
+    MatFormFieldModule,
+    MatTableModule,
+    MatTabsModule,
+    MatToolbarModule,
+    MatButtonToggleModule,
+    MatChipsModule,
+    MatListModule,
+    MatExpansionModule,
+    MatSelectModule,
+    MatGridListModule,
+    MatMenuModule,
+    MatPaginatorModule,
+    MatProgressBarModule,
+    MatProgressSpinnerModule,
+    MatRadioModule,
+    MatSidenavModule,
+    MatSlideToggleModule,
+    MatNativeDateModule,
+    MatSnackBarModule,
+    MatTooltipModule,
+    MatStepperModule,
+    MatDialogModule,
+    LoadingComponent,
+    AlertComponent,
+    SpinnerComponent,
+    EditDetailsComponent,
+    ChangePasswordComponent,
+    EditContactComponent,
+    ChangeProfileComponent,
+    ContactAdminComponent,
+    RaiseAnIssueComponent
   ]
 })
 export class MaterialModule { }

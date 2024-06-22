@@ -12,7 +12,7 @@
           <div class="col-2">
             <div class="title">Filter:</div>
           </div>
-          <div class="col-8">
+          <div class="col-10">
             <app-select2
               [options]="intervalData"
               [displayField]="'name'"
@@ -21,11 +21,11 @@
               (optionSelected)="onOptionSelected($event)">
             </app-select2>
           </div>
-          <div class="col-2">
+          <!-- <div class="col-2">
             <button class="custom-circle-button" (click)="applyFilter()">
               <mat-icon>filter_list</mat-icon>
             </button>
-          </div>
+          </div> -->
         </div>
       </div>
     </div>

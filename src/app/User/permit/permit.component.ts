@@ -18,6 +18,7 @@ export class PermitComponent implements OnInit {
   department_id!: string;
   cards: any[] = [];
   types: any[] = [];
+  counts: any = {};
 
   constructor(
     private dataService: DataService,
@@ -76,13 +77,20 @@ export class PermitComponent implements OnInit {
   }
 
   private loadCategories(): void {
-    this.dataService.getAllCaterogy(this.type, this.department_id).subscribe({
-      next: (data) => {
-        console.log(data);
-        this.cards = data;
+    const decryptUserId = this.encryptService.decryptData(this.cookieService.get('_user_id'));
+
+    forkJoin({
+      categories: this.dataService.getAllCaterogy(this.type, this.department_id),
+      submissionCount: this.dataService.getSubmissionCount(this.type, decryptUserId)
+    }).subscribe({
+      next: ({ categories, submissionCount }) => {
+        this.cards = categories;
+        this.counts = submissionCount;
         this.loadingService.isPageLoading(false);
       },
       error: (error) => {
+        console.error('Error loading categories or submission count:', error);
+        this.alertService.showAlert("Error loading categories or submission count. Please try again later.", "error", 3000);
         this.loadingService.isPageLoading(false);
       }
     });

@@ -8,6 +8,9 @@
     font-weight: 550;
     display: flex;
     align-items: center;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .title .icon-color{
@@ -48,4 +51,24 @@
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+}
+
+.status-approved {
+    background: linear-gradient(90deg, #008554 0%, #035539 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.status-rejected {
+    color: red;
+}
+
+.status-new {
+    color: blue;
+}
+
+.status-unknown {
+    background: linear-gradient(to bottom, #ffff00, #ffaa00);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
 }

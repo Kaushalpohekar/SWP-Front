@@ -1,0 +1,54 @@
+<div class="container dialog" [formGroup]="approveForm">
+  <div class="row pt-4 mb-4">
+    <div class="col-12 mb-3">
+      <div class="dialog-title">
+        Use your account password to continue
+      </div>
+    </div>
+    <div class="col-12 mb-3" *ngIf="!showUploadSignatureInstructions" [@fadeInOutPassword]>
+      <div class="custom-form-input">
+        <input type="password" formControlName="password"/>
+        <div class="error-msg" *ngIf="approveForm.get('password')?.invalid && (approveForm.get('password')?.dirty || approveForm.get('password')?.touched)">
+          Password is required
+        </div>
+        <div class="normal-msg" *ngIf="approveForm.get('password')?.valid && !approveForm.get('password')?.pristine">
+          Recently Used Password!
+        </div>
+      </div>
+    </div>
+    <div class="col-12 mb-2" *ngIf="showUploadSignatureInstructions" [@fadeInOutInstructions]>
+      <div class="signature-instructions mb-2">
+        <p class="sign sign-error">How to upload Signature?</p>
+        <p class="sign">
+          Step 1: Go to your profile.<br>
+          Step 2: Click on "Upload Signature" and follow the instructions to upload your signature.<br>
+          Step 3: Click "Upload" and wait for the data to be processed.<br>
+          Step 4: Once uploaded, retry the approval process.
+        </p>
+      </div>
+      <button mat-raised-button class="dialog-button" (click)="onProfileClick()">Go to Profile</button>
+    </div>
+    <div class="col-12" *ngIf="!showUploadSignatureInstructions">
+      <div class="container">
+        <div class="row">
+          <div class="col-6">
+            <button mat-raised-button class="dialog-button" (click)="onNoClick()">
+              <ng-container *ngIf="(isLoading$ | async); else cancelLabel">
+                <app-spinner></app-spinner>
+              </ng-container>
+              <ng-template #cancelLabel>Cancel</ng-template>
+            </button>
+          </div>
+          <div class="col-6">
+            <button mat-raised-button class="dialog-button success-button" (click)="onSaveClick()" [disabled]="!approveForm.valid || (isLoading$ | async)">
+              <ng-container *ngIf="(isLoading$ | async); else approveLabel">
+                <app-spinner></app-spinner>
+              </ng-container>
+              <ng-template #approveLabel>Approve</ng-template>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
