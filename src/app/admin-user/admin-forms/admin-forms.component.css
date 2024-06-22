@@ -82,3 +82,9 @@
     max-height: 50vh;
     overflow: auto;
 }
+
+.no-data-msg{
+    display: flex;
+    justify-content: center;
+    font-weight: 550;
+}

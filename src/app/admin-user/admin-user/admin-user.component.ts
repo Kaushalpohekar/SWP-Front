@@ -45,7 +45,6 @@ export class AdminUserComponent {
     if(data){
       this.dataService.usersDataByDepartments(data.department_id).subscribe(
         (response) => {
-          this.dataSource = response;
           this.dataSource = new MatTableDataSource(response);
           this.dataSource.paginator = this.paginator;
         },

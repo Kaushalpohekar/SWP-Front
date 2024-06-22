@@ -7,14 +7,14 @@
             </button>
         </div>
         <div class="row" style="padding-right: 0;">
-            <div class="col-lg-2 col-md-3 col-sm-12 mb-3" *ngFor="let card of cards">
-                <mat-card class="outer-card">
+            <div class="col-lg-2 col-md-3 col-sm-12 mb-3" *ngFor="let card of data">
+                <mat-card class="outer-card" (click)="CategorySelect(card)">
                     <mat-card-content>
                     <div class="container-fluid">
                         <div class="row">
                         <div class="col-8">
-                            <div class="card-title">{{ card.title }}</div>
-                            <div class="card-subtitle">Type: {{ card.subtitle }}</div>
+                            <div class="card-title">{{ card.name }}</div>
+                            <div class="card-subtitle">Type: {{ card.form_type }}</div>
                             <div class="card-subtitle2">{{ card.subtitle }}</div>
                         </div>
                         <div class="col-4 ">
@@ -32,7 +32,7 @@
         </div>
         <div>
             <mat-card style="border-radius: 5px;">
-                <div class="row container-fluid">
+                <div class="row container-fluid" *ngIf="categorySelected">
                     <div class="col-12 col-md-10 col-lg-9">
                           <h2 class="mt-2" style="margin-left: 10px;">Forms</h2>
                           <mat-horizontal-stepper [linear]="true" #stepper="matHorizontalStepper">
@@ -172,7 +172,10 @@
                           </div>
                         </div>
                     </div> 
-                </div>            
+                </div>   
+                <div class="row container-fluid" *ngIf="!categorySelected">
+                  <div class="no-data-msg mt-3 mb-3">Category Not Selected.</div>
+                </div>         
             </mat-card>                        
         </div>       
     </div>
