@@ -1,32 +1,220 @@
-<div class="container-fluid">
-  <div class="row pt-2 mb-2">
-    <div class="col-xl-8 col-lg-8 col-md-8 col-sm-12 mb-2">
-      <div class="row">
-        <div class="col-12 pt-3 mb-3">
-          <div class="title">Choose Permit type to Continue</div>
-        </div>
-        <div class="col-lg-4 col-md-6 col-sm-6 mb-4" *ngFor="let card of cards">
-          <mat-card class="outer-card" (click)="onCardClick(card.catagoryID)">
-            <mat-card-content>
-              <div class="container-fluid">
-                <div class="row">
-                  <div class="col-8">
-                    <div class="card-title">{{ card.title }}</div>
-                    <div class="card-subtitle">{{ card.subtitle }}</div>
-                  </div>
-                  <div class="col-4 ">
-                    <mat-card class="inner-card">
-                      <mat-card-content>
-                        <i class="material-icons icon-color">{{ card.icon }}</i> 
-                      </mat-card-content>
-                    </mat-card>
-                  </div>
-                </div>
-              </div>
-            </mat-card-content>
-          </mat-card>
+<!-- <div class="container-fluid">
+  <div class="row pt-4 mb-2 d-flex align-items-center">
+    <div class="col-lg-8 col-md-6 col-sm-12 mb-2">
+      <div class="Overview"> Overview </div>
+    </div>
+    <div class="col-lg-4 col-md-6 col-sm-12 mb-2">
+      <div class="row d-flex align-items-center">
+        <div class="col-4 Overview">Apply Filter :</div>
+        <div class="col-8">
+          <app-select2
+            [options]="intervalData"
+            [displayField]="'name'"
+            [valueField]="'value'"
+            [(ngModel)]="selectedInterval"
+            (optionSelected)="onIntervalChange($event)">
+          </app-select2>
         </div>
       </div>
     </div>
   </div>
+  <div class="row mb-2">
+    <div class="col-lg-8 col-md-8 col-sm-12 mb-2">
+      <mat-card class="card-1">
+        <mat-card-content>
+          <div class="row">
+            <div class="col-12 mb-2 d-flex align-items-center">
+              <div class="count-1">Opened by Type</div>
+            </div>
+            <div class="col-12 mb-2 chart-container">
+              <highcharts-chart
+                [Highcharts]="Highcharts"
+                [options]="chartOptions"
+                style="width: 100%; height: 100%; display: block;"
+              ></highcharts-chart>
+            </div>
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </div>
+
+    <div class="col-lg-4 col-md-4 col-sm-12 mb-2">
+      <mat-card>
+        <mat-card-content>
+          <div class="row">
+            <div class="col-12 mb-2 d-flex align-items-center">
+              <div class="count-1">Percentage of Closures, Extension and Open</div>
+            </div>
+            <div class="col-12 mb-2 chart-container">
+              <highcharts-chart
+                [Highcharts]="Highcharts"
+                [options]="chartOptionsDonut"
+                style="width: 100%; height: 100%; display: block;"
+              ></highcharts-chart>
+            </div>
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
+  <div class="row mb-2">
+    <div class="col-lg-6 col-md-6 col-sm-12 mb-2">
+      <mat-card class="card-1">
+        <mat-card-content>
+          <div class="row">
+            <div class="col-12 mb-2 d-flex align-items-center">
+              <div class="count-1">New, Approval, Closures and Extensions</div>
+            </div>
+            <div class="col-12 mb-2 chart-container">
+              <highcharts-chart
+                [Highcharts]="Highcharts"
+                [options]="chartOptions2"
+                style="width: 100%; height: 100%; display: block;"
+              ></highcharts-chart>
+            </div>
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </div>
+    <div class="col-lg-6 col-md-6 col-sm-12 mb-2">
+      <mat-card class="card-1">
+        <mat-card-content>
+          <div class="row">
+            <div class="col-12 mb-2 d-flex align-items-center">
+              <div class="count-1">Arroved And Reject over Time</div>
+            </div>
+            <div class="col-12 mb-2 chart-container">
+              <highcharts-chart
+                [Highcharts]="Highcharts"
+                [options]="chartOptions3"
+                style="width: 100%; height: 100%; display: block;"
+              ></highcharts-chart>
+            </div>
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
 </div>
+ -->
+<div class="container-fluid">
+  <div class="row pt-4 mb-2 d-flex align-items-center">
+    <div class="col-lg-8 col-md-6 col-sm-12 mb-2">
+      <div class="Overview"> Overview </div>
+    </div>
+    <div class="col-lg-4 col-md-6 col-sm-12 mb-2">
+      <div class="row d-flex align-items-center">
+        <div class="col-4 Overview">Apply Filter :</div>
+        <div class="col-8">
+          <app-select2
+            [options]="intervalData"
+            [displayField]="'name'"
+            [valueField]="'value'"
+            [(ngModel)]="selectedInterval"
+            (optionSelected)="onIntervalChange($event)">
+          </app-select2>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row mb-2">
+    <div class="col-lg-8 col-md-8 col-sm-12 mb-2">
+      <mat-card class="card-1">
+        <mat-card-content>
+          <div class="row">
+            <div class="col-12 mb-2 d-flex align-items-center">
+              <div class="count-1">Opened by Type</div>
+            </div>
+            <div class="col-12 mb-2 chart-container" *ngIf="(loading$ | async) === false">
+              <highcharts-chart
+                [Highcharts]="Highcharts"
+                [options]="chartOptions"
+                style="width: 100%; height: 100%; display: block;"
+              ></highcharts-chart>
+            </div>
+            <div class="col-12 d-flex justify-content-center align-items-center" *ngIf="loading$ | async">
+              <div class="spinner-wrapper">
+                <app-spinner></app-spinner>
+              </div>
+            </div>
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </div>
+
+    <div class="col-lg-4 col-md-4 col-sm-12 mb-2">
+      <mat-card class="card-1">
+        <mat-card-content>
+          <div class="row">
+            <div class="col-12 mb-2 d-flex align-items-center">
+              <div class="count-1">Ditrubution</div>
+            </div>
+            <div class="col-12 mb-2 chart-container" *ngIf="(loading$ | async) === false">
+              <highcharts-chart
+                [Highcharts]="Highcharts"
+                [options]="donutOptions"
+                style="width: 100%; height: 100%; display: block;"
+              ></highcharts-chart>
+            </div>
+            <div class="col-12 d-flex justify-content-center align-items-center" *ngIf="loading$ | async">
+              <div class="spinner-wrapper">
+                <app-spinner></app-spinner>
+              </div>
+            </div>
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
+
+  <div class="row mb-2">
+    <div class="col-lg-6 col-md-6 col-sm-12 mb-2">
+      <mat-card class="card-1">
+        <mat-card-content>
+          <div class="row">
+            <div class="col-12 mb-2 d-flex align-items-center">
+              <div class="count-1">New, Approval, Closures and Extensions</div>
+            </div>
+            <div class="col-12 mb-2 chart-container" *ngIf="(loading$ | async) === false">
+              <highcharts-chart
+                [Highcharts]="Highcharts"
+                [options]="statusOptions"
+                style="width: 100%; height: 100%; display: block;"
+              ></highcharts-chart>
+            </div>
+            <div class="col-12 d-flex justify-content-center align-items-center" *ngIf="loading$ | async">
+              <div class="spinner-wrapper">
+                <app-spinner></app-spinner>
+              </div>
+            </div>
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </div>
+    <div class="col-lg-6 col-md-6 col-sm-12 mb-2">
+      <mat-card class="card-1">
+        <mat-card-content>
+          <div class="row">
+            <div class="col-12 mb-2 d-flex align-items-center">
+              <div class="count-1">Arroved And Reject over Time</div>
+            </div>
+            <div class="col-12 mb-2 chart-container" *ngIf="(loading$ | async) === false">
+              <highcharts-chart
+                [Highcharts]="Highcharts"
+                [options]="lineChartOptions"
+                style="width: 100%; height: 100%; display: block;"
+              ></highcharts-chart>
+            </div>
+            <div class="col-12 d-flex justify-content-center align-items-center" *ngIf="loading$ | async">
+              <div class="spinner-wrapper">
+                <app-spinner></app-spinner>
+              </div>
+            </div>
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
+</div>
+

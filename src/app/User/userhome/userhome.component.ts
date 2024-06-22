@@ -21,8 +21,8 @@ export class UserhomeComponent implements OnInit {
   approvedCount = 0;
   rejectedCount = 0;
   user_id = '';
-  selectedInterval = '1day';
-  selectedSort = 'total';
+  selectedInterval!: string;
+  selectedSort!: string;
   intervalData = [
     { name: 'Hour', value: '1hour' },
     { name: 'Day', value: '1day' },
@@ -57,7 +57,15 @@ export class UserhomeComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadingService.isPageLoading(true);
+    this.checkCookies();
     this.fetchData();
+  }
+
+  checkCookies(): void {
+    const savedInterval = this.cookieService.get('_usr_hm_itrvl');
+    const savedSort = this.cookieService.get('_usr_hm_srt');
+    this.selectedInterval = savedInterval ? savedInterval : '1day';
+    this.selectedSort = savedSort ? savedSort : 'total';
   }
 
   fetchData(): void {
@@ -84,10 +92,11 @@ export class UserhomeComponent implements OnInit {
         const data = response.formsListCount;
         this.totalCount = data.totalCount || 0;
         this.newCount = data.statusCounts.opened || 0;
-        this.approvedCount = data.statusCounts.approvedCount || 0;
-        this.rejectedCount = data.statusCounts.rejectedCount || 0;
+        this.approvedCount = data.statusCounts.approved || 0;
+        this.rejectedCount = data.statusCounts.rejected || 0;
         this.updateCountCards();
         this.loadingService.isPageLoading(false);
+        this.updateCards(); // Ensure sorting is applied after data is fetched
       });
     } catch (error) {
       this.loadingService.isPageLoading(false);
@@ -107,10 +116,17 @@ export class UserhomeComponent implements OnInit {
 
   onOptionSelected(selectedInterval: any): void {
     this.selectedInterval = selectedInterval.value;
+    this.cookieService.set('_usr_hm_itrvl', this.selectedInterval, { path: '/' });
+    this.fetchData();
   }
 
   onOptionSelected2(selectedSort: any): void {
     this.selectedSort = selectedSort.value;
+    this.cookieService.set('_usr_hm_srt', this.selectedSort, { path: '/' });
+    this.updateCards();
+  }
+
+  updateCards(): void {
     switch(this.selectedSort) {
       case 'total':
         this.cards = [...this.originalCards];
@@ -168,7 +184,9 @@ export class UserhomeComponent implements OnInit {
       case 'opened':
         return { color: 'blue' }; // Blue color for new status
       case 'approved':
-        return { color: 'green' }; // Green color for approved status
+        return { color: 'darkgreen' }; // Green color for approved status
+      case 'rejected':
+        return { color: 'darkred' };
       default:
         return {
           color: 'grey'

@@ -34,7 +34,7 @@
 
 
     <div class="user-profile" [matMenuTriggerFor]="menu" >
-      <img src="../../../assets/img/face.png" class="user-image" alt="User Image">
+      <img [src]="img?.profile_photo || '../../../assets/img/face.png'" class="user-image" alt="User Image">
     </div>
     <mat-menu #menu="matMenu">
       <button mat-menu-item (click)="profile()">

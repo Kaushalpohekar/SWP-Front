@@ -1,0 +1,45 @@
+.profile-img {
+  width: 75px;
+  height: auto;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-top: -75px;
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+}
+
+
+.card-profile{
+  border: none;
+}
+
+.card-profile .head{
+  height: 50px;
+  font-size: 1rem;
+  font-weight: 550;
+  background: linear-gradient(180deg, #00a366 0%, #047d4b 100%);
+  color: whitesmoke;
+}
+
+.card-profile .content{
+  font-size: 0.8rem;
+  font-weight: 550;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+
+
+.card-profile .link{
+  color: blue;
+  cursor: pointer;
+}
+
+.sign{
+  height: 100px;
+  width: auto;
+}
+
+.error-list{
+  color: red;
+}

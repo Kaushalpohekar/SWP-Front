@@ -54,4 +54,12 @@ export class DataService {
   getSubmissionDetails(submission_id: string): Observable<any> {
     return this.http.get(`${this.apiUrl}/getSubmissionDetails/${submission_id}`);
   }
+
+  getProfileDetails(user_id: string): Observable<any> {
+    return this.http.get(`${this.apiUrl}/profileDetails/${user_id}`);
+  }
+
+  getSubmissionCount(formType: string, user_id: string): Observable<any> {
+    return this.http.get(`${this.apiUrl}/getSubmissionCount/${formType}/${user_id}`);
+  }
 }

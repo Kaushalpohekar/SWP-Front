@@ -1,47 +1,27 @@
-.title {
-    font-size: 1rem;
-    font-weight: 550;
+/* styles.css */
+
+.count-1 {
+  font-size: 0.8rem;
+  font-weight: 550;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
-.outer-card {
-    height: 100%;
-    width: 100%;
+.chart-container {
+  width: 100%;
+  min-height: 200px; /* Adjust the minimum height as needed */
 }
 
-.inner-card {
-    height: 50px;
-    margin-top: -25px;
-    width: 50px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+.spinner-wrapper {
+  width: 100%;
+  min-height: 200px; /* Ensure this matches the .chart-container min-height */
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-.card-title {
-    font-size: 1rem;
-    font-weight: 550;
-}
-
-.card-subtitle {
-    font-size: 0.8rem;
-    font-weight: 550;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
-
-.icon-color {
-    background: linear-gradient(to right, #008554, #035539); /* Green shades */
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    animation: pulse 2.5s infinite alternate; /* Pulsating animation */
-}
-
-@keyframes pulse {
-    0% {
-        opacity: 1;
-    }
-    100% {
-        opacity: 0.5;
-    }
+.Overview {
+  font-size: 1rem;
+  font-weight: 550;
 }

@@ -1,36 +1,83 @@
-<div class="container-fluid">
-    <div class="row pt-3 mb-2">
-        <div class="col-lg-3 col-md-4 col-sm-6 mb-2" *ngFor="let form of forms">
-            <div class="card card-form">
-                <div class="card-body">
-                    <div class="row mb-4">
-                        <div class="col-6">
-                            <div class="title">
-                                <i class="material-icons icon-color">{{ form.icon }}</i> 
-                                <span>{{ form.formUID }}</span>
-                            </div>
-                        </div>
-                        <div class="col-6">
-                            <div class="title justify-content-center">
-                                <i class="material-icons icon-color">person</i> 
-                                <span>{{ form.worker }}</span>
-                            </div>
-                        </div>
+<div *ngIf="loadingService.pageLoading">
+  <app-loading></app-loading>
+</div>
+<div *ngIf="!loadingService.pageLoading">    
+    <div class="container-fluid">
+        <div class="row pt-3 mb-2">
+            <div class="col-12 mb-2">
+                <div class="row">
+                    <div class="col-lg-8 col-md-6 col-sm-12 mb-2 d-flex align-items-center">
+                        <div class="title">Select Any One to proceed</div>
                     </div>
-                    <div class="row d-flex align-items-center">
-                        <div class="col-12 mb-1 time-title">11:00 AM &#x23F1; 11:00 PM</div>
-                        <div class="col-12 mb-3 date-title">27 Feb, 2024  12 Hr  27 Feb, 2024</div>
-                        <div class="col-12 mb-1 organization">{{ form.organaztion }}</div>
-                        <div class="col-12 mb-1 form-name" title="{{ form.name }}">{{ form.name }}</div>
-                        <div class="col-6 button" (click)="Approved()">
-                            <div>Approved</div>
-                        </div>
-                        <div class="col-6 text-end button" (click)="Preview(form.formUID)">
-                            <div>Preview</div>
+                    <div class="col-lg-4 col-md-6 col-sm-12 mb-2">
+                        <div class="row">
+                            <div class="col-2 d-flex align-items-center justify-content-center">
+                                <div class="title">Filter</div>
+                            </div>
+                            <div class="col-5">
+                                <app-select2
+                                  [options]="intervalData"
+                                  [displayField]="'name'"
+                                  [valueField]="'value'"
+                                  [(ngModel)]="selectedInterval"
+                                  (optionSelected)="onIntervalChange($event)">
+                                </app-select2>
+                            </div>
+                            <div class="col-5">
+                                <app-select2
+                                  [options]="sortData"
+                                  [displayField]="'name'"
+                                  [valueField]="'value'"
+                                  [(ngModel)]="selectedSort"
+                                  (optionSelected)="onSortChange($event)">
+                                </app-select2>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>        
+            <div *ngIf="forms.length === 0" class="col-12 pt-3 mb-3">
+              <div class="alert alert-warning text-center" role="alert">
+                No data found. Please contact the administrator.
+              </div>
+            </div>
+            <div class="col-lg-3 col-md-4 col-sm-6 mb-2" *ngFor="let form of forms">
+                <div class="card card-form">
+                    <div class="card-body">
+                        <div class="row mb-4">
+                            <div class="col-6">
+                                <div class="title">
+                                    <i class="material-icons icon-color">{{ categoryDetails.icon }}</i> 
+                                    <span class="">{{ form.submission_id }}</span>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="title justify-content-center">
+                                    <i class="material-icons icon-color">person</i> 
+                                    <span>{{ form.worker_count }}</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row d-flex align-items-center">
+                            <div class="col-12 mb-1 time-title">{{ formatTime(form.start_time) }} &#x23F1; {{ formatTime(form.end_time) }}</div>
+                            <div class="col-12 mb-3 date-title">{{ formatDate(form.start_date) }} -  {{ formatDate(form.end_date) }}</div>
+                            <div class="col-12 mb-1 organization">{{ form.name }}</div>
+                            <div class="col-12 mb-1 form-name" title="{{ form.name }}">{{ form.form_name }}</div>
+                            <div class="col-6 button" (click)="approved()">
+                                <div [ngClass]="{
+                                    'status-approved': form.status === 'approved',
+                                    'status-rejected': form.status === 'rejected' || form.status === 'revoked',
+                                    'status-new': form.status === 'opened',
+                                    'status-unknown': form.status !== 'approved' && form.status !== 'rejected' && form.status !== 'revoked' && form.status !== 'opened'
+                                    }">{{ form.status }}</div>
+                            </div>
+                            <div class="col-6 text-end button" (click)="preview(form.submission_id)">
+                                <div>Preview</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>        
+        </div>
     </div>
 </div>

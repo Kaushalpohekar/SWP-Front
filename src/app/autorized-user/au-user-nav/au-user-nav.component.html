@@ -1,20 +1,49 @@
 <mat-toolbar>
   <div class="toolbar-content">
-    <div class="page-title">Authorized User</div>
-    <button mat-icon-button>
+    <div class="page-title">{{title}}</div>
+    <button mat-icon-button [matMenuTriggerFor]="notificationMenu">
       <mat-icon>notifications</mat-icon>
+      <mat-badge *ngIf="unreadCount > 0" [matBadge]="unreadCount" matBadgeColor="accent"></mat-badge>
     </button>
-    <div class="user-profile" [matMenuTriggerFor]="menu">
-      <img src="../../../assets/img/face.png" class="user-image" alt="User Image">
+
+    <mat-menu #notificationMenu="matMenu" class="notification-menu">
+      <div class="container-fluid">
+        <div class="row mb-1" *ngFor="let notification of notifications.slice(0, 4)" [ngClass]="{'unread': !notification.read}" (click)="openNotification(notification)">
+          <div class="col-6">
+            <div class="notification-title">{{ notification.title }}</div>
+          </div>
+          <div class="col-6 text-end">
+            <div class="notification-time">{{ notification.time | date:'short' }}</div>
+          </div>
+          <div class="col-12">
+            <div class="notification-item">
+              {{ notification.message }}
+            </div>
+          </div>
+        </div>
+        <div *ngIf="notifications.length > 4">
+          <div class="notification-view-all" (click)="viewAllNotifications()">View All</div>
+        </div>
+        <ng-template #noNotifications>
+          <button mat-menu-item>
+            <div class="menu-item-text">No notifications</div>
+          </button>
+        </ng-template>
+      </div>
+    </mat-menu>
+
+
+    <div class="user-profile" [matMenuTriggerFor]="menu" >
+      <img [src]="img?.profile_photo || '../../../assets/img/face.png'" class="user-image" alt="User Image">
     </div>
     <mat-menu #menu="matMenu">
-      <button mat-menu-item>
+      <button mat-menu-item (click)="profile()">
         <div class="menu-item-text"><mat-icon>account_circle</mat-icon>Profile</div>
       </button>
-      <button mat-menu-item>
+      <!-- <button mat-menu-item>
         <div class="menu-item-text"><mat-icon>settings</mat-icon>Settings</div>
-      </button>
-      <button mat-menu-item (click)="Logout()">
+      </button> -->
+      <button mat-menu-item (click)= "Logout()">
         <div class="menu-item-text"><mat-icon>exit_to_app</mat-icon>Logout</div>
       </button>
     </mat-menu>

@@ -5,10 +5,10 @@
 	<div class="container">
 	    <div class="row pt-4 mb-2">
 	        <div class="col-12">
-	        	<div class="mb-1 Print" *ngIf="data.submission.status === 'opened'" style="display: flex; align-items: center; justify-content: flex-end;" (click)="generatePDF()">
-				    Print
-				    <mat-icon class="mat-16">print</mat-icon>
-				</div>
+						<div class="mb-1 Print" *ngIf="data.submission.status === 'approved' || data.submission.status === 'rejected'" style="display: flex; align-items: center; justify-content: flex-end;" (click)="generatePDF()">
+						Print
+							<mat-icon class="mat-16">print</mat-icon>
+						</div>
 
 	            <div class="card card-pdf">
 	                <div class="card-body" id="pdf-content"> 
@@ -32,7 +32,14 @@
 	                            </div>
 	                            <div class="col-6 d-flex justify-content-end align-items-center">
 	                                <div class="form-uid">Status :</div>
-	                                <span>{{ data.submission.status }}</span>
+	                                	<span  class="status" [ngClass]="{
+                                      'status-approved': data.submission.status === 'approved',
+                                      'status-rejected': data.submission.status === 'rejected' || data.submission.status === 'revoked',
+                                      'status-new': data.submission.status === 'opened',
+                                      'status-unknown': data.submission.status !== 'approved' && data.submission.status !== 'rejected' && data.submission.status !== 'revoked' && data.submission.status !== 'opened'
+                                      }">
+                                      {{ data.submission.status }}
+                                    </span>
 	                            </div>
 	                        </div>
 	                        <div class="row mb-3">
@@ -88,8 +95,8 @@
 	                                            </div>
 	                                            <div class="col-4">
 	                                                <div class="worker-mb">Extended</div>
-													<div class="worker-name" *ngIf="data.submission.status === 'extended'">Yes</div>
-													<div class="worker-name" *ngIf="data.submission.status !== 'extended'">No</div>
+																									<div class="worker-name" *ngIf="data.submission.status === 'extended'">Yes</div>
+																									<div class="worker-name" *ngIf="data.submission.status !== 'extended'">No</div>
 	                                            </div>
 	                                        </div>
 	                                    </div>
@@ -121,15 +128,15 @@
 	                                                </div>
 	                                            </div>
 	                                            <div class="row" *ngIf="question.questionType === 'checkbox'">
-													<div class="col-lg-10 col-md-9 col-sm-12 d-flex align-items-center">
-													    <div class="worker-name">{{ question.questionText }}</div>
-													</div>
-													<div class="col-lg-2 col-md-3 col-sm-12">
-													    <div *ngFor="let option of question.answer.split(':'); let i = index" [ngClass]="{'correct-answer': question.answer.includes(option)}">
-													        <span>{{ i + 1 }}. {{ option }}</span>
-													    </div>
-													</div>
-												</div>
+																								<div class="col-lg-10 col-md-9 col-sm-12 d-flex align-items-center">
+																								    <div class="worker-name">{{ question.questionText }}</div>
+																								</div>
+																								<div class="col-lg-2 col-md-3 col-sm-12">
+																								    <div *ngFor="let option of question.answer.split(':'); let i = index" [ngClass]="{'correct-answer': question.answer.includes(option)}">
+																								        <span>{{ option }}</span>
+																								    </div>
+																								</div>
+																							</div>
 
 	                                            <div class="row" *ngIf="question.questionType === 'upload'">
 	                                                <div class="col-lg-10 col-md-9 col-sm-12 d-flex align-items-center">
@@ -159,17 +166,37 @@
 	                                </div>
 	                            </div>
 	                        </div>
-	                        <div class="row mb-3" *ngIf="data.submission.status === 'opened'">
-	                            <div class="col-12 text-end">
-	                                <img src="../../../assets/sign.png" class="img-fluid sign">
-	                                <div class="authorized">Kaushal S. Pohekar</div>
-	                            </div>
-	                        </div>
-	                        <div class="row mb-3" *ngIf="data.submission.status !== 'opened'">
-	                            <div class="col-12 text-center">
-	                                <div class="notApproved">Not Approved Yet!</div>
-	                            </div>
-	                        </div>
+	                        <div class="row mb-3" *ngIf="data.submission.status === 'approved'">
+													    <div class="col-12 text-end">
+													        <img src="../../../assets/sign.png" class="img-fluid sign">
+													        <div class="authorized">{{data.submission.authorizer.first_name}} {{data.submission.authorizer.last_name}}</div>
+													    </div>
+													</div>
+
+													<div class="row mb-3" *ngIf="data.submission.status === 'rejected'">
+													    <div class="col-12 text-center">
+													        <div class="notApproved">Your application is rejected.</div>
+													    </div>
+													</div>
+
+													<div class="row mb-3" *ngIf="data.submission.status === 'revoked'">
+													    <div class="col-12 text-center">
+													        <div class="notApproved">Your application is revoked.</div>
+													    </div>
+													</div>
+
+													<div class="row mb-3" *ngIf="data.submission.status === 'extended'">
+													    <div class="col-12 text-center">
+													        <div class="notApproved">Your application is extended.</div>
+													    </div>
+													</div>
+
+													<div class="row mb-3" *ngIf="data.submission.status === 'opened'">
+													    <div class="col-12 text-center">
+													        <div class="notApproved">Not Approved Yet!</div>
+													    </div>
+													</div>
+
 	                        <hr>
 	                        <div class="row mb-3">
 	                            <div class="col-12 text-center footer-text">

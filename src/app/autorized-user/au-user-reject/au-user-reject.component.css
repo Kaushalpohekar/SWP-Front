@@ -1,0 +1,39 @@
+.dialog {
+    max-width: 400px;
+    border: 1px solid #008554;
+    border-radius: 4px;
+    padding: 20px; /* Adjust padding as needed */
+}
+
+.dialog-title {
+    font-size: 1.2rem;
+    font-weight: 550;
+    text-align: center;
+    color: grey;
+}
+
+.dialog-button {
+    width: 100%;
+}
+
+.success {
+    background-color: #008554;
+    color: white;
+}
+
+.error-msg {
+    font-size: 0.7rem;
+    font-weight: 550;
+    color: red;
+}
+
+.normal-msg {
+    font-size: 0.7rem;
+    font-weight: 550;
+    color: black;
+}
+
+.reject-button{
+    background-color: #bf2b1b;
+    color: white;
+}

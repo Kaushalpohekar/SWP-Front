@@ -12,12 +12,12 @@
           <div class="card-body">
             <div class="row">
               <div class="col-8">
-                <div class="content">Kaushal Pohekar</div>
-                <div class="content">Software Development Engineer</div>
-                <div class="content" style="font-style: italic;">Software</div>
+                <div class="content">{{user.first_name}} {{user.last_name}}</div>
+                <div class="content">{{user.designation || 'Employee'}}</div>
+                <div class="content" style="font-style: italic;">{{user.department_name}}</div>
               </div>
               <div class="col-4 d-flex align-items-center">
-                <img src="../../../assets/img/face.png" class="profile-img">
+                <img [src]="user.profile.profile_photo || '../../../assets/img/face.png'" class="profile-img">
               </div>
             </div>
           </div>
@@ -31,19 +31,19 @@
               <div class="col-12 mb-2">
                 <div class="content">Personal Mail </div>
                 <div class="custom-form-input">
-                  <input type="text" value="kaushalpohekar1@gmail.com" readonly>
+                  <input type="text" value="{{user.personal_email}}" readonly>
                 </div>
               </div>
               <div class="col-12 mb-2">
                 <div class="content">Company Email </div>
                 <div class="custom-form-input">
-                  <input type="text" value="kaushalpohekar@senselive.com" readonly>
+                  <input type="text" value="{{user.company_email}}" readonly>
                 </div>
               </div>
               <div class="col-12 mb-2">
                 <div class="content">Contact No </div>
                 <div class="custom-form-input">
-                  <input type="text" value="9309865924" readonly>
+                  <input type="text" value="{{user.contact_no}}" readonly>
                 </div>
               </div>
             </div>
@@ -60,25 +60,25 @@
               <div class="col-12 mb-2">
                 <div class="content">Name of the Organization </div>
                 <div class="custom-form-input">
-                  <input type="text" value="SenseLive Technologies pvt ltd" readonly>
+                  <input type="text" value="{{user.organization_name}}" readonly>
                 </div>
               </div>
               <div class="col-12 mb-2">
                 <div class="content">Organization Address</div>
                 <div class="custom-form-input">
-                  <input type="text" value="GHRTBIF, Nagpur" readonly>
+                  <input type="text" value="{{user.organization_address}}" readonly>
                 </div>
               </div>
               <div class="col-12 mb-2">
                 <div class="content">Plant Name</div>
                 <div class="custom-form-input">
-                  <input type="text" value="Software Dept." readonly>
+                  <input type="text" value="{{user.plant_name}}" readonly>
                 </div>
               </div>
               <div class="col-12 mb-2">
                 <div class="content">Plant Location</div>
                 <div class="custom-form-input">
-                  <input type="text" value="GHRTBIF, Nagpur" readonly>
+                  <input type="text" value="{{user.plant_location}}" readonly>
                 </div>
               </div>
             </div>
@@ -107,6 +107,19 @@
               </div>
               <div class="col-lg-2 col-md-4 col-sm-6 mb-2 text-center">
                 <div class="content link">Raise an Issue</div>
+              </div>
+            </div>
+            <div class="row mb-2">
+              <div class="col-12">
+                <div class="content">Instructions:</div>
+                <ul class="content">
+                  <li>Modify personal information.</li>
+                  <li>Change password and log out immediately after.</li>
+                  <li>Update contact information.</li>
+                  <li>Upload an image less than 500 KB in PNG or JPG format.</li>
+                  <li>Contact organization admin for messages or coordination.</li>
+                  <li>Report dashboard bugs or defects.</li>
+                </ul>
               </div>
             </div>
           </div>

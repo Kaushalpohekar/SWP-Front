@@ -1,7 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 import { AuthService } from '../../Authentication/AuthService/auth.service';
 import { Router } from '@angular/router';
 import { trigger, state, style, transition, animate } from '@angular/animations';
+import { CookieService } from 'ngx-cookie-service';
+import { EncryptService } from '../../Authentication/AuthService/encrypt.service';
 
 
 @Component({
@@ -9,9 +11,10 @@ import { trigger, state, style, transition, animate } from '@angular/animations'
   templateUrl: './nav.component.html',
   styleUrls: ['./nav.component.css'],
 })
-export class NavComponent {
+export class NavComponent implements OnInit{
   title = 'Smart Work Permit';
   unreadCount: number = 0;
+  img: any;
   notifications = [
     { title: 'Admin', message: 'We are trying to solve ur problem once it has been done then we connect with u directly.', read: true, time: new Date() },
     { title: 'Notification 2', message: 'Message for Notification 2', read: true, time: new Date() },
@@ -20,8 +23,24 @@ export class NavComponent {
     { title: 'Notification 5', message: 'Message for Notification 5', read: true, time: new Date() }
   ];
 
-  constructor(private authService: AuthService, private router: Router) {
+  constructor(
+    private authService: AuthService, 
+    private router: Router,
+    private cookieService: CookieService,
+    private encryptService: EncryptService
+    ) {
     this.updateUnreadCount();
+  }
+
+  ngOnInit(){
+    this.authService.getProfilePhoto(this.encryptService.decryptData(this.cookieService.get('_user_id'))).subscribe(
+      (img)=>{
+        this.img = img;
+      },
+      (error)=>{
+        console.error(error);
+      }
+    );
   }
 
   openNotification(notification: any) {
