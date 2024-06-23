@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { AdminService } from '../adminService/admin.service';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
+import { UpdateService } from '../admin-user-layout/insert-update/service/update.service';
 
 @Component({
   selector: 'app-admin-user',
@@ -18,11 +19,17 @@ export class AdminUserComponent {
 
   @ViewChild(MatPaginator, { static: true }) paginator!: MatPaginator;
 
-  constructor(private route: ActivatedRoute, private router: Router, private dataService: AdminService) {}
+  constructor(private route: ActivatedRoute, private router: Router, private dataService: AdminService, private sidenavService: UpdateService) {}
 
   ngOnInit() {
     this.departmentsData();
     this.departmentsSelect("");
+  }
+
+  
+  updateToggleSidenav(data:any,type:string) {
+    this.sidenavService.toggleSidenav();
+    this.sidenavService.passData({data:data,type:type});
   }
 
   departmentsData() {

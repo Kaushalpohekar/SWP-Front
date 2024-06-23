@@ -1,0 +1,98 @@
+<mat-sidenav-container class="example-container">
+    <mat-sidenav-content class="content">
+      <app-admin-breadcrums></app-admin-breadcrums>
+      <router-outlet></router-outlet>
+    </mat-sidenav-content>
+    <mat-sidenav #sidenav [mode]=mode [(opened)]="opened" position="end">
+        <div class="col-12 mb-2" style="padding: 0.3vh;" [formGroup]="plantForm" *ngIf="passedData.type == 'insertPlant' || passedData.type == 'updatePlant'">
+            <label class="reuired-title">Plant name <span class="red">*</span></label>
+            <div class="custom-form-input" style="min-width: 220px;">
+                <input type="text" formControlName="plantName">
+            </div>
+
+            <label class="reuired-title">Plant Location <span class="red">*</span></label>
+            <div class="custom-form-input">
+                <input type="text" formControlName="plantLocation">
+            </div>
+
+		    <button mat-raised-button class="mt-2" style="width: 100%; background-color: #017048;color: whitesmoke;">Submit</button>
+        </div>
+
+        <div class="col-12 mb-2" style="padding: 0.3vh;" [formGroup]="departmentForm" *ngIf="passedData.type == 'editDepartment' || passedData.type == 'addDepartment'">
+            <label class="reuired-title">Department name <span class="red">*</span></label>
+            <div class="custom-form-input" style="min-width: 220px;">
+                <input type="text" formControlName="departmentName">
+            </div>
+
+		    <button mat-raised-button class="mt-2" style="width: 100%; background-color: #017048;color: whitesmoke;">Submit</button>
+        </div>
+
+        <div class="col-12 mb-2" style="padding: 0.3vh;" [formGroup]="userForm" *ngIf="passedData.type == 'addUser' || passedData.type == 'editUser'">
+            <label class="reuired-title">Personal Email <span class="red">*</span></label>
+            <div class="custom-form-input" style="min-width: 220px;">
+                <input type="email" formControlName="personal_email">
+            </div>
+
+            <label class="reuired-title">First Name<span class="red">*</span></label>
+            <div class="custom-form-input">
+                <input type="text" formControlName="first_name">
+            </div>
+
+            <label class="reuired-title">Last name <span class="red">*</span></label>
+            <div class="custom-form-input" style="min-width: 220px;">
+                <input type="text" formControlName="last_name">
+            </div>
+
+            <label class="reuired-title">Role <span class="red">*</span></label>
+            <div class="custom-form-input">
+                <select formControlName="role">
+                    <option *ngFor="let data of rolesData" [value]="data.role_id">{{ data.name }}</option>
+                </select>
+            </div>
+
+            <label class="reuired-title">Department <span class="red">*</span></label>
+            <div class="custom-form-input" style="min-width: 220px;">
+                <select formControlName="department">
+                    <option *ngFor="let data of data" [value]="data.department_id">{{ data.name }}</option>
+                </select>
+            </div>
+
+            <label class="reuired-title">Contact <span class="red">*</span></label>
+            <div class="custom-form-input">
+                <input type="text" formControlName="contact">
+            </div>
+
+            <label class="reuired-title">Password <span class="red">*</span></label>
+            <div class="custom-form-input" style="min-width: 220px;">
+                <input type="password" formControlName="password">
+            </div>
+
+		    <button mat-raised-button class="mt-2" style="width: 100%; background-color: #017048;color: whitesmoke;">Submit</button>
+        </div>
+
+        <div class="col-12 mb-2" style="padding: 0.3vh;" [formGroup]="categoryForm" *ngIf="passedData.type == 'addCategory'">
+            <label class="reuired-title">Name <span class="red">*</span></label>
+            <div class="custom-form-input" style="min-width: 220px;">
+                <input type="text" formControlName="name">
+            </div>
+
+            <label class="reuired-title">Subtitle<span class="red">*</span></label>
+            <div class="custom-form-input">
+                <input type="text" formControlName="subtitle">
+            </div>
+
+            <label class="reuired-title">Form Type <span class="red">*</span></label>
+            <div class="custom-form-input" style="min-width: 220px;">
+                <input type="text" formControlName="form_type">
+            </div>
+
+            <label class="reuired-title">Icon <span class="red">*</span></label>
+            <div class="custom-form-input">
+                <input type="text" formControlName="icon">
+            </div>
+
+		    <button mat-raised-button class="mt-2" style="width: 100%; background-color: #017048;color: whitesmoke;">Submit</button>
+        </div>
+    </mat-sidenav>
+</mat-sidenav-container>
+  

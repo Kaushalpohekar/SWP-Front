@@ -1,0 +1,11 @@
+.breadcrumb {
+  background: none;
+  padding: 0;
+  margin-bottom: 1rem;
+  list-style: none;
+}
+.breadcrumb-item + .breadcrumb-item::before {
+  content: ">";
+  padding: 0 0.5rem;
+  color: #6c757d;
+}

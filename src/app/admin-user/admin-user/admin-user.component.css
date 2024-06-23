@@ -49,6 +49,7 @@
     display: flex; 
     justify-content: flex-end;
     margin-bottom: -0.75vh;
+    flex-wrap: wrap;
 }
 
 .no-data-msg{

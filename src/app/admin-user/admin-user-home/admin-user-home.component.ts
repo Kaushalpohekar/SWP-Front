@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { AdminService } from '../adminService/admin.service';
 import { Router } from '@angular/router';
+import { UpdateService } from '../admin-user-layout/insert-update/service/update.service';
+import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-admin-user-home',
@@ -12,11 +14,16 @@ export class AdminUserHomeComponent implements OnInit {
   data: any;
   plantData: any;
 
-  constructor(private service: AdminService, private router: Router) { }
+  constructor(private service: AdminService, private router: Router, private sidenavService: UpdateService, private cookieService: CookieService) { }
 
   ngOnInit(): void {
     this.organizationData();
     this.plantsData();
+  }
+
+  updateToggleSidenav(data:any,type:string) {
+    this.sidenavService.toggleSidenav();
+    this.sidenavService.passData({data:data,type:type});
   }
 
   organizationData() {
@@ -52,7 +59,7 @@ export class AdminUserHomeComponent implements OnInit {
   }
 
   viewDetails(card: any) {
-    // this.service.setCardData(card);
     this.router.navigate(['/ad/home/users/'+card.plant_id]);
+    this.cookieService.set('_plant_id', card.plant_id, { path: '/' });
   }
 }

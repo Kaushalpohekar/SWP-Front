@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormArray } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AdminService } from '../adminService/admin.service';
+import { UpdateService } from '../admin-user-layout/insert-update/service/update.service';
+import { CookieService } from 'ngx-cookie-service';
+import { EncryptService } from '../../Authentication/AuthService/encrypt.service';
 
 @Component({
   selector: 'app-admin-forms',
@@ -16,14 +19,21 @@ export class AdminFormsComponent implements OnInit {
   numberOfQuestions = 0;
   requireOptions: boolean[] = [];
   data:any;
-  dataSource:any;
+  dataSource:any[]=[];
   categorySelected:boolean=false;
+  activeCard: any = null;
+  selectedCategory: any;
 
-  constructor(private _formBuilder: FormBuilder,private router: Router,private route: ActivatedRoute, private dataService: AdminService) { }
+  constructor(private _formBuilder: FormBuilder,private router: Router,private route: ActivatedRoute, private dataService: AdminService, private sidenavService: UpdateService,private cookieService: CookieService, private EncryptService: EncryptService) { }
 
   ngOnInit() {
     this.forms();
     this.categoriesData();
+  }
+
+  updateToggleSidenav(data:any,type:string) {
+    this.sidenavService.toggleSidenav();
+    this.sidenavService.passData({data:data,type:type});
   }
 
   categoriesData() {
@@ -43,9 +53,11 @@ export class AdminFormsComponent implements OnInit {
   }
 
   CategorySelect(data:any){
+    this.selectedCategory=data;
+    this.dataSource=[]
     if(data){
       this.categorySelected=true;
-      this.dataService.usersDataByDepartments(data.department_id).subscribe(
+      this.dataService.prevForms(data.category_id).subscribe(
         (response) => {
           this.dataSource = response;
         },
@@ -105,8 +117,39 @@ export class AdminFormsComponent implements OnInit {
     return this.requireOptions[i];
   }
 
-  getQuestionsAndAnswers() {
+  Submit() {
     const questionsArray = this.secondFormGroup.get('questionsArray')?.value;
-    console.log(questionsArray);
+    const encodedUserId = this.cookieService.get('_user_id')
+
+    const data = {
+      form_name:this.firstFormGroup.get('FormName')?.value,
+      form_description:this.firstFormGroup.get('FormDescription')?.value,
+      created_by:this.EncryptService.decryptData(encodedUserId),
+      category_id:this.selectedCategory.category_id,
+      plant_id: this.route.snapshot.paramMap.get('id'),
+      Questions:questionsArray,
+    }
+
+    if (this.firstFormGroup.valid && this.secondFormGroup.valid) {
+      this.dataService.addForm(data).subscribe(
+        (response) => {          
+          console.log('Form created Successfully, Id:',response);
+        },
+        (error) => {
+          console.error('Error creating form:', error);
+        }
+      );
+    } else {
+      this.firstFormGroup.markAllAsTouched();
+      this.secondFormGroup.markAllAsTouched();
+    }
+  }
+
+  setActiveCard(card: any): void {
+    this.activeCard = card;
+  }
+
+  isActive(card: any): boolean {
+    return this.activeCard === card;
   }
 }
