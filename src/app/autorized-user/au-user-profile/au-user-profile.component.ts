@@ -4,6 +4,13 @@ import { DataService } from '../service/data.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { CookieService } from 'ngx-cookie-service';
 import { EncryptService } from '../../Authentication/AuthService/encrypt.service';
+import { AuthService } from '../../Authentication/AuthService/auth.service';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { EditDetailsComponent } from '../../edit-details/edit-details.component';
+import { ChangePasswordComponent } from '../../change-password/change-password.component';
+import { EditContactComponent } from '../../edit-contact/edit-contact.component';
+import { ChangeProfileComponent } from '../../change-profile/change-profile.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-au-user-profile',
@@ -27,7 +34,10 @@ export class AuUserProfileComponent implements OnInit {
     private snackBar: MatSnackBar,
     private cookieService: CookieService,
     public loadingService: LoadingService,
-    private encryptService: EncryptService
+    private encryptService: EncryptService,
+    private authService: AuthService,
+    public dialog: MatDialog,
+    private router: Router,
   ) {}
 
   ngOnInit(): void {
@@ -42,7 +52,6 @@ export class AuUserProfileComponent implements OnInit {
     this.dataService.getProfileDetails(this.user_id).subscribe(
       (user) => {
         this.user = user[0];
-        console.log(this.user);
         this.loadingService.isPageLoading(false);
       },
       (error) => {
@@ -95,7 +104,6 @@ export class AuUserProfileComponent implements OnInit {
 
       try {
         const success = await this.dataService.insertSign(data).toPromise();
-        console.log('Signature uploaded successfully:', success);
         this.handleSuccess('Signature uploaded successfully.');
         this.fetchProfileDetails(); // Refetch profile details after successful upload
       } catch (error) {
@@ -105,6 +113,77 @@ export class AuUserProfileComponent implements OnInit {
     } else {
       this.handleError('User ID is missing.');
     }
+  }
+
+  openEditProfile() : void{
+    const user = {
+      user_id: this.user_id,
+      first_name: this.user.first_name,
+      last_name: this.user.last_name,
+      designation: this.user.designation || 'Employee',
+      department: this.user.department_name
+    }
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.data = { user };
+    const dialogRef = this.dialog.open(EditDetailsComponent, dialogConfig);
+    dialogRef.afterClosed().subscribe(result => {
+      if (result === 'success') {
+        this.fetchProfileDetails(); 
+      }
+    });
+  }
+
+  openChangePassword() : void{
+    const user = {
+      user_id: this.user_id,
+    }
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.data = { user };
+    const dialogRef = this.dialog.open(ChangePasswordComponent, dialogConfig);
+    dialogRef.afterClosed().subscribe(result => {
+      if (result === 'success') {
+        this.authService.logout();
+      }
+    });
+  }
+
+  openEditContact() : void{
+    const user = {
+      user_id: this.user_id,
+      personal_email: this.user.personal_email,
+      contact_no: this.user.contact_no,
+      company_email: this.user.company_email
+    }
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.data = { user };
+    const dialogRef = this.dialog.open(EditContactComponent, dialogConfig);
+    dialogRef.afterClosed().subscribe(result => {
+      if (result === 'success') {
+        this.fetchProfileDetails(); 
+      }
+    });
+  }
+
+  openChangeProfile() : void{
+    const user = {
+      user_id: this.user_id,
+      photo: this.user.profile.profile_photo
+    }
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.data = { user };
+    const dialogRef = this.dialog.open(ChangeProfileComponent, dialogConfig);
+    dialogRef.afterClosed().subscribe(result => {
+      if (result === 'success') {
+        this.fetchProfileDetails(); 
+      }
+    });
+  }
+
+  openContactAdmin() : void{
+  }
+
+  openRaiseAnIssue() : void{
+    
   }
 
   private handleSuccess(message: string): void {

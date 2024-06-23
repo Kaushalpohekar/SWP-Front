@@ -96,4 +96,21 @@ export class AuthService {
   getProfilePhoto(user_id: string): Observable<any> {
     return this.http.get(`${this.apiUrl}/profilePicture/${user_id}`);
   }
+
+  updateUser(user_id: string, data: any): Observable<any> {
+    return this.http.put(`${this.apiUrl}/updateUser/${user_id}`, data);
+  }
+
+  updateEmail(user_id: string, data: any): Observable<any> {
+    return this.http.put(`${this.apiUrl}/updateEmail/${user_id}`, data);
+  }
+
+  updatePassword(user_id: string, data: any): Observable<any> {
+    return this.http.put(`${this.apiUrl}/updatePassword/${user_id}`, data);
+  }
+
+  updateProfileImage(data: any): Observable<any> {
+    return this.http.put(`${this.apiUrl}/updateProfile`, data);
+  }
+  
 }

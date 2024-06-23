@@ -1,0 +1,12 @@
+<div class="loading-container" *ngIf="isLoading">
+    <app-spinner>
+    </app-spinner>
+</div>
+<div class="image-container" *ngIf="!isLoading">
+    <div class="image-wrapper">
+        <img [src]="imageData" alt="Image" class="image">
+        <mat-icon class="close-button" aria-label="Close dialog" (click)="onNoClick()">
+            close
+        </mat-icon>
+    </div>
+</div>

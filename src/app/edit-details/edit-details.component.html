@@ -1,1 +1,67 @@
-<p>edit-details works!</p>
+<div class="container dialog" [formGroup]="editForm">
+  <div class="row pt-2 mb-4" [@fadeInOutPassword]>
+    <div class="col-12 mb-3">
+      <div class="dialog-title">
+        Edit Your Details 
+      </div>
+    </div>
+    <div class="col-lg-6 col-md-6 col-sm-12 mb-3" >
+      <div class="custom-form-input">
+        <label class="label">First Name :</label>
+        <input type="text" formControlName="first_name" placeholder="First Name"/>
+        <div class="error-msg" *ngIf="editForm.get('first_name')?.invalid && (editForm.get('first_name')?.dirty || editForm.get('first_name')?.touched)">
+          First name is required
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-6 col-md-6 col-sm-12 mb-3" >
+      <div class="custom-form-input">
+        <label class="label">Last Name :</label>
+        <input type="text" formControlName="last_name" placeholder="Last Name"/>
+        <div class="error-msg" *ngIf="editForm.get('last_name')?.invalid && (editForm.get('last_name')?.dirty || editForm.get('last_name')?.touched)">
+          Last name is required
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-6 col-md-6 col-sm-12 mb-3" >
+      <div class="custom-form-input">
+        <label class="label">Designation :</label>
+        <input type="text" formControlName="designation" placeholder="Designation"/>
+        <div class="error-msg" *ngIf="editForm.get('first_name')?.invalid && (editForm.get('designation')?.dirty || editForm.get('designation')?.touched)">
+          Designation is required
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-6 col-md-6 col-sm-12 mb-3" >
+      <div class="custom-form-input">
+        <label class="label">Department Name :</label>
+        <input type="text" formControlName="department" placeholder="Department Name" readonly />
+        <div class="error-msg" *ngIf="editForm.get('department')?.invalid && (editForm.get('department')?.dirty || editForm.get('department')?.touched)">
+          Department name is required
+        </div>
+      </div>
+    </div>
+    <div class="col-12">
+      <div class="container">
+        <div class="row">
+          <div class="col-6">
+            <button mat-raised-button class="dialog-button" (click)="onNoClick()">
+              <ng-container *ngIf="(isLoading$ | async); else cancelLabel">
+                <app-spinner></app-spinner>
+              </ng-container>
+              <ng-template #cancelLabel>Cancel</ng-template>
+            </button>
+          </div>
+          <div class="col-6">
+            <button mat-raised-button class="dialog-button success-button" (click)="onSaveClick()" [disabled]="!editForm.valid || (isLoading$ | async)">
+              <ng-container *ngIf="(isLoading$ | async); else approveLabel">
+                <app-spinner></app-spinner>
+              </ng-container>
+              <ng-template #approveLabel>Save</ng-template>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

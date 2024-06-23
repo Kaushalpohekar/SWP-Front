@@ -63,25 +63,25 @@
               </div>
               <div class="col-12 mb-2">
               	<img *ngIf="showSignature && user.sign.sign_photo" [src]="user.sign.sign_photo" class="img-fluid sign">
-				<div *ngIf="showSignature && !user.sign.sign_photo" class="content error-list">
-					Signature image not uploaded yet.
-				</div>
+        				<div *ngIf="showSignature && !user.sign.sign_photo" class="content error-list">
+        					Signature image not uploaded yet.
+        				</div>
               </div>
               <div class="col-12 mb-2">
-				<div class="content">
-					<p>Signature should meet the following criteria:</p>
-					<ul>
-						<li>Be in image format</li>
-						<li>Be properly horizontally aligned</li>
-						<li>Be in PNG, JPG, or JPEG format</li>
-						<li>Be less than 250 KB in size</li>
-					</ul>
-					<div href="#" (click)="triggerFileInput()" class="content link">Upload Signature</div>
-					<input type="file" #fileInput style="display: none;" (change)="onFileSelected($event)">
-					<ul class="error-list" *ngIf="errorMessage">
-						<li>{{ errorMessage }}</li>
-					</ul>
-				</div>
+        				<div class="content">
+        					<p>Signature should meet the following criteria:</p>
+        					<ul>
+        						<li>Be in image format</li>
+        						<li>Be properly horizontally aligned</li>
+        						<li>Be in PNG, JPG, or JPEG format</li>
+        						<li>Be less than 250 KB in size</li>
+        					</ul>
+        					<div href="#" (click)="triggerFileInput()" class="content link">Upload Signature</div>
+        					<input type="file" #fileInput style="display: none;" (change)="onFileSelected($event)">
+        					<ul class="error-list" *ngIf="errorMessage">
+        						<li>{{ errorMessage }}</li>
+        					</ul>
+        				</div>
               </div>
             </div>
           </div>
@@ -128,37 +128,37 @@
           <div class="card-body">
             <div class="row d-flex justify-content-center">
               <div class="col-lg-2 col-md-4 col-sm-6 mb-2 text-center">
-                <div class="content link">Edit Details</div>
+                <div class="content link" (click)="openEditProfile()">Edit Details</div>
               </div>
               <div class="col-lg-2 col-md-4 col-sm-6 mb-2 text-center">
-                <div class="content link">Change Password</div>
+                <div class="content link" (click)="openChangePassword()">Change Password</div>
               </div>
               <div class="col-lg-2 col-md-4 col-sm-6 mb-2 text-center">
-                <div class="content link">Edit Contact</div>
+                <div class="content link" (click)="openEditContact()">Edit Contact</div>
               </div>
               <div class="col-lg-2 col-md-4 col-sm-6 mb-2 text-center">
-                <div class="content link">Change Profile</div>
+                <div class="content link" (click)="openChangeProfile()">Change Profile</div>
               </div>
               <div class="col-lg-2 col-md-4 col-sm-6 mb-2 text-center">
-                <div class="content link">Contact Admin </div>
+                <div class="content link" (click)="openContactAdmin()">Contact Admin </div>
               </div>
               <div class="col-lg-2 col-md-4 col-sm-6 mb-2 text-center">
-                <div class="content link">Raise an Issue</div>
+                <div class="content link" (click)="openRaiseAnIssue()">Raise an Issue</div>
               </div>
             </div>
             <div class="row mb-2">
-				<div class="col-12">
-					<div class="content">Instructions:</div>
-					<ul class="content">
-						<li>Modify personal information.</li>
-						<li>Change password and log out immediately after.</li>
-						<li>Update contact information.</li>
-						<li>Upload an image less than 500 KB in PNG or JPG format.</li>
-						<li>Contact organization admin for messages or coordination.</li>
-						<li>Report dashboard bugs or defects.</li>
-					</ul>
-				</div>
-			</div>
+      				<div class="col-12">
+      					<div class="content">Instructions:</div>
+      					<ul class="content">
+      						<li>Modify personal information.</li>
+      						<li>Change password and log out immediately after.</li>
+      						<li>Update contact information.</li>
+      						<li>Upload an image less than 500 KB in PNG or JPG format.</li>
+      						<li>Contact organization admin for messages or coordination.</li>
+      						<li>Report dashboard bugs or defects.</li>
+      					</ul>
+      				</div>
+      			</div>
           </div>
         </div>      
       </div>
