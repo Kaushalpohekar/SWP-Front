@@ -16,7 +16,6 @@ export class ConfirmSubmitComponent {
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {
     this.formData = data.data;
-    console.log(this.formData);
   }
 
   onNoClick(): void {

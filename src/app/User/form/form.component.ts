@@ -465,7 +465,6 @@ export class FormComponent implements OnInit, OnDestroy {
     const questionIndex = this.questions.findIndex(question => question.question_id === questionId);
     if (questionIndex !== -1) {
       this.questions[questionIndex].answer = value;
-      console.log(`Question ID: ${questionId}, Answer: ${value}`);
     }
   }
 
