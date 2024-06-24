@@ -5,6 +5,8 @@ import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { UpdateService } from '../admin-user-layout/insert-update/service/update.service';
 import { Subscription } from 'rxjs';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { ConfirmSnackBarComponent } from 'src/app/confirm-snack-bar/confirm-snack-bar.component';
 
 @Component({
   selector: 'app-admin-user',
@@ -23,7 +25,7 @@ export class AdminUserComponent {
 
   @ViewChild(MatPaginator, { static: true }) paginator!: MatPaginator;
 
-  constructor(private route: ActivatedRoute, private router: Router, private dataService: AdminService, private sidenavService: UpdateService) {}
+  constructor(private snackBar: MatSnackBar,private route: ActivatedRoute, private router: Router, private dataService: AdminService, private sidenavService: UpdateService) {}
 
   ngOnInit() {
     this.departmentsData();
@@ -40,6 +42,62 @@ export class AdminUserComponent {
       this.subscription.unsubscribe();
     }
   }
+
+  deleteUser(ID:string) {
+    const snackBarRef = this.snackBar.openFromComponent(ConfirmSnackBarComponent, {
+      duration: 3000,
+    });
+
+    snackBarRef.onAction().subscribe(() => {
+      this.dataService.deleteUser(ID).subscribe(
+        () => {
+          this.snackBar.open(`User Deleted Successfully`, 'Close', {
+            duration: 3000,
+          });
+          this.departmentsSelect(this.selectedDep);          
+        },
+        (error) => {
+          this.snackBar.open(`Error while deleting plant: ${error}`, 'Close', {
+            duration: 3000,
+          });
+        }
+      );
+    });
+
+    snackBarRef.afterDismissed().subscribe(() => {
+      this.snackBar.open(`Snack bar dismissed`, 'Close', {
+        duration: 3000,
+      });
+    });
+  }
+
+  deleteDepartment(ID:string) {
+    const snackBarRef = this.snackBar.openFromComponent(ConfirmSnackBarComponent, {
+      duration: 3000,
+    });
+
+    snackBarRef.onAction().subscribe(() => {
+      this.dataService.deleteDepartment(ID).subscribe(
+        () => {
+          this.snackBar.open(`Department Deleted Successfully`, 'Close', {
+            duration: 3000,
+          });
+          this.departmentsData();
+        },
+        (error) => {
+          this.snackBar.open(`Error while deleting Department: ${error}`, 'Close', {
+            duration: 3000,
+          });
+        }
+      );
+    });
+
+    snackBarRef.afterDismissed().subscribe(() => {
+      this.snackBar.open(`Snack bar dismissed`, 'Close', {
+        duration: 3000,
+      });
+    });
+  }
   
   updateToggleSidenav(data:any,type:string) {
     this.sidenavService.toggleSidenav();
@@ -54,11 +112,15 @@ export class AdminUserComponent {
           this.data = response;
         },
         (error) => {
-          console.error('Error fetching departments data:', error);
+          this.snackBar.open(`Error fetching departments data: ${error}`, 'Close', {
+            duration: 3000,
+          });
         }
       );
     } else {
-      console.warn('No Plant ID found.');
+      this.snackBar.open(`No Plant ID found.`, 'Close', {
+        duration: 3000,
+      });
     }
   }
 

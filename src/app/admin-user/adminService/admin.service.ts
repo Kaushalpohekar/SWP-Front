@@ -116,4 +116,8 @@ export class AdminService {
   deleteDepartment(id:string): Observable<any> {
     return this.http.delete(`${this.apiUrl}/deleteDepartment/${id}`);
   }
+  
+  deleteUser(id:string): Observable<any> {
+    return this.http.delete(`${this.apiUrl}/deleteUser/${id}`);
+  }
 }

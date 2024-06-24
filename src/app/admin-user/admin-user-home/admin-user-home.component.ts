@@ -4,6 +4,8 @@ import { Router } from '@angular/router';
 import { UpdateService } from '../admin-user-layout/insert-update/service/update.service';
 import { CookieService } from 'ngx-cookie-service';
 import { Subscription } from 'rxjs';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { ConfirmSnackBarComponent } from 'src/app/confirm-snack-bar/confirm-snack-bar.component';
 
 @Component({
   selector: 'app-admin-user-home',
@@ -16,7 +18,7 @@ export class AdminUserHomeComponent implements OnInit {
   plantData: any;
   private plantChangeSubscription!: Subscription;
 
-  constructor(private service: AdminService, private router: Router, private sidenavService: UpdateService, private cookieService: CookieService) { }
+  constructor(private snackBar: MatSnackBar,private service: AdminService, private router: Router, private sidenavService: UpdateService, private cookieService: CookieService) { }
 
   ngOnInit(): void {
     this.organizationData();
@@ -38,6 +40,35 @@ export class AdminUserHomeComponent implements OnInit {
     this.sidenavService.passData({data:data,type:type});
   }
 
+  deletePlant(ID:string) {
+    const snackBarRef = this.snackBar.openFromComponent(ConfirmSnackBarComponent, {
+      duration: 3000,
+    });
+
+    snackBarRef.onAction().subscribe(() => {
+      this.service.deletePlant(ID).subscribe(
+        () => {
+          this.snackBar.open('Plant Deleted Successfully', 'Close', {
+            duration: 3000,
+          });
+          this.plantsData();
+        },
+        (error) => {
+          this.snackBar.open(`Error while deleting plant:${error}` ,'Close', {
+            duration: 3000,
+          });
+          console.error();
+        }
+      );
+    });
+
+    snackBarRef.afterDismissed().subscribe(() => {
+      this.snackBar.open('Snack bar dismissed', 'Close', {
+        duration: 3000,
+      });
+    });
+  }
+
   organizationData() {
     const organizationId = this.service.retrieveOrganizationId();
     if (organizationId) {
@@ -46,11 +77,15 @@ export class AdminUserHomeComponent implements OnInit {
           this.data = response[0];
         },
         (error) => {
-          console.error('Error fetching organization data:', error);
+          this.snackBar.open(`Error fetching organization data: ${error}`, 'Close', {
+            duration: 3000,
+          });
         }
       );
     } else {
-      console.warn('No organization ID found.');
+      this.snackBar.open(`No organization ID found.`, 'Close', {
+        duration: 3000,
+      });
     }
   }
 
@@ -62,11 +97,15 @@ export class AdminUserHomeComponent implements OnInit {
           this.plantData = response;
         },
         (error) => {
-          console.error('Error fetching plants data:', error);
+          this.snackBar.open(`Error fetching plants data: ${error}`, 'Close', {
+            duration: 3000,
+          });
         }
       );
     } else {
-      console.warn('No organization ID found.');
+      this.snackBar.open(`No organization ID found.`, 'Close', {
+        duration: 3000,
+      });
     }
   }
 

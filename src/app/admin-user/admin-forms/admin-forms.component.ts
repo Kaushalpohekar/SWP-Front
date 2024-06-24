@@ -6,6 +6,7 @@ import { UpdateService } from '../admin-user-layout/insert-update/service/update
 import { CookieService } from 'ngx-cookie-service';
 import { EncryptService } from '../../Authentication/AuthService/encrypt.service';
 import { Subscription } from 'rxjs';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-admin-forms',
@@ -27,7 +28,7 @@ export class AdminFormsComponent implements OnInit {
   selectedCategory: any;
   private subscription!: Subscription;
 
-  constructor(private _formBuilder: FormBuilder,private router: Router,private route: ActivatedRoute, private dataService: AdminService, private sidenavService: UpdateService,private cookieService: CookieService, private EncryptService: EncryptService) { }
+  constructor(private snackBar : MatSnackBar, private _formBuilder: FormBuilder,private router: Router,private route: ActivatedRoute, private dataService: AdminService, private sidenavService: UpdateService,private cookieService: CookieService, private EncryptService: EncryptService) { }
 
   ngOnInit() {
     this.forms();
@@ -57,11 +58,15 @@ export class AdminFormsComponent implements OnInit {
           this.data = response;
         },
         (error) => {
-          console.error('Error fetching departments data:', error);
+          this.snackBar.open(`Error fetching departments data: ${error}`, 'Close', {
+            duration: 3000,
+          });
         }
       );
     } else {
-      console.warn('No Plant ID found.');
+      this.snackBar.open(`No Plant ID found.`, 'Close', {
+        duration: 3000,
+      });
     }
   }
 
@@ -75,7 +80,9 @@ export class AdminFormsComponent implements OnInit {
           this.dataSource = response;
         },
         (error) => {
-          error.error.error;
+          this.snackBar.open(error.error.error, 'Close', {
+            duration: 3000,
+          });
         }
       );
     } else {
@@ -145,11 +152,17 @@ export class AdminFormsComponent implements OnInit {
 
     if (this.firstFormGroup.valid && this.secondFormGroup.valid) {
       this.dataService.addForm(data).subscribe(
-        (response) => {          
-          console.log('Form created Successfully, Id:',response);
+        (response) => {     
+          this.snackBar.open(`Form created Successfully, Id: ${response}`, 'Close', {
+            duration: 3000,
+          });     
+          console.log('',response);
         },
         (error) => {
-          console.error('Error creating form:', error);
+          this.snackBar.open(`Error creating form: ${error}`, 'Close', {
+            duration: 3000,
+          });
+          console.error('', error);
         }
       );
     } else {

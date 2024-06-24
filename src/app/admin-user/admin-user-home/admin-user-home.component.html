@@ -33,7 +33,7 @@
                 </div>
                 <div class="mt-1 update-flex">
                   <button mat-button style="color:#135c18;" (click)="updateToggleSidenav(card,'updatePlant');$event.stopPropagation()">Update</button>
-                  <button mat-button color="warn" (click)="$event.stopPropagation()">Delete</button>
+                  <button mat-button color="warn" (click)="$event.stopPropagation();deletePlant(card.plant_id)">Delete</button>
                 </div>
               </div>
             </mat-card-content>

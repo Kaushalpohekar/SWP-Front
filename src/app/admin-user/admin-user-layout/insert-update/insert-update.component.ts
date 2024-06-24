@@ -7,6 +7,7 @@ import { AdminService } from '../../adminService/admin.service';
 import { Router, NavigationEnd } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
 import { filter } from 'rxjs/operators';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-insert-update',
@@ -27,6 +28,7 @@ export class InsertUpdateComponent implements OnInit {
   cardsData:any;
 
   constructor(
+    private snackBar : MatSnackBar,
     private router: Router,
     private breakpointObserver: BreakpointObserver,
     private dataService: AdminService,
@@ -157,11 +159,15 @@ export class InsertUpdateComponent implements OnInit {
           this.data = response;
         },
         (error) => {
-          console.error('Error fetching departments data:', error);
+          this.snackBar.open(`Error fetching departments data: ${error}`, 'Close', {
+            duration: 3000,
+          });
         }
       );
     } else {
-      console.warn('No Plant ID found.');
+      this.snackBar.open(`No Plant ID found.`, 'Close', {
+        duration: 3000,
+      });
     }
   }
 
@@ -171,7 +177,9 @@ export class InsertUpdateComponent implements OnInit {
         this.rolesData = response;
       },
       (error) => {
-        console.error('Error fetching user Roles:', error);
+        this.snackBar.open(`Error fetching user Roles: ${error}`, 'Close', {
+          duration: 3000,
+        });
       }
     );
   }
@@ -181,12 +189,16 @@ export class InsertUpdateComponent implements OnInit {
       const id = this.cardsData.data.organization_id;
       this.dataService.addPlant(id,this.plantForm.value).subscribe(
         () => {
-          console.log('Plant added successfully.')
+          this.snackBar.open(`Plant added successfully.`, 'Close', {
+            duration: 3000,
+          });
           this.plantForm.reset();
           this.dataService.notifyPlantChange();
         },
         (error) => {
-          console.error('Error adding plants data:', error);
+          this.snackBar.open(`Error adding plants data:`, 'Close', {
+            duration: 3000,
+          });
         }
       );      
     }
@@ -194,15 +206,21 @@ export class InsertUpdateComponent implements OnInit {
       const id = this.cardsData.data.plant_id;
       this.dataService.updatePlant(id,this.plantForm.value).subscribe(
         () => {
-          console.log('Plant Updated successfully.')
+          this.snackBar.open(`Plant Updated successfully.`, 'Close', {
+            duration: 3000,
+          });
           this.dataService.notifyPlantChange();
         },
         (error) => {
-          console.error('Error updating plants data:', error);
+          this.snackBar.open(`Error updating plants data: ${error}`, 'Close', {
+            duration: 3000,
+          });
         }
       );
     }else {
-      console.log('Please fill all required parameters.')
+      this.snackBar.open(`Please fill all required parameters.`, 'Close', {
+        duration: 3000,
+      });
     }
   }
 
@@ -211,12 +229,17 @@ export class InsertUpdateComponent implements OnInit {
       const id = this.cardsData.data;
       this.dataService.addDepartment(id,this.departmentForm.value).subscribe(
         () => {
-          console.log('Department added successfully.')
+          this.snackBar.open(`Department added successfully.`, 'Close', {
+            duration: 3000,
+          });
           this.departmentForm.reset();
           this.dataService.notifyDepartmentChange();
         },
         (error) => {
-          console.error('Error adding departments data:', error);
+          this.snackBar.open(`Error adding departments data: ${error}`, 'Close', {
+            duration: 3000,
+          });
+          console.error('', error);
         }
       );      
     }
@@ -224,15 +247,21 @@ export class InsertUpdateComponent implements OnInit {
       const id = this.cardsData.data.department_id;
       this.dataService.updateDepartment(id,this.departmentForm.value).subscribe(
         () => {
-          console.log('Department Updated successfully.')
+          this.snackBar.open(`Department Updated successfully.`, 'Close', {
+            duration: 3000,
+          });
           this.dataService.notifyDepartmentChange();
         },
         (error) => {
-          console.error('Error updating departments data:', error);
+          this.snackBar.open(`Error updating departments data: ${error}`, 'Close', {
+            duration: 3000,
+          });
         }
       );
     }else {
-      console.log('Please fill all required parameters.')
+      this.snackBar.open(`Please fill all required parameters.`, 'Close', {
+        duration: 3000,
+      });
     }
   }
 
@@ -240,12 +269,16 @@ export class InsertUpdateComponent implements OnInit {
     if(this.cardsData.type=='addUser' && this.userForm.valid){
       this.dataService.addUser(this.userForm.value).subscribe(
         () => {
-          console.log('User added successfully.')
+          this.snackBar.open(`User added successfully.`, 'Close', {
+            duration: 3000,
+          });
           this.userForm.reset();
           this.dataService.notifyDepartmentChange();
         },
         (error) => {
-          console.error('Error adding user data:', error);
+          this.snackBar.open(`Error adding user data: ${error}`, 'Close', {
+            duration: 3000,
+          });
         }
       );      
     }
@@ -253,15 +286,21 @@ export class InsertUpdateComponent implements OnInit {
       const id = this.cardsData.data.user_id;
       this.dataService.updateUser(id,this.userForm.value).subscribe(
         () => {
-          console.log('User Updated successfully.')
+          this.snackBar.open(`User Updated successfully.`, 'Close', {
+            duration: 3000,
+          });
           this.dataService.notifyDepartmentChange();
         },
         (error) => {
-          console.error('Error updating user data:', error);
+          this.snackBar.open(`Error updating user data: ${error}`, 'Close', {
+            duration: 3000,
+          });
         }
       );
     }else {
-      console.log('Please fill all required parameters.')
+      this.snackBar.open(`Please fill all required parameters.`, 'Close', {
+        duration: 3000,
+      });
     }
   }
 
@@ -270,16 +309,22 @@ export class InsertUpdateComponent implements OnInit {
       const id = this.cardsData.data;
       this.dataService.addCategory(id,this.categoryForm.value).subscribe(
         () => {
-          console.log('Category added successfully.')
+          this.snackBar.open(`Category added successfully.`, 'Close', {
+            duration: 3000,
+          });
           this.categoryForm.reset();
           this.dataService.notifyCategoryChange();
         },
         (error) => {
-          console.error('Error adding Category data:', error);
+          this.snackBar.open(`Error adding Category data: ${error}`, 'Close', {
+            duration: 3000,
+          });
         }
       );      
     }else {
-      console.log('Please fill all required parameters.')
+      this.snackBar.open(`Please fill all required parameters.`, 'Close', {
+        duration: 3000,
+      });
     }
   }
 }
