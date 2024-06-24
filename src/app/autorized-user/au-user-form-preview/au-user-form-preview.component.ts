@@ -9,7 +9,7 @@ import html2canvas from 'html2canvas';
 import { DatePipe } from '@angular/common';
 import { AuUserApproveComponent } from '../au-user-approve/au-user-approve.component';
 import { AuUserRejectComponent } from '../au-user-reject/au-user-reject.component';
-
+import { ImageComponent } from '../../image/image.component';
 
 @Component({
   selector: 'app-au-user-form-preview',
@@ -101,6 +101,13 @@ export class AuUserFormPreviewComponent implements OnInit{
     });
   }
 
+  openImage(data: string) : void{
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.data = { data };
+    const dialogRef = this.dialog.open(ImageComponent, dialogConfig);
+    dialogRef.afterClosed().subscribe(result => {});
+  }
+  
   private handleError(message: string) {
     this.snackBar.open(message, 'Close', {
       duration: 3000,

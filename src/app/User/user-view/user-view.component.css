@@ -231,3 +231,16 @@
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 }
+
+.answer{
+    font-size: 0.9rem;
+    font-weight: 550;
+}
+
+.upload-text{
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    cursor: pointer;
+    color: blue;
+}

@@ -182,6 +182,7 @@
 									</div>
 
 									<div *ngIf="question.question_type === 'upload'" class="upload-container" (drop)="handleDrop($event, question)" (dragover)="handleDragOver($event)">
+										<div class="question-upload">File Should be JPG, PNG, & JPEG and within 5MB only.</div>
 										<input type="file" id="file-upload-{{question.question_id}}" class="input-file" (change)="displayFileName($event, question)">
 										<div class="text-center">
 											<mat-icon>upload</mat-icon>

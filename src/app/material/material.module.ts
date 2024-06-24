@@ -41,6 +41,7 @@ import { EditContactComponent } from '../edit-contact/edit-contact.component';
 import { ChangeProfileComponent } from '../change-profile/change-profile.component';
 import { ContactAdminComponent } from '../contact-admin/contact-admin.component';
 import { RaiseAnIssueComponent } from '../raise-an-issue/raise-an-issue.component';
+import { ImageComponent } from '../image/image.component';
 
 @NgModule({
   declarations: [
@@ -52,7 +53,8 @@ import { RaiseAnIssueComponent } from '../raise-an-issue/raise-an-issue.componen
     EditContactComponent,
     ChangeProfileComponent,
     ContactAdminComponent,
-    RaiseAnIssueComponent
+    RaiseAnIssueComponent,
+    ImageComponent
   ],
   imports: [
     CommonModule,
@@ -130,7 +132,8 @@ import { RaiseAnIssueComponent } from '../raise-an-issue/raise-an-issue.componen
     EditContactComponent,
     ChangeProfileComponent,
     ContactAdminComponent,
-    RaiseAnIssueComponent
+    RaiseAnIssueComponent,
+    ImageComponent
   ]
 })
 export class MaterialModule { }

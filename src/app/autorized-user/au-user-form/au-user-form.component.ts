@@ -121,9 +121,6 @@ export class AuUserFormComponent implements OnInit {
   }
 
   private applyFilters(): void {
-    console.log('Applying filters');
-    console.log('Original Forms:', this.originalForms);
-    console.log('Selected Sort:', this.selectedSort);
 
     let filteredForms = [...this.originalForms];
 
@@ -143,8 +140,6 @@ export class AuUserFormComponent implements OnInit {
         // No additional filtering needed for 'total'
         break;
     }
-
-    console.log('Filtered Forms:', filteredForms);
     this.forms = filteredForms;
   }
 

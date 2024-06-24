@@ -66,7 +66,7 @@
 	                            </div>           
 	                        </div>
 	                        <div class="row mb-3">
-	                            <div class="col-5">
+	                            <div class="col-lg-5 col-md-12 col-sm-12 mb-2">
 	                                <div class="card card-box">
 	                                    <div class="box-header">LOCATION OF WORK</div>
 	                                    <div class="card-body">
@@ -80,7 +80,7 @@
 	                                </div>
 	                            </div>
 
-	                            <div class="col-7">
+	                            <div class="col-lg-7 col-md-12 col-sm-12 mb-2">
 	                                <div class="card card-box">
 	                                    <div class="box-header">DURATION OF WORK</div>
 	                                    <div class="card-body card-box-line-2">
@@ -115,7 +115,7 @@
 	                                                </div>
 	                                                <div class="col-lg-2 col-md-3 col-sm-12">
 	                                                    <div class="d-flex align-items-center justify-content-center">
-	                                                        <div *ngFor="let option of question.options; let i = index" class="multipleChoice-box" [ngClass]="{'true': question.answer === option}">{{ option }}</div>
+	                                                        <div class="answer" *ngFor="let option of question.options; let i = index" class="multipleChoice-box" [ngClass]="{'true': question.answer === option}">{{ option }}</div>
 	                                                    </div>
 	                                                </div>
 	                                            </div>
@@ -123,7 +123,7 @@
 	                                                <div class="col-lg-10 col-md-9 col-sm-12 d-flex align-items-center">
 	                                                    <div class="worker-name">{{ question.questionText }}</div>
 	                                                </div>
-	                                                <div class="col-lg-2 col-md-3 col-sm-12">
+	                                                <div class="col-lg-2 col-md-3 col-sm-12 answer">
 	                                                    {{ question.answer }}
 	                                                </div>
 	                                            </div>
@@ -132,7 +132,7 @@
 																								    <div class="worker-name">{{ question.questionText }}</div>
 																								</div>
 																								<div class="col-lg-2 col-md-3 col-sm-12">
-																								    <div *ngFor="let option of question.answer.split(':'); let i = index" [ngClass]="{'correct-answer': question.answer.includes(option)}">
+																								    <div class="answer" *ngFor="let option of question.answer.split(':'); let i = index" [ngClass]="{'correct-answer': question.answer.includes(option)}">
 																								        <span>{{ option }}</span>
 																								    </div>
 																								</div>
@@ -142,8 +142,8 @@
 	                                                <div class="col-lg-10 col-md-9 col-sm-12 d-flex align-items-center">
 	                                                    <div class="worker-name">{{ question.questionText }}</div>
 	                                                </div>
-	                                                <div class="col-lg-2 col-md-3 col-sm-12">
-	                                                    {{ question.answer}}
+	                                                <div class="col-lg-2 col-md-3 col-sm-12 answer upload-text" (click)="openImage(question.attachment.data)">
+	                                                    {{ question.attachment.fileName}}
 	                                                </div>
 	                                            </div>
 	                                            <hr *ngIf="!last" style="margin-top: 5px; margin-bottom: 5px;">
@@ -204,16 +204,10 @@
 	                            </div>
 	                        </div>
 	                    </div>
+	                    <
 	                </div>
 	            </div>
 	        </div>
 	    </div>
-	    <!-- <div class="row mb-3">
-	        <div class="col-12 text-end mb-2">
-	            <button class="button-approved">Approve</button>
-	            <button class="button-approved">Reject</button>
-	            <button class="button-approved">Print</button>
-	        </div>
-	    </div> -->
 	</div>
 </div>

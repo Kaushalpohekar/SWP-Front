@@ -6,6 +6,8 @@ import { LoadingService } from '../../service/loading.service';
 import { jsPDF } from 'jspdf';
 import html2canvas from 'html2canvas';
 import { DatePipe } from '@angular/common';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { ImageComponent } from '../../image/image.component';
 
 @Component({
   selector: 'app-user-view',
@@ -21,7 +23,8 @@ export class UserViewComponent implements OnInit {
     private route: ActivatedRoute,
     private snackBar: MatSnackBar,
     public loadingService: LoadingService,
-    private datePipe: DatePipe
+    private datePipe: DatePipe,
+    public dialog: MatDialog,
   ) {}
 
   ngOnInit(): void {
@@ -75,6 +78,13 @@ export class UserViewComponent implements OnInit {
     this.snackBar.open(message, 'Close', {
       duration: 3000,
     });
+  }
+
+  openImage(data: string) : void{
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.data = { data };
+    const dialogRef = this.dialog.open(ImageComponent, dialogConfig);
+    dialogRef.afterClosed().subscribe(result => {});
   }
 
   formatDate(dateString: string): string {

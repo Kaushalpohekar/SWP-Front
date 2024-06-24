@@ -1,1 +1,58 @@
-<p>edit-contact works!</p>
+<div class="container dialog" [formGroup]="editForm">
+  <div class="row pt-2 mb-4" [@fadeInOutPassword]>
+    <div class="col-12 mb-3">
+      <div class="dialog-title">
+        Edit Your ContactDetails
+      </div>
+    </div>
+    <div class="col-12 mb-3">
+      <div class="custom-form-input">
+        <label class="label">Personal Email:</label>
+        <input type="text" formControlName="personal_email" placeholder="Personal Email" />
+        <div class="error-msg" *ngIf="editForm.get('personal_email')?.invalid && (editForm.get('personal_email')?.dirty || editForm.get('personal_email')?.touched)">
+          {{ getErrorMessage('personal_email') }}
+        </div>
+      </div>
+    </div>
+    <div class="col-12 mb-3">
+      <div class="custom-form-input">
+        <label class="label">Company Email:</label>
+        <input type="text" formControlName="company_email" placeholder="Company Email" />
+        <div class="error-msg" *ngIf="editForm.get('company_email')?.invalid && (editForm.get('company_email')?.dirty || editForm.get('company_email')?.touched)">
+          {{ getErrorMessage('company_email') }}
+        </div>
+      </div>
+    </div>
+    <div class="col-12 mb-3">
+      <div class="custom-form-input">
+        <label class="label">Contact Number:</label>
+        <input type="text" formControlName="contact_no" placeholder="Contact Number" />
+        <div class="error-msg" *ngIf="editForm.get('contact_no')?.invalid && (editForm.get('contact_no')?.dirty || editForm.get('contact_no')?.touched)">
+          {{ getErrorMessage('contact_no') }}
+        </div>
+      </div>
+    </div>
+    <div class="col-12">
+      <div class="container">
+        <div class="row">
+          <div class="col-6">
+            <button mat-raised-button class="dialog-button" (click)="onNoClick()">
+              <ng-container *ngIf="(isLoading$ | async); else cancelLabel">
+                <app-spinner></app-spinner>
+              </ng-container>
+              <ng-template #cancelLabel>Cancel</ng-template>
+            </button>
+          </div>
+          <div class="col-6">
+            <button mat-raised-button class="dialog-button success-button" (click)="onSaveClick()" [disabled]="!editForm.valid || (isLoading$ | async)">
+              <ng-container *ngIf="(isLoading$ | async); else approveLabel">
+                <app-spinner></app-spinner>
+              </ng-container>
+              <ng-template #approveLabel>Save</ng-template>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

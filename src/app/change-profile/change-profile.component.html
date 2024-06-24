@@ -1,1 +1,55 @@
-<p>change-profile works!</p>
+<div class="container dialog">
+  <div class="row pt-2 mb-4" [@fadeInOutPassword]>
+    <div class="col-12 mb-2">
+      <div class="dialog-title">
+        Update Profile Image
+      </div>
+    </div>
+    <div class="col-12 d-flex align-items-center justify-content-center mb-2">
+      <div class="profile-img-container">
+        <img *ngIf="profileImageUrl" [src]="profileImageUrl" class="profile-img" alt="Profile Image">
+        <div *ngIf="!profileImageUrl" class="clickable-area">
+          Click here to select an image
+        </div>
+      </div>
+    </div>
+    <div class="col-12 text-center mb-2">
+      <div class="sign sign-link" (click)="fileInput.click()">Upload New Profile</div>
+      <input type="file" #fileInput style="display:none" (change)="onFileSelected($event)" accept="image/*">
+    </div>
+    <div class="col-12 mb-2">
+		<div class="sign">
+			<p>Profile should meet the following criteria:</p>
+			<ul>
+				<li>Be in image format</li>
+				<li>Be properly horizontally aligned</li>
+				<li>Be in PNG, JPG, or JPEG format</li>
+				<li>Be less than 500 KB in size</li>
+				<li>Once the profile Picture gets updated then, try to refresh the Dashboard!</li>
+			</ul>
+			<ul class="sign-error" *ngIf="errorMessage">
+				<li>{{ errorMessage }}</li>
+			</ul>
+		</div>
+    </div>
+    <div class="col-12">
+      <div class="container">
+        <div class="row">
+          <div class="col-6">
+            <button mat-raised-button class="dialog-button" (click)="onNoClick()">
+              Cancel
+            </button>
+          </div>
+          <div class="col-6">
+            <button mat-raised-button class="dialog-button success-button" (click)="onSaveClick()" [disabled]="!profileImageFile">
+              <ng-container *ngIf="(isLoading$ | async); else approveLabel">
+                <app-spinner></app-spinner>
+              </ng-container>
+              <ng-template #approveLabel>Save</ng-template>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

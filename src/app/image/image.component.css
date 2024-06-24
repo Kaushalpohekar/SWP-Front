@@ -1,0 +1,38 @@
+.loading-container {
+  position: relative;
+  width: 50vw;
+  height: 50vh;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+.image-container {
+  position: relative;
+  width: 100%;
+  max-height: 80vh;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.image-wrapper {
+  width: 100%;
+  text-align: center; 
+}
+
+.image {
+  max-width: 100%;
+  max-height: 100%;
+  height: auto;
+}
+
+.close-button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  cursor: pointer;
+}

@@ -42,3 +42,8 @@
     background-color: #008554 !important;
     color: white !important;
 }
+
+.label{
+    font-size: 0.8rem;
+    font-weight: 550;
+}
