@@ -4,6 +4,7 @@ import { AdminService } from '../adminService/admin.service';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { UpdateService } from '../admin-user-layout/insert-update/service/update.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-admin-user',
@@ -13,9 +14,12 @@ import { UpdateService } from '../admin-user-layout/insert-update/service/update
 export class AdminUserComponent {
 
   data:any;
+  selectedDep:string="";
   noDataMsg!:string;
+  id!:string;
   displayedColumns: string[] = ['name','username','role','contact','action'];
   dataSource= new MatTableDataSource<any>();
+  private subscription!: Subscription;
 
   @ViewChild(MatPaginator, { static: true }) paginator!: MatPaginator;
 
@@ -24,8 +28,18 @@ export class AdminUserComponent {
   ngOnInit() {
     this.departmentsData();
     this.departmentsSelect("");
+
+    this.subscription = this.dataService.departmentChange$.subscribe(() => {
+      this.departmentsData();
+      if(this.selectedDep!=''){this.departmentsSelect(this.selectedDep);}
+    });
   }
 
+  ngOnDestroy() {
+    if (this.subscription) {
+      this.subscription.unsubscribe();
+    }
+  }
   
   updateToggleSidenav(data:any,type:string) {
     this.sidenavService.toggleSidenav();
@@ -33,9 +47,9 @@ export class AdminUserComponent {
   }
 
   departmentsData() {
-    const id = this.route.snapshot.paramMap.get('id');
-    if (id) {
-      this.dataService.departmentsData(id).subscribe(
+    this.id = this.route.snapshot.paramMap.get('id')??'';
+    if (this.id) {
+      this.dataService.departmentsData(this.id).subscribe(
         (response) => {
           this.data = response;
         },
@@ -49,6 +63,7 @@ export class AdminUserComponent {
   }
 
   departmentsSelect(data:any){
+    this.selectedDep=data;
     if(data){
       this.dataService.usersDataByDepartments(data.department_id).subscribe(
         (response) => {

@@ -3,6 +3,7 @@ import { AdminService } from '../adminService/admin.service';
 import { Router } from '@angular/router';
 import { UpdateService } from '../admin-user-layout/insert-update/service/update.service';
 import { CookieService } from 'ngx-cookie-service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-admin-user-home',
@@ -13,12 +14,23 @@ export class AdminUserHomeComponent implements OnInit {
 
   data: any;
   plantData: any;
+  private plantChangeSubscription!: Subscription;
 
   constructor(private service: AdminService, private router: Router, private sidenavService: UpdateService, private cookieService: CookieService) { }
 
   ngOnInit(): void {
     this.organizationData();
     this.plantsData();
+
+    this.plantChangeSubscription = this.service.plantChange$.subscribe(() => {
+      this.plantsData();
+    });
+  }
+
+  ngOnDestroy() {
+    if (this.plantChangeSubscription) {
+      this.plantChangeSubscription.unsubscribe();
+    }
   }
 
   updateToggleSidenav(data:any,type:string) {

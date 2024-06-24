@@ -24,6 +24,7 @@ export class InsertUpdateComponent implements OnInit {
   userForm!: FormGroup;
   categoryForm!: FormGroup;
   private currentType: string = '';
+  cardsData:any;
 
   constructor(
     private router: Router,
@@ -34,21 +35,21 @@ export class InsertUpdateComponent implements OnInit {
     private cookieService: CookieService
   ) {
     this.plantForm = this.fb.group({
-      plantName: ['', Validators.required],
-      plantLocation: ['', Validators.required]
+      name: ['', Validators.required],
+      location: ['', Validators.required]
     });
 
     this.departmentForm = this.fb.group({
-      departmentName: ['', Validators.required],
+      name: ['', Validators.required],
     });
 
     this.userForm = this.fb.group({
       personal_email: ['', Validators.required],
       first_name: ['', Validators.required],
       last_name: ['', Validators.required],
-      role: ['', Validators.required],
-      department: ['', Validators.required],
-      contact: ['', Validators.required],
+      role_id: ['', Validators.required],
+      department_id: ['', Validators.required],
+      contact_no: ['', Validators.required],
       password: ['', Validators.required]
     });
 
@@ -74,6 +75,8 @@ export class InsertUpdateComponent implements OnInit {
     this.sidenavService.sidenavToggle$.subscribe(() => this.toggleSidenav());
     this.sidenavService.dataPassing$.subscribe(data => {
       this.handleNewData(data);
+      this.cardsData=data;
+      console.log(data);
     });
 
     // Listen to router events to close sidenav on route change
@@ -117,8 +120,8 @@ export class InsertUpdateComponent implements OnInit {
 
   handlePlantFormData(data: any) {
     this.plantForm.patchValue({
-      plantName: data.name,
-      plantLocation: data.location
+      name: data.name,
+      location: data.location
     });
   }
 
@@ -127,15 +130,15 @@ export class InsertUpdateComponent implements OnInit {
       personal_email: data.personal_email,
       first_name: data.first_name,
       last_name: data.last_name,
-      role: data.role_id,
-      department: data.department_id,
-      contact: data.contact_no
+      role_id: data.role_id,
+      department_id: data.department_id,
+      contact_no: data.contact_no
     });
   }
 
   handleDepartmentFormData(data: any) {
     this.departmentForm.patchValue({
-      departmentName: data.name,
+      name: data.name,
     });
   }
 
@@ -171,5 +174,112 @@ export class InsertUpdateComponent implements OnInit {
         console.error('Error fetching user Roles:', error);
       }
     );
+  }
+
+  submitPlant(){
+    if(this.cardsData.type=='insertPlant' && this.plantForm.valid){
+      const id = this.cardsData.data.organization_id;
+      this.dataService.addPlant(id,this.plantForm.value).subscribe(
+        () => {
+          console.log('Plant added successfully.')
+          this.plantForm.reset();
+          this.dataService.notifyPlantChange();
+        },
+        (error) => {
+          console.error('Error adding plants data:', error);
+        }
+      );      
+    }
+    else if (this.cardsData.type=='updatePlant' && this.plantForm.valid){
+      const id = this.cardsData.data.plant_id;
+      this.dataService.updatePlant(id,this.plantForm.value).subscribe(
+        () => {
+          console.log('Plant Updated successfully.')
+          this.dataService.notifyPlantChange();
+        },
+        (error) => {
+          console.error('Error updating plants data:', error);
+        }
+      );
+    }else {
+      console.log('Please fill all required parameters.')
+    }
+  }
+
+  submitDepartment(){
+    if(this.cardsData.type=='addDepartment' && this.departmentForm.valid){
+      const id = this.cardsData.data;
+      this.dataService.addDepartment(id,this.departmentForm.value).subscribe(
+        () => {
+          console.log('Department added successfully.')
+          this.departmentForm.reset();
+          this.dataService.notifyDepartmentChange();
+        },
+        (error) => {
+          console.error('Error adding departments data:', error);
+        }
+      );      
+    }
+    else if (this.cardsData.type=='editDepartment' && this.departmentForm.valid){
+      const id = this.cardsData.data.department_id;
+      this.dataService.updateDepartment(id,this.departmentForm.value).subscribe(
+        () => {
+          console.log('Department Updated successfully.')
+          this.dataService.notifyDepartmentChange();
+        },
+        (error) => {
+          console.error('Error updating departments data:', error);
+        }
+      );
+    }else {
+      console.log('Please fill all required parameters.')
+    }
+  }
+
+  submitUser(){
+    if(this.cardsData.type=='addUser' && this.userForm.valid){
+      this.dataService.addUser(this.userForm.value).subscribe(
+        () => {
+          console.log('User added successfully.')
+          this.userForm.reset();
+          this.dataService.notifyDepartmentChange();
+        },
+        (error) => {
+          console.error('Error adding user data:', error);
+        }
+      );      
+    }
+    else if (this.cardsData.type=='editUser'&& this.userForm.get('personal_email')?.valid && this.userForm.get('first_name')?.valid && this.userForm.get('last_name')?.valid && this.userForm.get('role_id')?.valid && this.userForm.get('department_id')?.valid && this.userForm.get('contact_no')?.valid){
+      const id = this.cardsData.data.user_id;
+      this.dataService.updateUser(id,this.userForm.value).subscribe(
+        () => {
+          console.log('User Updated successfully.')
+          this.dataService.notifyDepartmentChange();
+        },
+        (error) => {
+          console.error('Error updating user data:', error);
+        }
+      );
+    }else {
+      console.log('Please fill all required parameters.')
+    }
+  }
+
+  submitCategory(){
+    if(this.cardsData.type=='addCategory' && this.categoryForm.valid){
+      const id = this.cardsData.data;
+      this.dataService.addCategory(id,this.categoryForm.value).subscribe(
+        () => {
+          console.log('Category added successfully.')
+          this.categoryForm.reset();
+          this.dataService.notifyCategoryChange();
+        },
+        (error) => {
+          console.error('Error adding Category data:', error);
+        }
+      );      
+    }else {
+      console.log('Please fill all required parameters.')
+    }
   }
 }

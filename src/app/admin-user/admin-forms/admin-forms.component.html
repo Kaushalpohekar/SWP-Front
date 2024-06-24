@@ -2,7 +2,7 @@
     <div class="row pt-2 mb-2">
         <div class="outer-card card-flex">
             <h2 class="mt-2">Categories</h2>
-            <button mat-icon-button (click)="updateToggleSidenav('','addCategory')">
+            <button mat-icon-button (click)="updateToggleSidenav(id,'addCategory')">
               <mat-icon>add</mat-icon>
             </button>
         </div>
@@ -89,11 +89,11 @@
                                   <mat-form-field appearance="outline" class="from-feild">
                                     <mat-label>Type of Question {{i+1}}</mat-label>
                                     <mat-select placeholder="Question Type" formControlName="QuestionType">
-                                      <mat-option value="multiple">Multiple Choice</mat-option>
-                                      <mat-option value="long">Long Answer</mat-option>
-                                      <mat-option value="select">Select Answer</mat-option>
-                                      <mat-option value="short">Short Answer</mat-option>
-                                      <mat-option value="radio">Check Box</mat-option>
+                                      <mat-option value="multipleChoice">Multiple Choice</mat-option>
+                                      <mat-option value="longAnswer">Long Answer</mat-option>
+                                      <mat-option value="selectAnswer">Select Answer</mat-option>
+                                      <mat-option value="shortAnswer">Short Answer</mat-option>
+                                      <mat-option value="checkbox">Check Box</mat-option>
                                       <mat-option value="upload">Upload</mat-option>
                                     </mat-select>
                                     <mat-icon matSuffix>view_headline</mat-icon>

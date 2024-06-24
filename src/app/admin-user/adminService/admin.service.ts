@@ -4,14 +4,34 @@ import { Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
 import { environment } from 'src/environments/environment';
 import { EncryptService } from 'src/app/Authentication/AuthService/encrypt.service';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AdminService {
   private apiUrl = environment.apiUrl;
-  private cardData: any;
+
+  private plantChangeSubject = new Subject<void>();
+  plantChange$ = this.plantChangeSubject.asObservable();
+
+  private departmentChangeSubject = new Subject<void>();
+  departmentChange$ = this.departmentChangeSubject.asObservable();
+
+  private categoryChangeSubject = new Subject<void>();
+  categoryChange$ = this.categoryChangeSubject.asObservable();
+
+  notifyPlantChange() {
+    this.plantChangeSubject.next();
+  }
+
+  notifyCategoryChange() {
+    this.categoryChangeSubject.next();
+  }
+
+  notifyDepartmentChange() {
+    this.departmentChangeSubject.next();
+  }
 
   constructor(private http: HttpClient, private router: Router, private cookieService: CookieService, private encryptService: EncryptService) {}
 
@@ -59,5 +79,41 @@ export class AdminService {
 
   addForm(data: any): Observable<any> {
     return this.http.post(`${this.apiUrl}/addForm`, data);
+  }
+
+  addPlant(id:string,data: any): Observable<any> {
+    return this.http.post(`${this.apiUrl}/addPlant/${id}`, data);
+  }
+
+  addUser(data: any): Observable<any> {
+    return this.http.post(`${this.apiUrl}/addUser`, data);
+  }
+
+  addDepartment(id:string,data: any): Observable<any> {
+    return this.http.post(`${this.apiUrl}/addDepartment/${id}`, data);
+  }
+
+  addCategory(id:string,data: any): Observable<any> {
+    return this.http.post(`${this.apiUrl}/addCategory/${id}`, data);
+  }
+  
+  updatePlant(id:string,data: any): Observable<any> {
+    return this.http.put(`${this.apiUrl}/updatePlant/${id}`, data);
+  }
+
+  updateUser(id:string,data: any): Observable<any> {
+    return this.http.put(`${this.apiUrl}/updateUser/${id}`, data);
+  }
+
+  updateDepartment(id:string,data: any): Observable<any> {
+    return this.http.put(`${this.apiUrl}/updateDepartment/${id}`, data);
+  }
+  
+  deletePlant(id:string): Observable<any> {
+    return this.http.delete(`${this.apiUrl}/deletePlant/${id}`);
+  }
+  
+  deleteDepartment(id:string): Observable<any> {
+    return this.http.delete(`${this.apiUrl}/deleteDepartment/${id}`);
   }
 }
