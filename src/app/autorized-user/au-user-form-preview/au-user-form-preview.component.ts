@@ -42,7 +42,9 @@ export class AuUserFormPreviewComponent implements OnInit{
 
     this.dataService.getSubmissionDetails(submission_id).subscribe(
       (data) => {
+        data.questions.sort((a: any, b: any) => a.questionText.localeCompare(b.questionText));
         this.data = data;
+        console.log(this.data);
         this.loadingService.isPageLoading(false); // Turn off loading when data is successfully fetched
       },
       (error) => {

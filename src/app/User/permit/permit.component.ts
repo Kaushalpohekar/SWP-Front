@@ -37,6 +37,7 @@ export class PermitComponent implements OnInit {
       this.loadingService.isPageLoading(true);
       this.loadInitialData();
       this.cards = [];
+      this.counts = {};
     });
   }
 

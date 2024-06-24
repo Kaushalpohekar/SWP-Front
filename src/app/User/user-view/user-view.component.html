@@ -113,11 +113,14 @@
 	                                                <div class="col-lg-10 col-md-9 col-sm-12 d-flex align-items-center">
 	                                                    <div class="worker-name">{{ question.questionText }}</div>
 	                                                </div>
-	                                                <div class="col-lg-2 col-md-3 col-sm-12">
+	                                                <!-- <div class="col-lg-2 col-md-3 col-sm-12">
 	                                                    <div class="d-flex align-items-center justify-content-center">
 	                                                        <div class="answer" *ngFor="let option of question.options; let i = index" class="multipleChoice-box" [ngClass]="{'true': question.answer === option}">{{ option }}</div>
 	                                                    </div>
-	                                                </div>
+	                                                </div> -->
+	                                                <div class="col-lg-2 col-md-3 col-sm-12 answer">
+                                                        {{ question.answer }}
+                                                    </div>
 	                                            </div>
 	                                            <div class="row" *ngIf="question.questionType === 'shortAnswer' || question.questionType === 'longAnswer' || question.questionType === 'selectAnswer'">
 	                                                <div class="col-lg-10 col-md-9 col-sm-12 d-flex align-items-center">
@@ -204,7 +207,6 @@
 	                            </div>
 	                        </div>
 	                    </div>
-	                    <
 	                </div>
 	            </div>
 	        </div>
