@@ -5,6 +5,8 @@ import { AdminService } from '../adminService/admin.service';
 import { UpdateService } from '../admin-user-layout/insert-update/service/update.service';
 import { CookieService } from 'ngx-cookie-service';
 import { EncryptService } from '../../Authentication/AuthService/encrypt.service';
+import { Subscription } from 'rxjs';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-admin-forms',
@@ -14,6 +16,7 @@ import { EncryptService } from '../../Authentication/AuthService/encrypt.service
 export class AdminFormsComponent implements OnInit {
 
   isLinear = true;
+  id:string="";
   firstFormGroup!: FormGroup;
   secondFormGroup!: FormGroup;
   numberOfQuestions = 0;
@@ -23,12 +26,23 @@ export class AdminFormsComponent implements OnInit {
   categorySelected:boolean=false;
   activeCard: any = null;
   selectedCategory: any;
+  private subscription!: Subscription;
 
-  constructor(private _formBuilder: FormBuilder,private router: Router,private route: ActivatedRoute, private dataService: AdminService, private sidenavService: UpdateService,private cookieService: CookieService, private EncryptService: EncryptService) { }
+  constructor(private snackBar : MatSnackBar, private _formBuilder: FormBuilder,private router: Router,private route: ActivatedRoute, private dataService: AdminService, private sidenavService: UpdateService,private cookieService: CookieService, private EncryptService: EncryptService) { }
 
   ngOnInit() {
     this.forms();
     this.categoriesData();
+
+    this.subscription = this.dataService.categoryChange$.subscribe(() => {
+      this.categoriesData();
+    });
+  }
+  
+  ngOnDestroy() {
+    if (this.subscription) {
+      this.subscription.unsubscribe();
+    }
   }
 
   updateToggleSidenav(data:any,type:string) {
@@ -37,18 +51,22 @@ export class AdminFormsComponent implements OnInit {
   }
 
   categoriesData() {
-    const id = this.route.snapshot.paramMap.get('dep_id');
-    if (id) {
-      this.dataService.categoriesData(id).subscribe(
+    this.id = this.route.snapshot.paramMap.get('dep_id')??'';
+    if (this.id) {
+      this.dataService.categoriesData(this.id).subscribe(
         (response) => {
           this.data = response;
         },
         (error) => {
-          console.error('Error fetching departments data:', error);
+          this.snackBar.open(`Error fetching departments data: ${error}`, 'Close', {
+            duration: 3000,
+          });
         }
       );
     } else {
-      console.warn('No Plant ID found.');
+      this.snackBar.open(`No Plant ID found.`, 'Close', {
+        duration: 3000,
+      });
     }
   }
 
@@ -62,7 +80,9 @@ export class AdminFormsComponent implements OnInit {
           this.dataSource = response;
         },
         (error) => {
-          error.error.error;
+          this.snackBar.open(error.error.error, 'Close', {
+            duration: 3000,
+          });
         }
       );
     } else {
@@ -132,11 +152,17 @@ export class AdminFormsComponent implements OnInit {
 
     if (this.firstFormGroup.valid && this.secondFormGroup.valid) {
       this.dataService.addForm(data).subscribe(
-        (response) => {          
-          console.log('Form created Successfully, Id:',response);
+        (response) => {     
+          this.snackBar.open(`Form created Successfully, Id: ${response}`, 'Close', {
+            duration: 3000,
+          });     
+          console.log('',response);
         },
         (error) => {
-          console.error('Error creating form:', error);
+          this.snackBar.open(`Error creating form: ${error}`, 'Close', {
+            duration: 3000,
+          });
+          console.error('', error);
         }
       );
     } else {

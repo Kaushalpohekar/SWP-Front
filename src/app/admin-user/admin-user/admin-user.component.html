@@ -2,7 +2,7 @@
     <div class="row pt-2 mb-2">
         <div class="outer-card card-flex">
             <h2 class="mt-2">Departments</h2>
-            <button mat-icon-button (click)="updateToggleSidenav('','addDepartment')">
+            <button mat-icon-button (click)="updateToggleSidenav(id,'addDepartment')">
               <mat-icon>add</mat-icon>
             </button>
         </div>
@@ -20,7 +20,7 @@
                             <div class="mt-2 update-flex">
                                 <button mat-button color="primary" style="margin-right: -5px;" (click)="$event.stopPropagation();viewForms(card)">Forms</button>
                                 <button mat-button style="color:#135c18;margin-right: -5px;" (click)="$event.stopPropagation();updateToggleSidenav(card,'editDepartment')">Update</button>
-                                <button mat-button color="warn" style="margin-right: -5px;" (click)="$event.stopPropagation()">Delete</button>
+                                <button mat-button color="warn" style="margin-right: -5px;" (click)="$event.stopPropagation();deleteDepartment(card.department_id)">Delete</button>
                             </div>
                         </div>
                     </div>
@@ -65,7 +65,7 @@
                                 <button mat-icon-button color="dark" style="white-space: nowrap;" (click)="updateToggleSidenav(element,'editUser')">
                                   <mat-icon>edit</mat-icon>
                                 </button>
-                                <button mat-icon-button color="dark" style="white-space: nowrap;">
+                                <button (click)="deleteUser(element.user_id)" mat-icon-button color="dark" style="white-space: nowrap;">
                                   <mat-icon style="margin-right: 5px;">delete</mat-icon>
                                 </button>
                               </td>
