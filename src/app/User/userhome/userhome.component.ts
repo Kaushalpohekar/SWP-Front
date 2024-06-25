@@ -155,7 +155,8 @@ export class UserhomeComponent implements OnInit {
 
   formatDate(dateString: string): string {
     const date = new Date(dateString);
-    date.setMinutes(date.getMinutes() + 330);
+    // date.setMinutes(date.getMinutes() + 330);
+    date.setMinutes(date.getMinutes());
     const formattedDate = this.datePipe.transform(date, 'MMM d, y hh:mm a');
     return formattedDate ?? 'Invalid Date';
   }
