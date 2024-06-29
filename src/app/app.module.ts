@@ -23,7 +23,7 @@ import { RouterModule } from '@angular/router';
     MaterialModule,
     HttpClientModule,
     OverlayModule,
-    RouterModule // Import RouterModule
+    RouterModule
   ],
   providers: [
     { provide: LocationStrategy, useClass: HashLocationStrategy } // Provide HashLocationStrategy

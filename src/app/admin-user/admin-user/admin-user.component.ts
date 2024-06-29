@@ -57,7 +57,7 @@ export class AdminUserComponent {
           this.departmentsSelect(this.selectedDep);          
         },
         (error) => {
-          this.snackBar.open(`Error while deleting plant: ${error}`, 'Close', {
+          this.snackBar.open(`Error while deleting plant: ${error.error.error}`, 'Close', {
             duration: 3000,
           });
         }
@@ -85,7 +85,7 @@ export class AdminUserComponent {
           this.departmentsData();
         },
         (error) => {
-          this.snackBar.open(`Error while deleting Department: ${error}`, 'Close', {
+          this.snackBar.open(`Error while deleting Department: ${error.error.error}`, 'Close', {
             duration: 3000,
           });
         }
@@ -112,7 +112,7 @@ export class AdminUserComponent {
           this.data = response;
         },
         (error) => {
-          this.snackBar.open(`Error fetching departments data: ${error}`, 'Close', {
+          this.snackBar.open(`Error fetching departments data: ${error.error.error}`, 'Close', {
             duration: 3000,
           });
         }

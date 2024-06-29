@@ -54,7 +54,7 @@ export class AdminUserHomeComponent implements OnInit {
           this.plantsData();
         },
         (error) => {
-          this.snackBar.open(`Error while deleting plant:${error}` ,'Close', {
+          this.snackBar.open(`Error while deleting plant:${error.error.error}` ,'Close', {
             duration: 3000,
           });
           console.error();
@@ -77,7 +77,7 @@ export class AdminUserHomeComponent implements OnInit {
           this.data = response[0];
         },
         (error) => {
-          this.snackBar.open(`Error fetching organization data: ${error}`, 'Close', {
+          this.snackBar.open(`Error fetching organization data: ${error.error.error}`, 'Close', {
             duration: 3000,
           });
         }
@@ -97,7 +97,7 @@ export class AdminUserHomeComponent implements OnInit {
           this.plantData = response;
         },
         (error) => {
-          this.snackBar.open(`Error fetching plants data: ${error}`, 'Close', {
+          this.snackBar.open(`Error fetching plants data: ${error.error.error}`, 'Close', {
             duration: 3000,
           });
         }

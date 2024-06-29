@@ -1,7 +1,7 @@
 <div class="container-fluid">
     <div class="row pt-2 mb-2">
         <div class="outer-card card-flex">
-            <h2 class="mt-2">Categories</h2>
+            <div class="card-title mt-2">Categories</div>
             <button mat-icon-button (click)="updateToggleSidenav(id,'addCategory')">
               <mat-icon>add</mat-icon>
             </button>
@@ -34,7 +34,7 @@
             <mat-card style="border-radius: 5px;" *ngIf="categorySelected">
               <div class="row container-fluid">
                 <div class="col-12 col-md-10 col-lg-9">
-                      <h2 class="mt-2" style="margin-left: 10px;">Forms</h2>
+                      <div class="card-title mt-3" style="margin-left: 10px;">Forms</div>
                       <mat-horizontal-stepper [linear]="true" #stepper="matHorizontalStepper">
                         <mat-step [stepControl]="firstFormGroup">
                           <form [formGroup]="firstFormGroup" class="mt-2 row">
@@ -143,14 +143,14 @@
                 </div>  
                 <div class="col-12 col-md-2 col-lg-3">
                     <div class="mt-2 mb-2" *ngIf="dataSource.length>0;else noData">
-                      <h2 class="mt-1 mb-1" style="margin-left: 10px;">Previous Forms</h2>
+                      <div class="card-title mt-3 mb-2" style="margin-left: 10px;">Previous Forms</div>
                       <div class="list-group card-height">
                         <a class="list-group-item list-group-item-action"
                           *ngFor="let card of dataSource"
                           [class.active]="isActive(card)"
                           (click)="setActiveCard(card)">
                           <div class="d-flex w-100 justify-content-between">
-                            <p class="mb-1">{{card.form_name}}</p>
+                            <p class="mb-1 card-subtitle">{{card.form_name}}</p>
                           </div>
                           <h5 class="mb-1">{{card.form_description}}</h5>
                         </a>

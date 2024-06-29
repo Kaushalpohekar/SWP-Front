@@ -58,7 +58,7 @@ export class AdminFormsComponent implements OnInit {
           this.data = response;
         },
         (error) => {
-          this.snackBar.open(`Error fetching departments data: ${error}`, 'Close', {
+          this.snackBar.open(`Error fetching departments data: ${error.error.error}`, 'Close', {
             duration: 3000,
           });
         }
@@ -159,7 +159,7 @@ export class AdminFormsComponent implements OnInit {
           console.log('',response);
         },
         (error) => {
-          this.snackBar.open(`Error creating form: ${error}`, 'Close', {
+          this.snackBar.open(`Error creating form: ${error.error.error}`, 'Close', {
             duration: 3000,
           });
           console.error('', error);
@@ -172,7 +172,11 @@ export class AdminFormsComponent implements OnInit {
   }
 
   setActiveCard(card: any): void {
-    this.activeCard = card;
+    if (this.activeCard === card) {
+      this.activeCard = null;
+    } else {
+      this.activeCard = card;
+    }
   }
 
   isActive(card: any): boolean {

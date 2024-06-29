@@ -32,8 +32,8 @@
                   <div class="card-subtitle2 pt-2">{{card?.location}}</div>
                 </div>
                 <div class="mt-1 update-flex">
-                  <button mat-button style="color:#135c18;" (click)="updateToggleSidenav(card,'updatePlant');$event.stopPropagation()">Update</button>
-                  <button mat-button color="warn" (click)="$event.stopPropagation();deletePlant(card.plant_id)">Delete</button>
+                  <button mat-button class="card-btn" style="color:#135c18;" (click)="updateToggleSidenav(card,'updatePlant');$event.stopPropagation()">Update</button>
+                  <button mat-button class="card-btn" color="warn" (click)="$event.stopPropagation();deletePlant(card.plant_id)">Delete</button>
                 </div>
               </div>
             </mat-card-content>

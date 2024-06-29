@@ -159,7 +159,7 @@ export class InsertUpdateComponent implements OnInit {
           this.data = response;
         },
         (error) => {
-          this.snackBar.open(`Error fetching departments data: ${error}`, 'Close', {
+          this.snackBar.open(`Error fetching departments data: ${error.error.error}`, 'Close', {
             duration: 3000,
           });
         }
@@ -177,7 +177,7 @@ export class InsertUpdateComponent implements OnInit {
         this.rolesData = response;
       },
       (error) => {
-        this.snackBar.open(`Error fetching user Roles: ${error}`, 'Close', {
+        this.snackBar.open(`Error fetching user Roles: ${error.error.error}`, 'Close', {
           duration: 3000,
         });
       }
@@ -212,7 +212,7 @@ export class InsertUpdateComponent implements OnInit {
           this.dataService.notifyPlantChange();
         },
         (error) => {
-          this.snackBar.open(`Error updating plants data: ${error}`, 'Close', {
+          this.snackBar.open(`Error updating plants data: ${error.error.error}`, 'Close', {
             duration: 3000,
           });
         }
@@ -236,7 +236,7 @@ export class InsertUpdateComponent implements OnInit {
           this.dataService.notifyDepartmentChange();
         },
         (error) => {
-          this.snackBar.open(`Error adding departments data: ${error}`, 'Close', {
+          this.snackBar.open(`Error adding departments data: ${error.error.error}`, 'Close', {
             duration: 3000,
           });
           console.error('', error);
@@ -253,7 +253,7 @@ export class InsertUpdateComponent implements OnInit {
           this.dataService.notifyDepartmentChange();
         },
         (error) => {
-          this.snackBar.open(`Error updating departments data: ${error}`, 'Close', {
+          this.snackBar.open(`Error updating departments data: ${error.error.error}`, 'Close', {
             duration: 3000,
           });
         }
@@ -276,7 +276,7 @@ export class InsertUpdateComponent implements OnInit {
           this.dataService.notifyDepartmentChange();
         },
         (error) => {
-          this.snackBar.open(`Error adding user data: ${error}`, 'Close', {
+          this.snackBar.open(`Error adding user data: ${error.error.error}`, 'Close', {
             duration: 3000,
           });
         }
@@ -292,7 +292,7 @@ export class InsertUpdateComponent implements OnInit {
           this.dataService.notifyDepartmentChange();
         },
         (error) => {
-          this.snackBar.open(`Error updating user data: ${error}`, 'Close', {
+          this.snackBar.open(`Error updating user data: ${error.error.error}`, 'Close', {
             duration: 3000,
           });
         }
@@ -316,7 +316,7 @@ export class InsertUpdateComponent implements OnInit {
           this.dataService.notifyCategoryChange();
         },
         (error) => {
-          this.snackBar.open(`Error adding Category data: ${error}`, 'Close', {
+          this.snackBar.open(`Error adding Category data: ${error.error.error}`, 'Close', {
             duration: 3000,
           });
         }

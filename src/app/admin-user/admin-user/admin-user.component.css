@@ -26,7 +26,7 @@
 }
 
 .count-card .card-title {
-    font-size: 1.1rem;
+    font-size: 1rem;
     font-weight: 550;
     display: flex;
     align-items: center;
@@ -35,7 +35,7 @@
 
 .count-card .count {
     padding-top: 5px;
-    font-size: 1.3rem;
+    font-size: 1rem;
     font-weight: 600;
 }
 
@@ -76,4 +76,8 @@
     height: 40px;
     font-size: 0.7rem;
     font-weight: 550;
+}
+
+.card-btn{
+    font-size: 0.8rem;
 }
