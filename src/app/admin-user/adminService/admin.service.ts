@@ -120,6 +120,10 @@ export class AdminService {
   deletePlant(id:string): Observable<any> {
     return this.http.delete(`${this.apiUrl}/deletePlant/${id}`);
   }
+    
+  deleteForm(id:string): Observable<any> {
+    return this.http.delete(`${this.apiUrl}/deleteForm/${id}`);
+  }
   
   deleteDepartment(id:string): Observable<any> {
     return this.http.delete(`${this.apiUrl}/deleteDepartment/${id}`);

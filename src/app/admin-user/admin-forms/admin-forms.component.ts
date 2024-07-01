@@ -7,6 +7,8 @@ import { CookieService } from 'ngx-cookie-service';
 import { EncryptService } from '../../Authentication/AuthService/encrypt.service';
 import { Subscription } from 'rxjs';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { ConfirmSnackBarComponent } from 'src/app/confirm-snack-bar/confirm-snack-bar.component';
+
 
 @Component({
   selector: 'app-admin-forms',
@@ -17,6 +19,8 @@ export class AdminFormsComponent implements OnInit {
 
   isLinear = true;
   id:string="";
+  formData : any;
+  formActive: Boolean = false;
   firstFormGroup!: FormGroup;
   secondFormGroup!: FormGroup;
   numberOfQuestions = 0;
@@ -173,9 +177,10 @@ export class AdminFormsComponent implements OnInit {
 
   setActiveCard(card: any): void {
     if (this.activeCard != card) {
+      this.formActive = true;
       this.dataService.formData(card.form_id).subscribe(
         (response) => {
-          console.log(response);
+          this.formData = response;
         },
         (error) => {
           this.snackBar.open(`Error fetching departments data: ${error.error.error}`, 'Close', {
@@ -185,11 +190,43 @@ export class AdminFormsComponent implements OnInit {
       );
       this.activeCard = card;  
     } else {
+      this.formActive = false;
       this.activeCard = null;
     }
   }
 
   isActive(card: any): boolean {
     return this.activeCard === card;
+  }
+
+  getOptionsText(question: any): string {
+    return question.options.map((option: any) => option.option_text).join(', ');
+  }
+
+  deleteForm(ID:string) {
+    const snackBarRef = this.snackBar.openFromComponent(ConfirmSnackBarComponent, {
+      duration: 3000,
+    });
+
+    snackBarRef.onAction().subscribe(() => {
+      this.dataService.deleteForm(ID).subscribe(
+        () => {
+          this.snackBar.open(`Form Deleted Successfully`, 'Close', {
+            duration: 3000,
+          });    
+        },
+        (error) => {
+          this.snackBar.open(`Error while deleting Form: ${error.error.error}`, 'Close', {
+            duration: 3000,
+          });
+        }
+      );
+    });
+
+    snackBarRef.afterDismissed().subscribe(() => {
+      this.snackBar.open(`Snack bar dismissed`, 'Close', {
+        duration: 3000,
+      });
+    });
   }
 }

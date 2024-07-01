@@ -1,8 +1,8 @@
 <div class="container-fluid">
     <div class="row pt-2 mb-2">
-        <div class="outer-card card-flex">
+        <div class="outer-card card-flex mb-1">
             <div class="card-title mt-2">Categories</div>
-            <button mat-icon-button (click)="updateToggleSidenav(id,'addCategory')">
+            <button style="margin-top: -5px;" mat-icon-button (click)="updateToggleSidenav(id,'addCategory')">
               <mat-icon>add</mat-icon>
             </button>
         </div>
@@ -34,112 +34,146 @@
             <mat-card style="border-radius: 5px;" *ngIf="categorySelected">
               <div class="row container-fluid">
                 <div class="col-12 col-md-10 col-lg-9">
-                      <div class="card-title mt-3" style="margin-left: 10px;">Forms</div>
-                      <mat-horizontal-stepper [linear]="true" #stepper="matHorizontalStepper">
-                        <mat-step [stepControl]="firstFormGroup">
-                          <form [formGroup]="firstFormGroup" class="mt-2 row">
-                            <ng-template matStepLabel>Form Details</ng-template>
-                            <div class="col-md-8 col-12">
+                  <div class="card-title mt-3" *ngIf="!formActive" style="margin-left: 10px;">Forms</div>
+                  <mat-horizontal-stepper *ngIf="!formActive" [linear]="true" #stepper="matHorizontalStepper">
+                    <mat-step [stepControl]="firstFormGroup">
+                      <form [formGroup]="firstFormGroup" class="mt-2 row">
+                        <ng-template matStepLabel>Form Details</ng-template>
+                        <div class="col-md-8 col-12">
+                          <mat-form-field appearance="outline" class="from-feild">
+                            <mat-label>Form Name</mat-label>
+                            <input matInput placeholder="Form Name" formControlName="FormName">
+                            <mat-icon matSuffix>question_answer</mat-icon>
+                            <mat-error *ngIf="firstFormGroup.get('FormName')?.invalid && (firstFormGroup.get('FormName')?.dirty || firstFormGroup.get('FormName')?.touched)">Form Name is Required</mat-error>
+                          </mat-form-field>
+                        </div>
+                        <div class="col-md-4 col-12">
+                          <mat-form-field appearance="outline" class="from-feild">
+                            <mat-label>Number of Question</mat-label>
+                            <input type="number" min="1" matInput placeholder="Number of Questions" formControlName="Questions">
+                            <mat-icon matSuffix>format_list_numbered_rtl</mat-icon>
+                            <mat-error *ngIf="firstFormGroup.get('Questions')?.invalid && (firstFormGroup.get('Questions')?.dirty || firstFormGroup.get('Questions')?.touched)">Number of Questions should be greater than 0.</mat-error>
+                          </mat-form-field>
+                        </div>
+                        <div class="col-12">
+                          <mat-form-field appearance="outline" class="from-feild">
+                            <mat-label>Form Description</mat-label>
+                            <textarea matInput placeholder="Form Description" formControlName="FormDescription"></textarea>
+                            <mat-icon matSuffix>format_line_spacing</mat-icon>
+                            <mat-error *ngIf="firstFormGroup.get('FormDescription')?.invalid && (firstFormGroup.get('FormDescription')?.dirty || firstFormGroup.get('FormDescription')?.touched)">Form Description is Required</mat-error>
+                          </mat-form-field>
+                        </div>
+                        <div style="display: flex; justify-content: end;">
+                          <button mat-icon-button matStepperNext>
+                            <mat-icon>navigate_next</mat-icon>
+                          </button>
+                        </div>
+                      </form>
+                    </mat-step>
+                    <mat-step [stepControl]="secondFormGroup">
+                      <form [formGroup]="secondFormGroup">
+                        <ng-template matStepLabel>Questions</ng-template>
+                        <div formArrayName="questionsArray" style="max-height: 45vh; overflow-y: auto; overflow-x: hidden;">
+                          <div *ngFor="let question of questionsArray; let i = index" [formGroupName]="i" class="row mt-2">
+                            <div class="col-12 col-md-8">
                               <mat-form-field appearance="outline" class="from-feild">
-                                <mat-label>Form Name</mat-label>
-                                <input matInput placeholder="Form Name" formControlName="FormName">
+                                <mat-label>Question {{ i + 1 }}</mat-label>
+                                <input matInput placeholder="Question {{ i + 1 }}" formControlName="Question">
                                 <mat-icon matSuffix>question_answer</mat-icon>
-                                <mat-error *ngIf="firstFormGroup.get('FormName')?.invalid && (firstFormGroup.get('FormName')?.dirty || firstFormGroup.get('FormName')?.touched)">Form Name is Required</mat-error>
+                                <mat-error *ngIf="secondFormGroup.get(['questionsArray', i, 'Question'])?.invalid && (secondFormGroup.get(['questionsArray', i, 'Question'])?.dirty || secondFormGroup.get(['questionsArray', i, 'Question'])?.touched)">
+                                  Question {{ i + 1 }} is Required
+                                </mat-error>
                               </mat-form-field>
                             </div>
                             <div class="col-md-4 col-12">
                               <mat-form-field appearance="outline" class="from-feild">
-                                <mat-label>Number of Question</mat-label>
-                                <input type="number" min="1" matInput placeholder="Number of Questions" formControlName="Questions">
-                                <mat-icon matSuffix>format_list_numbered_rtl</mat-icon>
-                                <mat-error *ngIf="firstFormGroup.get('Questions')?.invalid && (firstFormGroup.get('Questions')?.dirty || firstFormGroup.get('Questions')?.touched)">Number of Questions should be greater than 0.</mat-error>
+                                <mat-label>Type of Question {{i+1}}</mat-label>
+                                <mat-select placeholder="Question Type" formControlName="QuestionType">
+                                  <mat-option value="multipleChoice">Multiple Choice</mat-option>
+                                  <mat-option value="longAnswer">Long Answer</mat-option>
+                                  <mat-option value="selectAnswer">Select Answer</mat-option>
+                                  <mat-option value="shortAnswer">Short Answer</mat-option>
+                                  <mat-option value="checkbox">Check Box</mat-option>
+                                  <mat-option value="upload">Upload</mat-option>
+                                </mat-select>
+                                <mat-icon matSuffix>view_headline</mat-icon>
+                                <mat-error *ngIf="secondFormGroup.get(['questionsArray', i, 'QuestionType'])?.invalid && (secondFormGroup.get(['questionsArray', i, 'QuestionType'])?.dirty || secondFormGroup.get(['questionsArray', i, 'QuestionType'])?.touched)">
+                                  Question Type is Required.
+                                </mat-error>
                               </mat-form-field>
                             </div>
-                            <div class="col-12">
+                            <div *ngIf="getQuestionType(i) === 'multipleChoice' || getQuestionType(i) === 'selectAnswer' || getQuestionType(i) === 'checkbox'" class="col-12">
                               <mat-form-field appearance="outline" class="from-feild">
-                                <mat-label>Form Description</mat-label>
-                                <textarea matInput placeholder="Form Description" formControlName="FormDescription"></textarea>
-                                <mat-icon matSuffix>format_line_spacing</mat-icon>
-                                <mat-error *ngIf="firstFormGroup.get('FormDescription')?.invalid && (firstFormGroup.get('FormDescription')?.dirty || firstFormGroup.get('FormDescription')?.touched)">Form Description is Required</mat-error>
+                                <mat-label>Options for Question {{ i + 1 }}</mat-label>
+                                <input matInput placeholder="Write options for multiple choice separated by Comma." formControlName="Option">
+                                <mat-icon matSuffix>view_list</mat-icon>
+                                <mat-error *ngIf="secondFormGroup.get(['questionsArray', i, 'Option'])?.invalid && (secondFormGroup.get(['questionsArray', i, 'Option'])?.dirty || secondFormGroup.get(['questionsArray', i, 'Option'])?.touched)">
+                                  Options are Required
+                                </mat-error>
                               </mat-form-field>
-                            </div>
-                            <div style="display: flex; justify-content: end;">
-                              <button mat-icon-button matStepperNext>
-                                <mat-icon>navigate_next</mat-icon>
-                              </button>
-                            </div>
-                          </form>
-                        </mat-step>
-                        <mat-step [stepControl]="secondFormGroup">
-                          <form [formGroup]="secondFormGroup">
-                            <ng-template matStepLabel>Questions</ng-template>
-                            <div formArrayName="questionsArray" style="max-height: 45vh; overflow-y: auto; overflow-x: hidden;">
-                              <div *ngFor="let question of questionsArray; let i = index" [formGroupName]="i" class="row mt-2">
-                                <div class="col-12 col-md-8">
-                                  <mat-form-field appearance="outline" class="from-feild">
-                                    <mat-label>Question {{ i + 1 }}</mat-label>
-                                    <input matInput placeholder="Question {{ i + 1 }}" formControlName="Question">
-                                    <mat-icon matSuffix>question_answer</mat-icon>
-                                    <mat-error *ngIf="secondFormGroup.get(['questionsArray', i, 'Question'])?.invalid && (secondFormGroup.get(['questionsArray', i, 'Question'])?.dirty || secondFormGroup.get(['questionsArray', i, 'Question'])?.touched)">
-                                      Question {{ i + 1 }} is Required
-                                    </mat-error>
-                                  </mat-form-field>
-                                </div>
-                                <div class="col-md-4 col-12">
-                                  <mat-form-field appearance="outline" class="from-feild">
-                                    <mat-label>Type of Question {{i+1}}</mat-label>
-                                    <mat-select placeholder="Question Type" formControlName="QuestionType">
-                                      <mat-option value="multipleChoice">Multiple Choice</mat-option>
-                                      <mat-option value="longAnswer">Long Answer</mat-option>
-                                      <mat-option value="selectAnswer">Select Answer</mat-option>
-                                      <mat-option value="shortAnswer">Short Answer</mat-option>
-                                      <mat-option value="checkbox">Check Box</mat-option>
-                                      <mat-option value="upload">Upload</mat-option>
-                                    </mat-select>
-                                    <mat-icon matSuffix>view_headline</mat-icon>
-                                    <mat-error *ngIf="secondFormGroup.get(['questionsArray', i, 'QuestionType'])?.invalid && (secondFormGroup.get(['questionsArray', i, 'QuestionType'])?.dirty || secondFormGroup.get(['questionsArray', i, 'QuestionType'])?.touched)">
-                                      Question Type is Required.
-                                    </mat-error>
-                                  </mat-form-field>
-                                </div>
-                                <div *ngIf="getQuestionType(i) === 'multiple' || getQuestionType(i) === 'select' || getQuestionType(i) === 'radio'" class="col-12">
-                                  <mat-form-field appearance="outline" class="from-feild">
-                                    <mat-label>Options for Question {{ i + 1 }}</mat-label>
-                                    <input matInput placeholder="Write options for multiple choice separated by Comma." formControlName="Option">
-                                    <mat-icon matSuffix>view_list</mat-icon>
-                                    <mat-error *ngIf="secondFormGroup.get(['questionsArray', i, 'Option'])?.invalid && (secondFormGroup.get(['questionsArray', i, 'Option'])?.dirty || secondFormGroup.get(['questionsArray', i, 'Option'])?.touched)">
-                                      Options are Required
-                                    </mat-error>
-                                  </mat-form-field>
-                                </div>
-                              </div>
-                            </div>
-                            <div style="display: flex; justify-content:space-between;">
-                              <button mat-button matStepperPrevious>
-                                <mat-icon>navigate_before</mat-icon>
-                              </button>
-                              <button mat-button matStepperNext>
-                                <mat-icon>navigate_next</mat-icon>
-                              </button>
-                            </div>
-                          </form>
-                        </mat-step>
-                        <mat-step>
-                          <ng-template matStepLabel>Submit</ng-template>
-                          You are all Set.
-                          <div>
-                            <div style="display: flex; justify-content:space-between;">
-                              <button mat-button matStepperPrevious>
-                                <mat-icon>navigate_before</mat-icon>
-                              </button>
-                              <button mat-raised-button style="background-color: #017048;color: whitesmoke;" (click)="Submit()">
-                                Submit
-                              </button>
                             </div>
                           </div>
-                        </mat-step>
-                      </mat-horizontal-stepper>
-                      
+                        </div>
+                        <div style="display: flex; justify-content:space-between;">
+                          <button mat-button matStepperPrevious>
+                            <mat-icon>navigate_before</mat-icon>
+                          </button>
+                          <button mat-button matStepperNext>
+                            <mat-icon>navigate_next</mat-icon>
+                          </button>
+                        </div>
+                      </form>
+                    </mat-step>
+                    <mat-step>
+                      <ng-template matStepLabel>Submit</ng-template>
+                      You are all Set.
+                      <div>
+                        <div style="display: flex; justify-content:space-between;">
+                          <button mat-button matStepperPrevious>
+                            <mat-icon>navigate_before</mat-icon>
+                          </button>
+                          <button mat-raised-button style="background-color: #017048;color: whitesmoke;" (click)="Submit()">
+                            Submit
+                          </button>
+                        </div>
+                      </div>
+                    </mat-step>
+                  </mat-horizontal-stepper>
+
+                  <div class="card-title mt-3" style="margin-left: 10px;" *ngIf="formActive">Forms Preview :</div>
+                  <div class="container-fluid mb-3" *ngIf="formActive">
+                    <div class="form-title mt-3 d-flex justify-content-center">{{ formData?.form_name }}</div>
+                    <div class="d-flex mt-3">
+                      <div class="form-act-data">Form Description:&nbsp;</div>
+                      <div class="form-data">{{ formData?.form_description }}</div>
+                    </div>
+                    <div class="mt-2">
+                      <div class="form-act-data">Questions:&nbsp;</div>
+                      <div class="container-fluid" style="max-height: 25vh; overflow-y: auto;">
+                        <div *ngFor="let question of formData?.questions; let i = index" class="question-block mt-2">
+                          <div style="display: flex; justify-content: space-between; flex-wrap: wrap;">
+                            <div class="d-flex">
+                              <div class="form-act-data">Question {{ i + 1 }}:&nbsp;</div>
+                              <div class="form-data">{{ question.question_text }}</div>
+                            </div>
+                            <div class="d-flex">
+                              <div class="form-act-data">Type:&nbsp;</div>
+                              <div class="form-data">{{ question.question_type }}</div>
+                            </div>
+                          </div>
+                          <div class="d-flex" *ngIf="question.options && question.options.length > 0">
+                            <div class="form-act-data">Options:&nbsp;</div>
+                            <div class="form-data">
+                              {{ getOptionsText(question) }}
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="mt-2 d-flex justify-content-end">
+                        <button mat-raised-button class="card-btn" color="warn" (click)="deleteForm(formData.form_id)">Delete</button>
+                    </div>
+                  </div>
                 </div>  
                 <div class="col-12 col-md-2 col-lg-3">
                     <div class="mt-2 mb-2" *ngIf="dataSource.length>0;else noData">

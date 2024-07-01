@@ -24,6 +24,21 @@
     font-weight: 550;
 }
 
+.form-title {
+    font-size: 0.9rem;
+    font-weight: 420;
+}
+
+.form-data {
+    font-size: 0.8rem;
+    font-weight: 400;
+}
+
+.form-act-data {
+    font-size: 0.8rem;
+    font-weight: 420;
+}
+
 .count-card .card-title {
     font-size: 1rem;
     font-weight: 550;
