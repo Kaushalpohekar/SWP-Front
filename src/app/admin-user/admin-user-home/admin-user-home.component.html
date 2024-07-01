@@ -2,7 +2,7 @@
   <div class="row pt-2 mb-2">
     <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
       <div class="outer-card">
-        <h4 class="mt-2">Hello, User Name</h4>
+        <h4 *ngIf="user" class="mt-2">Hello, {{user?.first_name ?? ''}} {{user?.last_name ?? ''}}</h4>
       </div>
       <mat-card class="Linear-Approved">
         <mat-card-content>

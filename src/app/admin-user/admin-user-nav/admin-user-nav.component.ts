@@ -8,8 +8,13 @@ import { AuthService } from '../../Authentication/AuthService/auth.service';
 })
 
 export class AdminUserNavComponent {
+  router: any;
   constructor (private AuthService: AuthService) {}
   Logout() {
     this.AuthService.logout();
+  }
+
+  profile() {
+    this.router.navigate(['/ad/profile']);
   }
 }

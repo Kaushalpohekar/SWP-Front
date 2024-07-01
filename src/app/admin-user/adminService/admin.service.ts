@@ -65,6 +65,10 @@ export class AdminService {
     return this.http.get(`${this.apiUrl}/usersDataByOrganization/${organization_id}`);
   }
 
+  getProfileDetails(user_id: string): Observable<any> {
+    return this.http.get(`${this.apiUrl}/profileDetails/${user_id}`);
+  }
+
   categoriesData(department_id:string): Observable<any> {
     return this.http.get(`${this.apiUrl}/categoriesData/${department_id}`);
   }

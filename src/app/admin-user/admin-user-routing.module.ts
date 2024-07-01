@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { AdminUserHomeComponent } from './admin-user-home/admin-user-home.component';
 import { AdminUserComponent } from './admin-user/admin-user.component';
 import { AdminFormsComponent } from './admin-forms/admin-forms.component';
+import { UserProfileComponent } from '../User/user-profile/user-profile.component';
 
 const routes: Routes = [
   { 
@@ -20,6 +21,7 @@ const routes: Routes = [
     component: AdminFormsComponent,
     data: { breadcrumb: 'Forms' }
   },
+  { path: 'profile', component:UserProfileComponent  },
   { 
     path: '**', 
     redirectTo: 'home', 

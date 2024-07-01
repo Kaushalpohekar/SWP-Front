@@ -15,6 +15,7 @@ import { ConfirmSnackBarComponent } from 'src/app/confirm-snack-bar/confirm-snac
 export class AdminUserHomeComponent implements OnInit {
 
   data: any;
+  user: any;
   plantData: any;
   private plantChangeSubscription!: Subscription;
 
@@ -23,10 +24,23 @@ export class AdminUserHomeComponent implements OnInit {
   ngOnInit(): void {
     this.organizationData();
     this.plantsData();
+    this.fetchProfileDetails();
 
     this.plantChangeSubscription = this.service.plantChange$.subscribe(() => {
       this.plantsData();
     });
+  }
+
+  fetchProfileDetails(): void {
+    const id = this.service.retrieveUserId();
+    this.service.getProfileDetails(id).subscribe(
+      (user) => {
+        this.user = user[0];
+      },
+      (error) => {
+        console.error('Error fetching user profile details:', error);
+      }
+    );
   }
 
   ngOnDestroy() {
