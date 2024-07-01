@@ -1,4 +1,4 @@
 export const environment = {
   production: false,
-  apiUrl: 'https://senso.senselive.in/swp'
+  apiUrl: 'http://localhost:4000'
 };

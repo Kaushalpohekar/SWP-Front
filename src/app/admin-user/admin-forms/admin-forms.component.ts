@@ -172,10 +172,20 @@ export class AdminFormsComponent implements OnInit {
   }
 
   setActiveCard(card: any): void {
-    if (this.activeCard === card) {
-      this.activeCard = null;
+    if (this.activeCard != card) {
+      this.dataService.formData(card.form_id).subscribe(
+        (response) => {
+          console.log(response);
+        },
+        (error) => {
+          this.snackBar.open(`Error fetching departments data: ${error.error.error}`, 'Close', {
+            duration: 3000,
+          });
+        }
+      );
+      this.activeCard = card;  
     } else {
-      this.activeCard = card;
+      this.activeCard = null;
     }
   }
 

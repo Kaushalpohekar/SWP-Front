@@ -73,6 +73,10 @@ export class AdminService {
     return this.http.get(`${this.apiUrl}/prevForms/${category_id}`);
   }
 
+  formData(id:string): Observable<any> {
+    return this.http.get(`${this.apiUrl}/formData/${id}`);
+  }
+
   roles(): Observable<any> {
     return this.http.get(`${this.apiUrl}/roles`);
   }  
